@@ -46,10 +46,10 @@ class Strings {
   //Metodos de la clase
   void ShowStrings(std::vector<std::string>);
 
-  std::string longitud(std::string);
-  std::string inversa(std::string);
-  std::string prefijos(std::string);
-  std::string sufijos(std::string);
-  std::string subcadenas(std::string);
+  std::string length(std::string);
+  std::string reverse(std::string);
+  std::string prefixes(std::string);
+  std::string suffixes(std::string);
+  std::string substrings(std::string);
 };
 

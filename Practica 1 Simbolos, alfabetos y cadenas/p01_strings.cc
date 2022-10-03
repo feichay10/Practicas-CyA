@@ -27,9 +27,8 @@
 #include "functions.h"
 
 int main(int argc, char *argv[]) {
-  CheckParameters(argc, argv);
-
   int option = atoi(argv[3]);
 
+  CheckParameters(argc, argv);
   ReadWriteFile(argv[1], argv[2], option);  //./p01_strings filein.txt fileout.txt 1
 }

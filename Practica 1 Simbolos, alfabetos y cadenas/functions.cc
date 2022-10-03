@@ -15,6 +15,7 @@
 // Referencias:
 //          https://stackoverflow.com/questions/29441675/splitting-strings-separately-by-line-and-by-blank-space-using-getline
 //          http://www.cplusplus.com/forum/general/25076/
+//          https://www.delftstack.com/howto/cpp/cpp-get-type/
 //
 // Historial de revisiones
 //          04/10/2022 - Creación (primera versión) del código
@@ -22,8 +23,8 @@
 #include "functions.h"
 
 #define CADENA_VACIA "&"
+#define INT "i"
 
-// Symbol _sym;      // Creando objeto de la clase Symbol
 Alphabet _alpha;  // Creando objeto de la clase Alphabet
 Strings _str;     // Creando objeto de la clase String
 
@@ -37,11 +38,18 @@ void CheckParameters(int argc, char* argv[]) {
            "Longitud\n 2. Inversa\n 3. Prefijos\n 4. Sufijos\n 5. Subcadenas\n"
         << std::endl;
     exit(EXIT_SUCCESS);
-  } else if (argc != 4 || argc == 1) {
+  } else if (argc != 4) {
     std::cout << "Falta parametros, para saber el funcionamiento del programa: "
                  "\n./p01_strings --help"
               << std::endl;
     exit(EXIT_SUCCESS);
+  }
+
+  if (typeid(argv[3]).name() != INT) {
+    std::cout
+        << "Introduzca un opcode disponible en el programa. Utilice '--help' "
+        << std::endl;
+    exit(1);
   }
 
   int opcode = std::stoi(argv[3]);
@@ -50,6 +58,7 @@ void CheckParameters(int argc, char* argv[]) {
     std::cout
         << "Introduzca un opcode disponible en el programa. Utilice '--help' "
         << std::endl;
+    exit(EXIT_SUCCESS);
   }
 }
 
@@ -58,24 +67,32 @@ std::string Menu(std::string cadena, int _opcode) {
   int operation = int(_opcode);
 
   switch (operation) {
+    case 0:
+      result_operation = _str.length(cadena);
+      result_operation = _str.reverse(cadena);
+      result_operation = _str.prefixes(cadena);
+      result_operation = _str.suffixes(cadena);
+      result_operation = _str.substrings(cadena);
+      // return result_operation;
+      break;
     case 1:
-      result_operation = _str.longitud(cadena);
+      result_operation = _str.length(cadena);
       return result_operation;
       break;
     case 2:
-      result_operation = _str.inversa(cadena);
+      result_operation = _str.reverse(cadena);
       return result_operation;
       break;
     case 3:
-      result_operation = _str.prefijos(cadena);
+      result_operation = _str.prefixes(cadena);
       return result_operation;
       break;
     case 4:
-      result_operation = _str.sufijos(cadena);
+      result_operation = _str.suffixes(cadena);
       return result_operation;
       break;
     case 5:
-      result_operation = _str.subcadenas(cadena);
+      result_operation = _str.substrings(cadena);
       return result_operation;
       break;
     default:
@@ -89,11 +106,7 @@ void ReadWriteFile(std::string Input, std::string Output, int option) {
   std::ofstream FileOut;
   std::string lines, str, result_operation;
   std::stringstream ss;
-
   std::vector<std::string> list;
-  // std::vector<std::string> _symbol;
-  std::vector<std::string> _alphabet;
-  std::vector<std::string> _strings;
 
   FileIn.open(Input, std::ios::in);
   FileOut.open(Output, std::ios::out | std::ios::ate);
@@ -117,11 +130,11 @@ void ReadWriteFile(std::string Input, std::string Output, int option) {
 
     for (unsigned i = 0; i < list.size(); i++) {
       if (list[i].length() > 1) {
-        result_operation = Menu(list[i], option);
+        std::cout << "\nLa cadena es: " << list[i] << std::endl;
         _alpha.SearchAlphabet(list[i]);
+        result_operation = Menu(list[i], option);
         FileOut << result_operation << std::endl;
       } else {
-        //std::cout << std::endl;
         _alpha.ShowAlphabet(list[i]);
       }
     }

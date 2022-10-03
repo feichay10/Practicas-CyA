@@ -40,24 +40,14 @@ void Alphabet::ShowAlphabet(std::string alfabeto) {
 
 void Alphabet::SearchAlphabet(std::string String) {
   std::string Alpha;
-  bool flag;
 
-  for (unsigned i = 0; i < String.size(); i++) {
-    flag = 0;
-    for (unsigned j = 0; j < String.size(); j++) {
-      if (String[i] == String[j] && i != j) {  // a a && 0 != 0 hoola
-        flag = 1;
-        break;
-      }
-    }
-    if (flag == 0) {
-      std::cout << "Alphabet: ";
-      std::cout << String[i] << std::endl;
+  for (unsigned i = 0; i <= String.length(); i++) {
+    std::size_t result = Alpha.find(String[i]);
+    if (result == std::string::npos) {
+      Alpha += " ";
+      Alpha += String[i];
     }
   }
-
-  for (unsigned i = 0, unsigned j = 0; i < String.size(); i++){
-    Alpha += String;
-    
-  }
+  std::cout << "El alfabeto de la cadena \"" << String << "\" es: ";
+  std::cout << Alpha << " " << std::endl;
 }

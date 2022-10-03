@@ -33,73 +33,74 @@ int Strings::GetOpcode() { return opcode; }
 
 std::vector<std::string> Strings::GetString() { return StringList; }
 
-std::string Strings::longitud(std::string strings) {
+std::string Strings::length(std::string strings) {
   std::stringstream ss;
-  std::string resultado_longitud;
+  std::string result_length;
 
-  std::cout << "\nLa cadena es: " << strings << std::endl;
-  //std::cout << "Su longitud es: " << strings.size() << std::endl;
+  std::cout << "- Su longitud es: " << strings.size() << std::endl;
 
   ss << strings.size();      // convertir un int a stream
-  ss >> resultado_longitud;  // convertir stream a string
+  ss >> result_length;  // convertir stream a string
 
-  return resultado_longitud;
+  return result_length;
 }
 
-std::string Strings::inversa(std::string strings) {
-  std::string aux_inversa = " ";
+std::string Strings::reverse(std::string strings) {
+  std::string aux_reverse = " ";
 
   for (int i = strings.size(); i >= 0; i--) {
-    aux_inversa += strings[i];
+    aux_reverse += strings[i];
   }
 
-  std::cout << "\nInversa: " << aux_inversa << std::endl;
+  std::cout << "- Su inversa es: " << aux_reverse << std::endl;
 
-  return aux_inversa;
+  return aux_reverse;
 }
 
-std::string Strings::prefijos(std::string strings) {
-  std::string aux_prefijo = " ";
-  std::string prefijos = " & ";
+std::string Strings::prefixes(std::string strings) {
+  std::string aux_prefixes = " ";
+  std::string prefixes = " & ";
   std::vector<std::string> vector;
 
-  std::cout << "\nPrefijos: ";
+  std::cout << "- Prefijos: &";
 
   for (unsigned i = 0; i <= strings.size(); i++) {
-    aux_prefijo += strings[i];
-    std::cout << aux_prefijo << " ";
-    prefijos += aux_prefijo + " ";
+    aux_prefixes += strings[i];
+    std::cout << aux_prefixes;
+    prefixes += aux_prefixes + " ";
   }
-  return prefijos;
+  std::cout << std::endl;
+  return prefixes;
 }
 
-std::string Strings::sufijos(std::string strings) {
-  std::string aux_sufijo = " ";
-  std::string sufijos = " & ";
+std::string Strings::suffixes(std::string strings) {
+  std::string aux_suffixes = " ";
+  std::string suffixes = " & ";
 
-  std::cout << "\nSufijos: ";
+  std::cout << "- Sufijos: &";
   for (int i = strings.size(); i >= 0; i--) {
-    aux_sufijo = strings[i] + aux_sufijo;
-    std::cout << aux_sufijo << " ";
-    sufijos += aux_sufijo + " ";
+    aux_suffixes = strings[i] + aux_suffixes;
+    std::cout << aux_suffixes;
+    suffixes += aux_suffixes + " ";
   }
-  return sufijos;
+  std::cout << std::endl;
+  return suffixes;
 }
 
-std::string Strings::subcadenas(std::string strings) {
-  std::string subcadenas = " ";
+std::string Strings::substrings(std::string strings) {
+  std::string substrings = " ";
 
-  std::cout << "\nSubcadenas: " << std::endl;
+  std::cout << "- Subcadenas: " << std::endl;
 
   for (unsigned i = 0; i < strings.size(); i++) {
     for (unsigned j = i; j < strings.size(); j++) {
       for (unsigned k = i; k <= j; k++) {
         std::cout << strings[k];
-        subcadenas += strings[k];
+        substrings += strings[k];
       }
-      subcadenas += "\n";
+      substrings += "\n";
       std::cout << std::endl;
     }
   }
-  return subcadenas;
+  return substrings;
 }
