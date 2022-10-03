@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/feichay/Escritorio/Ingenieria_Informatica/sf_Ingenieria_Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas/Practica 1 Simbolos, alfabetos y cadenas",
+      "program": "/home/feichay/Escritorio/Ingenieria_Informatica/sf_Ingenieria_Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas/Practica 1 Simbolos, alfabetos y cadenas/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
