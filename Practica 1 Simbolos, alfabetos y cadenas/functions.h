@@ -25,9 +25,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <typeinfo>
 
-//#include "symbol.h"
 #include "alphabet.h"
 #include "strings.h"
 

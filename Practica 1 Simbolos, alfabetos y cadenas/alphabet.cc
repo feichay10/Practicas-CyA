@@ -27,12 +27,12 @@
 Alphabet::~Alphabet() {}
 
 // Setters
-void Alphabet::SetAlphabet(std::vector<std::string> _AlphaList) {
+void Alphabet::setAlphabet(std::vector<std::string> _AlphaList) {
   AlphaList = _AlphaList;
 }
 
 // Getters
-std::vector<std::string> Alphabet::GetAlphabet() { return AlphaList; }
+std::vector<std::string> Alphabet::getAlphabet() { return AlphaList; }
 
 void Alphabet::SearchAlphabet(std::string String) {
   std::string Alpha;

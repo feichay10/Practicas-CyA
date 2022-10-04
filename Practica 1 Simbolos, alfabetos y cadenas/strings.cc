@@ -24,13 +24,13 @@
 
 Strings::~Strings() {}
 
-void Strings::SetOpcode(int _opcode) { opcode = _opcode; }
+void Strings::setOpcode(int _opcode) { opcode = _opcode; }
 
-void Strings::SetString(std::vector<std::string> _StringList) {
+void Strings::setString(std::vector<std::string> _StringList) {
   StringList = _StringList;
 }
 
-int Strings::GetOpcode() { return opcode; }
+int Strings::getOpcode() { return opcode; }
 
 std::vector<std::string> Strings::GetString() { return StringList; }
 
