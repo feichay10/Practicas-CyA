@@ -29,7 +29,6 @@ class String;
 class Alphabet {
  private:
   std::vector<std::string> AlphaList;
-  std::vector<std::string> StringElements;
 
  public:
   Alphabet() = default;   // Constructor
@@ -40,8 +39,6 @@ class Alphabet {
 
   // Getter (mostrar los atributos)
   std::vector<std::string> GetAlphabet();
-
-  void ShowAlphabet(std::string);
 
   void SearchAlphabet(std::string Strings_);
 }; 

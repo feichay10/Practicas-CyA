@@ -34,10 +34,6 @@ void Alphabet::SetAlphabet(std::vector<std::string> _AlphaList) {
 // Getters
 std::vector<std::string> Alphabet::GetAlphabet() { return AlphaList; }
 
-void Alphabet::ShowAlphabet(std::string alfabeto) {
-  // std::cout << "El alfabeto es: " << alfabeto << " ";
-}
-
 void Alphabet::SearchAlphabet(std::string String) {
   std::string Alpha;
 

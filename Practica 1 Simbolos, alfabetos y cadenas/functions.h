@@ -24,11 +24,12 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <typeinfo>
 
 //#include "symbol.h"
 #include "alphabet.h"
 #include "strings.h"
 
-void CheckParameters(int argc, char *argv[]);
+void CheckParameters(int argc_, char *argv[]);
 std::string Menu(std::string string_, int opcode);
 void ReadWriteFile(std::string FileIn, std::string FileOut, int option);

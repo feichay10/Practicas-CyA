@@ -23,42 +23,35 @@
 #include "functions.h"
 
 #define CADENA_VACIA "&"
-#define INT "i"
 
 Alphabet _alpha;  // Creando objeto de la clase Alphabet
 Strings _str;     // Creando objeto de la clase String
 
 void CheckParameters(int argc, char* argv[]) {
-  std::string parameter1 = argv[1];
+  // std::string parameter1 = argv[1];
+  int opcode;
+  std::cout << "el argc es: " << argc << std::endl;
 
-  if (argc == 2 && parameter1 == "--help") {
-    std::cout
-        << "Para ejecutar el programa debe introducir lo siguiente: "
-           "./p01_strings filein.txt fileout.txt opcode\nLos opcodes son:\n 1. "
-           "Longitud\n 2. Inversa\n 3. Prefijos\n 4. Sufijos\n 5. Subcadenas\n"
-        << std::endl;
-    exit(EXIT_SUCCESS);
-  } else if (argc != 4) {
-    std::cout << "Falta parametros, para saber el funcionamiento del programa: "
-                 "\n./p01_strings --help"
-              << std::endl;
-    exit(EXIT_SUCCESS);
-  }
-
-  if (typeid(argv[3]).name() != INT) {
-    std::cout
-        << "Introduzca un opcode disponible en el programa. Utilice '--help' "
-        << std::endl;
-    exit(1);
-  }
-
-  int opcode = std::stoi(argv[3]);
-
-  if (opcode < 1 || opcode > 5) {
-    std::cout
-        << "Introduzca un opcode disponible en el programa. Utilice '--help' "
-        << std::endl;
-    exit(EXIT_SUCCESS);
+  if (argc != 4) {
+    if (argc < 4) {
+      std::cout << "Error. Faltan argumentos ./p01_strings filein.txt "
+                   "fileout.txt opcode"
+                << std::endl;
+      exit(1);
+    } else {
+      std::cout << "Error. Demasiados argumentos ./p01_strings filein.txt "
+                   "fileout.txt opcode"
+                << std::endl;
+      exit(1);
+    }
+  } else {
+    opcode = std::stoi(argv[3]);
+    if (opcode < 0 || opcode > 5) {
+      std::cout
+          << "Opcode Erroneo, Opcode = [1 - 5]"
+          << std::endl;
+      exit(EXIT_SUCCESS);
+    }
   }
 }
 
@@ -134,8 +127,6 @@ void ReadWriteFile(std::string Input, std::string Output, int option) {
         _alpha.SearchAlphabet(list[i]);
         result_operation = Menu(list[i], option);
         FileOut << result_operation << std::endl;
-      } else {
-        _alpha.ShowAlphabet(list[i]);
       }
     }
 
