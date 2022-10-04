@@ -15,7 +15,7 @@
 // Referencias:
 //          https://stackoverflow.com/questions/29441675/splitting-strings-separately-by-line-and-by-blank-space-using-getline
 //          http://www.cplusplus.com/forum/general/25076/
-//          https://www.delftstack.com/howto/cpp/cpp-get-type/
+//          https://www.geeksforgeeks.org/string-at-in-cpp/
 //
 // Historial de revisiones
 //          04/10/2022 - Creación (primera versión) del código
@@ -28,9 +28,7 @@ Alphabet _alpha;  // Creando objeto de la clase Alphabet
 Strings _str;     // Creando objeto de la clase String
 
 void CheckParameters(int argc, char* argv[]) {
-  // std::string parameter1 = argv[1];
   int opcode;
-  std::cout << "el argc es: " << argc << std::endl;
 
   if (argc != 4) {
     if (argc < 4) {

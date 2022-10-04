@@ -15,6 +15,7 @@
 // Referencias:
 //          https://stackoverflow.com/questions/29441675/splitting-strings-separately-by-line-and-by-blank-space-using-getline
 //          http://www.cplusplus.com/forum/general/25076/
+//          https://www.geeksforgeeks.org/string-at-in-cpp/
 //
 // Historial de revisiones
 //          04/10/2022 - Creación (primera versión) del código
