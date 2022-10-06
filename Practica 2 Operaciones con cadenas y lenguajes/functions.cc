@@ -16,14 +16,15 @@
  *
  */
 
-#include "functions.h"
+#include "unctions.h"
 
 #define CADENA_VACIA "&"
 
-const std::string FILE_OUT = "fileout.txt"; 
+const std::string FILE_OUT = "fileout.txt";
 
-Alphabet _alpha;  // Creando objeto de la clase Alphabet
-Strings _str;     // Creando objeto de la clase String
+Alphabet alphabet;  // Creando objeto de la clase Alphabet
+Strings strings;    // Creando objeto de la clase String
+Language language;  // Creando objeto de la clase Language
 
 void CheckParameters(int argc, char* argv[]) {
   int opcode;
@@ -56,19 +57,34 @@ void CheckParameters(int argc, char* argv[]) {
   }
 }
 
-
 void ReadFile(std::string Input1, std::string Input2, int option) {
   std::ifstream FileIn1, FileIn2;
   std::string lines, str, result_operation;
   std::stringstream ss;
   std::vector<std::string> list;
 
-  FileIn1.open(Input1, std::ios::in);
-  FileIn2.open(Input2, std::ios::in);
+  if (option == 1 || option == 2 || option == 3 ||
+      option == 4) {  // En caso de operaciones que hacen falta la entrada de
+                      // dos ficheros
+    FileIn1.open(Input1, std::ios::in);
+    FileIn2.open(Input2, std::ios::in);
 
-  if (FileIn1.fail() || FileIn2.fail()) {
-    std::cout << "Ficheros de entrada no abiertos" << std::endl;
-    exit(1);
+    if (FileIn1.fail() || FileIn2.fail()) {
+      std::cout << "Ficheros de entrada no abiertos" << std::endl;
+      exit(1);
+    }
+
+    FileIn1.close();
+    FileIn2.close();
+  } else {
+    FileIn1.open(Input1, std::ios::in);
+
+    if (FileIn1.fail()) {
+      std::cout << "Fichero de entrada filein1.txt no abierto" << std::endl;
+      exit(1);
+    }
+
+    FileIn1.close();
   }
 
   while (getline(FileIn1, lines, '\n')) {
@@ -87,7 +103,7 @@ void ReadFile(std::string Input1, std::string Input2, int option) {
     for (unsigned i = 0; i < list.size(); i++) {
       if (list[i].length() > 1) {
         std::cout << "\nLa cadena es: " << list[i] << std::endl;
-        _alpha.SearchAlphabet(list[i]);
+        alphabet.SearchAlphabet(list[i]);
         result_operation = Menu(list[i], option);
         // FileOut << result_operation << std::endl;
       }
@@ -96,9 +112,6 @@ void ReadFile(std::string Input1, std::string Input2, int option) {
     list.clear();
     ss.clear();
   }
-
-  FileIn1.close();
-  FileIn2.close();
 }
 
 void WriteFile(std::string Output, int option) {
@@ -115,29 +128,34 @@ void WriteFile(std::string Output, int option) {
   FileOut.close();
 }
 
-std::string Menu(std::string cadena, int _opcode) {
+std::string Menu(int argc, char* argv[]) {
   std::string result_operation;
-  int operation = int(_opcode);
+  int operation = atoi(argv[4]);
 
   switch (operation) {
     case 1:
-      
+      ReadFile(argv[1], argv[2], operation);
+      language.concatenation();
       return result_operation;
       break;
     case 2:
-
+      language.lunion();
       return result_operation;
       break;
     case 3:
-
+      language.intersection();
       return result_operation;
       break;
     case 4:
-
+      language.difference();
       return result_operation;
       break;
     case 5:
-
+      language.reverse();
+      return result_operation;
+      break;
+    case 6:
+      language.pow();
       return result_operation;
       break;
     default:

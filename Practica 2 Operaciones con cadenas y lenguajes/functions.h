@@ -24,6 +24,7 @@
 
 #include "alphabet.h"
 #include "strings.h"
+#include "language.h"
 
 void CheckParameters(int argc_, char *argv[]);
 std::string Menu(int argc_, char *argv[]);

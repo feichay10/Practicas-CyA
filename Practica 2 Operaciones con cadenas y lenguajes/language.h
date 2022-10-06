@@ -39,9 +39,9 @@ class Language {
 
   // Metodos de la clase
   std::string concatenation(std::string);
-  std::string union(std::string);
+  std::string lunion(std::string);
   std::string intersection(std::string);
   std::string difference(std::string);
   std::string reverse(std::string);
   std::string pow(std::string);
-}
+};
