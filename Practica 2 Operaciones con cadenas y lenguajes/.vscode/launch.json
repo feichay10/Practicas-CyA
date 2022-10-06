@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "f:/Google Drive ALU/Ingenieria Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas-CyA/Practica 2 Operaciones con cadenas y lenguajes",
+      "program": "f:/Google Drive ALU/Ingenieria Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas-CyA/Practica 2 Operaciones con cadenas y lenguajes/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
