@@ -16,7 +16,7 @@
  *
  */
 
-#include "unctions.h"
+#include "functions.h"
 
 #define CADENA_VACIA "&"
 
@@ -57,8 +57,8 @@ void CheckParameters(int argc, char* argv[]) {
   }
 }
 
-void ReadFile(std::string Input1, std::string Input2, int option) {
-  std::ifstream FileIn1, FileIn2;
+void ReadFile(std::string input_1, std::string input_2, int option) {
+  std::ifstream file_in_1, file_in_2;
   std::string lines, str, result_operation;
   std::stringstream ss;
   std::vector<std::string> list;
@@ -66,28 +66,28 @@ void ReadFile(std::string Input1, std::string Input2, int option) {
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
                       // dos ficheros
-    FileIn1.open(Input1, std::ios::in);
-    FileIn2.open(Input2, std::ios::in);
+    file_in_1.open(input_1, std::ios::in);
+    file_in_2.open(input_2, std::ios::in);
 
-    if (FileIn1.fail() || FileIn2.fail()) {
+    if (file_in_1.fail() || file_in_2.fail()) {
       std::cout << "Ficheros de entrada no abiertos" << std::endl;
       exit(1);
     }
 
-    FileIn1.close();
-    FileIn2.close();
+    file_in_1.close();
+    file_in_2.close();
   } else {
-    FileIn1.open(Input1, std::ios::in);
+    file_in_1.open(input_1, std::ios::in);
 
-    if (FileIn1.fail()) {
+    if (file_in_1.fail()) {
       std::cout << "Fichero de entrada filein1.txt no abierto" << std::endl;
       exit(1);
     }
 
-    FileIn1.close();
+    file_in_1.close();
   }
 
-  while (getline(FileIn1, lines, '\n')) {
+  while (getline(file_in_1, lines, '\n')) {
     ss.str(lines);
     while (ss >> str) {
       list.push_back(str);        // Cortamos la linea por palabras
@@ -114,18 +114,18 @@ void ReadFile(std::string Input1, std::string Input2, int option) {
   }
 }
 
-void WriteFile(std::string Output, int option) {
-  std::ofstream FileOut;
+void WriteFile(std::string output, int option) {
+  std::ofstream file_out;
   std::string result_operation;
 
-  FileOut.open(Output, std::ios::out | std::ios::ate);
+  file_out.open(output, std::ios::out | std::ios::ate);
 
-  if (FileOut.fail()) {
+  if (file_out.fail()) {
     std::cout << "Ficheros no abiertos" << std::endl;
     exit(1);
   }
 
-  FileOut.close();
+  file_out.close();
 }
 
 std::string Menu(int argc, char* argv[]) {

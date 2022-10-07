@@ -22,10 +22,10 @@ Strings::~Strings() {}
 
 void Strings::SetOpcode(int _opcode) { opcode = _opcode; }
 
-void Strings::SetString(std::vector<std::string> _StringList) {
-  StringList = _StringList;
+void Strings::SetString(std::vector<std::string> string_list {
+  string_list = _string_list;
 }
 
 int Strings::GetOpcode() { return opcode; }
 
-std::vector<std::string> Strings::GetString() { return StringList; }
+std::vector<std::string> Strings::GetString() { return string_list; }

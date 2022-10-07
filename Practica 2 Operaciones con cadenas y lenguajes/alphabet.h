@@ -25,7 +25,7 @@ class String;
 
 class Alphabet {
  private:
-  std::vector<std::string> AlphaList;
+  std::vector<std::string> alpha_list;
 
  public:
   Alphabet() = default;   // Constructor

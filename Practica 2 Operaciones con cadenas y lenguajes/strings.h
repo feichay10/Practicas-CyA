@@ -26,7 +26,7 @@ class Strings {
  private:
   //Atributos
   int opcode;
-  std::vector<std::string> StringList;
+  std::vector<std::string> string_list;
 
  public:
   Strings() = default;   // Constructor
@@ -41,5 +41,6 @@ class Strings {
   std::vector<std::string> GetString();   
 
   //Metodos de la clase
+  //std::string Take
 };
 

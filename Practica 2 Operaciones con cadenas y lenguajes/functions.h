@@ -26,7 +26,7 @@
 #include "strings.h"
 #include "language.h"
 
-void CheckParameters(int argc_, char *argv[]);
-std::string Menu(int argc_, char *argv[]);
+void CheckParameters(int argc, char *argv[]);
+std::string Menu(int argc, char *argv[]);
 void ReadFile(std::string, std::string, int);
 void WriteFile(std::string, int);

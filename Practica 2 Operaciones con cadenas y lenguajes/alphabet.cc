@@ -23,23 +23,23 @@
 Alphabet::~Alphabet() {}
 
 // Setters
-void Alphabet::SetAlphabet(std::vector<std::string> _AlphaList) {
-  AlphaList = _AlphaList;
+void Alphabet::SetAlphabet(std::vector<std::string> alpha_list) {
+  alpha_list = _alpha_list;
 }
 
 // Getters
-std::vector<std::string> Alphabet::GetAlphabet() { return AlphaList; }
+std::vector<std::string> Alphabet::GetAlphabet() { return alpha_list; }
 
 void Alphabet::SearchAlphabet(std::string String) {
-  std::string Alpha;
+  std::string alpha;
 
   for (unsigned i = 0; i <= String.length(); i++) {
     std::size_t result = Alpha.find(String[i]);
     if (result == std::string::npos) {
-      Alpha += " ";
-      Alpha += String[i];
+      alpha += " ";
+      alpha += String[i];
     }
   }
   std::cout << "El alfabeto de la cadena \"" << String << "\" es: ";
-  std::cout << Alpha << " " << std::endl;
+  std::cout << alpha << " " << std::endl;
 }

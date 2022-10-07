@@ -73,5 +73,12 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp"
-  }
+  },
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "/media/sf_Ingenieria_Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas-CyA/Practica 2 Operaciones con cadenas y lenguajes",
+      "binaryPath": "/media/sf_Ingenieria_Informatica/2ºIng Informatica/Primer Cuatrimestre/Computabilidad Y Algoritmia/Curso 2022-2023/Practicas-CyA/Practica 2 Operaciones con cadenas y lenguajes/p02_languages",
+      "binaryArgs": []
+    }
+  ]
 }
