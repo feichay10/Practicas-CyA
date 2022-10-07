@@ -23,7 +23,7 @@
 Alphabet::~Alphabet() {}
 
 // Setters
-void Alphabet::SetAlphabet(std::vector<std::string> alpha_list) {
+void Alphabet::SetAlphabet(std::vector<std::string> _alpha_list) {
   alpha_list = _alpha_list;
 }
 
@@ -34,7 +34,7 @@ void Alphabet::SearchAlphabet(std::string String) {
   std::string alpha;
 
   for (unsigned i = 0; i <= String.length(); i++) {
-    std::size_t result = Alpha.find(String[i]);
+    std::size_t result = alpha.find(String[i]);
     if (result == std::string::npos) {
       alpha += " ";
       alpha += String[i];

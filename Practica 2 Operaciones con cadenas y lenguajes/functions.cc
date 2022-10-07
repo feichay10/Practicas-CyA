@@ -21,6 +21,8 @@
 #define CADENA_VACIA "&"
 
 const std::string FILE_OUT = "fileout.txt";
+const std::string BEGIN_BRACE = "{";
+const std::string END_BRACE = "}";
 
 Alphabet alphabet;  // Creando objeto de la clase Alphabet
 Strings strings;    // Creando objeto de la clase String
@@ -51,7 +53,7 @@ void CheckParameters(int argc, char* argv[]) {
   } else {
     opcode = std::stoi(argv[4]);
     if (opcode < 1 || opcode > 6) {
-      std::cout << "Opcode Erroneo, Opcode = [1 - 5]" << std::endl;
+      std::cout << "Opcode Erroneo, Opcode = [1 - 6]" << std::endl;
       exit(1);
     }
   }
@@ -59,7 +61,7 @@ void CheckParameters(int argc, char* argv[]) {
 
 void ReadFile(std::string input_1, std::string input_2, int option) {
   std::ifstream file_in_1, file_in_2;
-  std::string lines, str, result_operation;
+  std::string lines, str;
   std::stringstream ss;
   std::vector<std::string> list;
 
@@ -74,6 +76,9 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
+    IterateFile(file_in_1, list_input_1);
+    IterateFile(file_in_2, list_input_2);
+
     file_in_1.close();
     file_in_2.close();
   } else {
@@ -83,6 +88,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       std::cout << "Fichero de entrada filein1.txt no abierto" << std::endl;
       exit(1);
     }
+
+    IterateFile(file_in_1, list_input_1);
 
     file_in_1.close();
   }
@@ -104,8 +111,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       if (list[i].length() > 1) {
         std::cout << "\nLa cadena es: " << list[i] << std::endl;
         alphabet.SearchAlphabet(list[i]);
-        result_operation = Menu(list[i], option);
-        // FileOut << result_operation << std::endl;
+        // result_operation = Menu(list[i], option);
+        //  FileOut << result_operation << std::endl;
       }
     }
 
@@ -117,6 +124,7 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
 void WriteFile(std::string output, int option) {
   std::ofstream file_out;
   std::string result_operation;
+  int count = 0;
 
   file_out.open(output, std::ios::out | std::ios::ate);
 
@@ -128,6 +136,37 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
+void IterateFile(std::string file_in, std::vector<std::string> list) {
+  std::string lines, str, result_operation;
+  std::stringstream ss;
+
+  while (getline(file_in, lines, '\n')) {
+    ss.str(lines);
+    while (ss >> str) {
+      list.push_back(str);        // Cortamos la linea por palabras
+      if (str == CADENA_VACIA) {  // Detectar un & en el fichero de entrada
+        std::cout << "\nERROR. Ha introducido un & en el fichero de entrada."
+                  << std::endl;
+        // FileOut << "No se puede utilizar el & en esta calculadora" <<
+        // std::endl;
+        exit(1);
+      }
+    }
+
+    for (unsigned i = 0; i < list.size(); i++) {
+      if (list[i] == END_BRACE){
+        count++;
+      }
+      if (count == 2){
+        break; 
+      }
+    }
+
+    list.clear();
+    ss.clear();
+  }
+}
+
 std::string Menu(int argc, char* argv[]) {
   std::string result_operation;
   int operation = atoi(argv[4]);
@@ -135,31 +174,34 @@ std::string Menu(int argc, char* argv[]) {
   switch (operation) {
     case 1:
       ReadFile(argv[1], argv[2], operation);
-      language.concatenation();
-      return result_operation;
+      // language.concatenation();
+      // return result_operation;
       break;
     case 2:
-      language.lunion();
-      return result_operation;
+      // language.l_union();
+      // return result_operation;
       break;
     case 3:
-      language.intersection();
-      return result_operation;
+      // language.intersection();
+      // return result_operation;
       break;
     case 4:
-      language.difference();
-      return result_operation;
+      // language.difference();
+      // return result_operation;
       break;
     case 5:
-      language.reverse();
-      return result_operation;
+      // language.reverse();
+      // return result_operation;
       break;
     case 6:
-      language.pow();
-      return result_operation;
+      // language.pow();
+      // return result_operation;
       break;
     default:
+      std::cout << "Opcode Erroneo, Opcode = [1 - 6]" << std::endl;
+      exit(1);
       break;
   }
+  result_operation = "prueba";
   return result_operation;
 }

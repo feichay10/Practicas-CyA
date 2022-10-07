@@ -22,7 +22,7 @@ Strings::~Strings() {}
 
 void Strings::SetOpcode(int _opcode) { opcode = _opcode; }
 
-void Strings::SetString(std::vector<std::string> string_list {
+void Strings::SetString(std::vector<std::string> _string_list) {
   string_list = _string_list;
 }
 
