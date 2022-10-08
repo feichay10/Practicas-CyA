@@ -109,7 +109,7 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::ifstream file_in, std::vector<std::string> list) {
+void IterateFile(std::ifstream& file_in, std::vector<std::string> list) {
   std::string lines, str, result_operation;
   std::stringstream ss;
   int count = 0;
@@ -117,25 +117,27 @@ void IterateFile(std::ifstream file_in, std::vector<std::string> list) {
   while (getline(file_in, lines, '\n')) {
     ss.str(lines);
     while (ss >> str) {
-      list.push_back(str);        // Cortamos la linea por palabras
-      if (str == CADENA_VACIA) {  // Detectar un & en el fichero de entrada
-        std::cout << "\nERROR. Ha introducido un & en el fichero de entrada."
-                  << std::endl;
-        exit(1);
-      }
+      list.push_back(str);  // Cortamos la linea por palabras
     }
 
     for (unsigned i = 0; i < list.size(); i++) {
-      if (list[i] != BEGIN_BRACE || list[i] != END_BRACE) {
-        alphabet.SaveAlphabet(list[i]);
-      } else if (list[i] == END_BRACE) {
-        count++;
+      if (list[i] == BEGIN_BRACE || list[i] == END_BRACE) {
+        if (list[i] == END_BRACE) {
+          count++;
+        }
+        continue;
+      } else {
+        if (count == 0) {
+          alphabet.SearchAlphabet(list[i]);
+          alphabet.SaveAlphabet(list[i]);
+        }
         if (count == 1) {
           strings.SaveStrings(list[i]);
         }
       }
     }
 
+    count = 0;  // Reseteamos el contador
     list.clear();
     ss.clear();
   }
@@ -164,6 +166,8 @@ std::string Menu(int argc, char* argv[]) {
       // return result_operation;
       break;
     case 5:
+      std::cout << operation << std::endl;
+      ReadFile(argv[1], argv[2], operation);
       // language.reverse();
       // return result_operation;
       break;

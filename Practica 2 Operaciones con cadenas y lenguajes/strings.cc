@@ -30,6 +30,6 @@ int Strings::GetOpcode() { return opcode; }
 
 std::vector<std::string> Strings::GetString() { return string_list; }
 
-void Strings::SaveAlphabet(std::string strings){
+void Strings::SaveStrings(std::string strings){
   string_list.push_back(strings);
 }

@@ -18,8 +18,6 @@
 
 #include "alphabet.h"
 
-#include "string.h"
-
 Alphabet::~Alphabet() {}
 
 // Setters
@@ -41,7 +39,7 @@ void Alphabet::SearchAlphabet(std::string string) {
       alpha += string[i];
     }
   }
-  std::cout << "El alfabeto de la cadena \"" << String << "\" es: ";
+  std::cout << "El alfabeto de la cadena " << string << " es: ";
   std::cout << alpha << " " << std::endl;
 }
 
