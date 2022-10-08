@@ -121,18 +121,18 @@ void IterateFile(std::ifstream file_in, std::vector<std::string> list) {
       if (str == CADENA_VACIA) {  // Detectar un & en el fichero de entrada
         std::cout << "\nERROR. Ha introducido un & en el fichero de entrada."
                   << std::endl;
-        // FileOut << "No se puede utilizar el & en esta calculadora" <<
-        // std::endl;
         exit(1);
       }
     }
 
     for (unsigned i = 0; i < list.size(); i++) {
-      if (list[i] == END_BRACE) {
+      if (list[i] != BEGIN_BRACE || list[i] != END_BRACE) {
+        alphabet.SaveAlphabet(list[i]);
+      } else if (list[i] == END_BRACE) {
         count++;
-      }
-      if (count == 2) {
-        break;
+        if (count == 1) {
+          strings.SaveStrings(list[i]);
+        }
       }
     }
 
