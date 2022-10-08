@@ -37,5 +37,6 @@ class Alphabet {
   // Getter (mostrar los atributos)
   std::vector<std::string> GetAlphabet();
 
+  void MostrarAlphabet(std::vector<std::string>);
   void SearchAlphabet(std::string);
 }; 

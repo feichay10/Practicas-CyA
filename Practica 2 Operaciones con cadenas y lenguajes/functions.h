@@ -26,18 +26,14 @@
 #include "language.h"
 #include "strings.h"
 
-class Functions {
- private:
-  std::vector<std::string> list_input_1;
-  std::vector<std::string> list_input_2;
+#define CADENA_VACIA "&"
 
- public:
-  
+const std::string FILE_OUT = "fileout.txt";
+const std::string BEGIN_BRACE = "{";
+const std::string END_BRACE = "}";
 
-  //Metodos de la clase Functions
-  void CheckParameters(int argc, char *argv[]);
-  void ReadFile(std::string, std::string, int);
-  void WriteFile(std::string, int);
-  void IterateFile(std::string, std::vector<std::string>);
-  std::string Menu(int argc, char *argv[]);
-}
+void CheckParameters(int argc, char *argv[]);
+void ReadFile(std::string, std::string, int);
+void WriteFile(std::string, int);
+void IterateFile(std::ifstream, std::vector<std::string>);
+std::string Menu(int argc, char *argv[]);

@@ -21,6 +21,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <set>
 
 class Strings {
  private:
@@ -41,6 +42,6 @@ class Strings {
   std::vector<std::string> GetString();   
 
   //Metodos de la clase
-  //std::string Take
+  void SaveStrings(std::string);
 };
 

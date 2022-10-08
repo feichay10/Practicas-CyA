@@ -29,3 +29,7 @@ void Strings::SetString(std::vector<std::string> _string_list) {
 int Strings::GetOpcode() { return opcode; }
 
 std::vector<std::string> Strings::GetString() { return string_list; }
+
+void SaveStrings(std::string strings){
+  
+}

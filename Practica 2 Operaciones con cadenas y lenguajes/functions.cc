@@ -18,12 +18,6 @@
 
 #include "functions.h"
 
-#define CADENA_VACIA "&"
-
-const std::string FILE_OUT = "fileout.txt";
-const std::string BEGIN_BRACE = "{";
-const std::string END_BRACE = "}";
-
 Alphabet alphabet;  // Creando objeto de la clase Alphabet
 Strings strings;    // Creando objeto de la clase String
 Language language;  // Creando objeto de la clase Language
@@ -63,7 +57,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
   std::ifstream file_in_1, file_in_2;
   std::string lines, str;
   std::stringstream ss;
-  std::vector<std::string> list;
+  std::vector<std::string> list_input_1;
+  std::vector<std::string> list_input_2;
 
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
@@ -94,31 +89,9 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
     file_in_1.close();
   }
 
-  while (getline(file_in_1, lines, '\n')) {
-    ss.str(lines);
-    while (ss >> str) {
-      list.push_back(str);        // Cortamos la linea por palabras
-      if (str == CADENA_VACIA) {  // Detectar un & en el fichero de entrada
-        std::cout << "\nERROR. Ha introducido un & en el fichero de entrada."
-                  << std::endl;
-        // FileOut << "No se puede utilizar el & en esta calculadora" <<
-        // std::endl;
-        exit(1);
-      }
-    }
-
-    for (unsigned i = 0; i < list.size(); i++) {
-      if (list[i].length() > 1) {
-        std::cout << "\nLa cadena es: " << list[i] << std::endl;
-        alphabet.SearchAlphabet(list[i]);
-        // result_operation = Menu(list[i], option);
-        //  FileOut << result_operation << std::endl;
-      }
-    }
-
-    list.clear();
-    ss.clear();
-  }
+  list_input_1.clear();
+  list_input_2.clear();
+  ss.clear();
 }
 
 void WriteFile(std::string output, int option) {
@@ -136,9 +109,10 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::string file_in, std::vector<std::string> list) {
+void IterateFile(std::ifstream file_in, std::vector<std::string> list) {
   std::string lines, str, result_operation;
   std::stringstream ss;
+  int count = 0;
 
   while (getline(file_in, lines, '\n')) {
     ss.str(lines);
@@ -154,11 +128,11 @@ void IterateFile(std::string file_in, std::vector<std::string> list) {
     }
 
     for (unsigned i = 0; i < list.size(); i++) {
-      if (list[i] == END_BRACE){
+      if (list[i] == END_BRACE) {
         count++;
       }
-      if (count == 2){
-        break; 
+      if (count == 2) {
+        break;
       }
     }
 

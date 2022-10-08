@@ -30,14 +30,20 @@ void Alphabet::SetAlphabet(std::vector<std::string> _alpha_list) {
 // Getters
 std::vector<std::string> Alphabet::GetAlphabet() { return alpha_list; }
 
-void Alphabet::SearchAlphabet(std::string String) {
+void Alphabet::MostrarAlphabet(std::vector<std::string> _alpha_list){
+  for (unsigned i = 0; i < _alpha_list.size(); i++){
+    std::cout << _alpha_list[i] << std::endl;
+  }
+}
+
+void Alphabet::SearchAlphabet(std::string string) {
   std::string alpha;
 
-  for (unsigned i = 0; i <= String.length(); i++) {
-    std::size_t result = alpha.find(String[i]);
+  for (unsigned i = 0; i <= string.length(); i++) {
+    std::size_t result = alpha.find(string[i]);
     if (result == std::string::npos) {
       alpha += " ";
-      alpha += String[i];
+      alpha += string[i];
     }
   }
   std::cout << "El alfabeto de la cadena \"" << String << "\" es: ";
