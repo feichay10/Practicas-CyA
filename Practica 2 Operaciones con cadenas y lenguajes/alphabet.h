@@ -15,6 +15,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#pragma once
 
 #include <iostream>
 #include <string>

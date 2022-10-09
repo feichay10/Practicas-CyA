@@ -16,6 +16,8 @@
  *
  */
 
+#pragma once
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -37,3 +39,4 @@ void ReadFile(std::string, std::string, int);
 void WriteFile(std::string, int);
 void IterateFile(std::ifstream&, Strings&);
 std::string Menu(int argc, char *argv[]);
+

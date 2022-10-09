@@ -74,6 +74,10 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
 
     IterateFile(file_in_1, strings1);
     std::cout << std::endl;
+    // for (unsigned i = 0; i < strings1.getStringList().size(); i++){
+    //   std::cout << strings1.getStringList()[i] << std::endl;
+    // }
+  
     IterateFile(file_in_2, strings2);
 
     file_in_1.close();
@@ -110,10 +114,10 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::ifstream& file_in, Strings &string) {
+void IterateFile(std::ifstream& file_in, Strings& string) {
   std::string lines, str, result_operation;
   std::stringstream ss;
-  std::vector<std::string> list;
+  std::vector<std::string> list; // todo lo que almaceno es de tipo "Strings" 
   int count = 0;
 
   while (getline(file_in, lines, '\n')) {
@@ -130,11 +134,12 @@ void IterateFile(std::ifstream& file_in, Strings &string) {
         continue;
       } else {
         if (count == 0) {
-          std::cout << "El alfabeto: " << list[i] << std::endl;
+          // std::cout << "El alfabeto: " << list[i] << std::endl;
           // alphabet.searchAlphabet(list[i]);
-          // alphabet.saveAlphabet(list[i]);
+          alphabet.saveAlphabet(list[i]);
         } else if (count == 1) {
-          std::cout << "La cadena: " << list[i] << std::endl;
+          // std::cout << "\nLa cadena: " << list[i] << std::endl;
+          std::cout << std::endl;
           string.saveStrings(list[i]);
         }
       }
@@ -153,7 +158,7 @@ std::string Menu(int argc, char* argv[]) {
   switch (operation) {
     case 1:
       ReadFile(argv[1], argv[2], operation);
-      // language.concatenation();
+      language.concatenation(strings1, strings2);
       //  return result_operation;
       break;
     case 2:
@@ -171,8 +176,8 @@ std::string Menu(int argc, char* argv[]) {
     case 5:
       std::cout << operation << std::endl;
       ReadFile(argv[1], argv[2], operation);
-      // language.reverse();
-      // return result_operation;
+      // language.reverse(strings1);
+      //  return result_operation;
       break;
     case 6:
       // language.pow();
@@ -183,6 +188,5 @@ std::string Menu(int argc, char* argv[]) {
       exit(1);
       break;
   }
-  result_operation = "prueba";
   return result_operation;
 }

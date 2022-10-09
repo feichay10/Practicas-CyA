@@ -16,6 +16,8 @@
  *
  */
 
+#pragma once
+
 #include <fstream>
 #include <iostream>
 #include <set>
@@ -23,26 +25,32 @@
 #include <string>
 #include <vector>
 
+class Strings;
 class Language {
  private:
   // Atributos
   int pow_num;
-
+  std::set<Strings> language;
+  
  public:
   Language() = default;  // Constructor
   ~Language();           // Destructor
 
   // Setters
   void setPowNum(int);
+  //void setLanguage(std::string);
 
   // Getters
   int getPowNum();
+  //std::string getLanguage();
 
   // Metodos de la clase
-  std::string concatenation(std::vector<std::string>);
+  std::string concatenation(Strings, Strings);
   std::string l_union(std::string);
   std::string intersection(std::string);
   std::string difference(std::string);
-  std::string reverse(std::string);
+  std::string reverse(Strings);
   std::string pow(std::string);
 };
+
+
