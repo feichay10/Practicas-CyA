@@ -28,20 +28,20 @@ class Strings {
   //Atributos
   int opcode;
   std::vector<std::string> string_list;
-
+  
  public:
   Strings() = default;   // Constructor
-  ~Strings();  // Destructor
+  ~Strings();            // Destructor
 
   // Setters
-  void SetOpcode(int);  
-  void SetString(std::vector<std::string>);
+  void setOpcode(int);  
+  void setStringList(std::vector<std::string>);
 
   // Getters
-  int GetOpcode();
-  std::vector<std::string> GetString();   
+  int getOpcode();
+  std::vector<std::string> getStringList();   
 
   //Metodos de la clase
-  void SaveStrings(std::string);
+  void saveStrings(std::string);
 };
 

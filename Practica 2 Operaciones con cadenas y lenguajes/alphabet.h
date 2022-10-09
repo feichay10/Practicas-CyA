@@ -32,12 +32,12 @@ class Alphabet {
   ~Alphabet();            // Destructor
 
   // Setters (establecer a los atributos)
-  void SetAlphabet(std::vector<std::string>);
+  void setAlphaList(std::vector<std::string>);
 
   // Getter (mostrar los atributos)
-  std::vector<std::string> GetAlphabet();
+  std::vector<std::string> getAlphaList();
 
   // Metodos de la clase Alphabet
-  void SearchAlphabet(std::string);
-  void SaveAlphabet(std::string);
+  void searchAlphabet(std::string);
+  void saveAlphabet(std::string);
 }; 

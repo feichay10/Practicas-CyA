@@ -35,5 +35,5 @@ const std::string END_BRACE = "}";
 void CheckParameters(int argc, char *argv[]);
 void ReadFile(std::string, std::string, int);
 void WriteFile(std::string, int);
-void IterateFile(std::ifstream&, std::vector<std::string>);
+void IterateFile(std::ifstream&, Strings&);
 std::string Menu(int argc, char *argv[]);

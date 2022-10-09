@@ -19,7 +19,8 @@
 #include "functions.h"
 
 Alphabet alphabet;  // Creando objeto de la clase Alphabet
-Strings strings;    // Creando objeto de la clase String
+Strings strings1;   // Creando objeto de la clase Strings
+Strings strings2;   // Creando objeto de la clase Strings
 Language language;  // Creando objeto de la clase Language
 
 void CheckParameters(int argc, char* argv[]) {
@@ -71,8 +72,9 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, list_input_1);
-    IterateFile(file_in_2, list_input_2);
+    IterateFile(file_in_1, strings1);
+    std::cout << std::endl;
+    IterateFile(file_in_2, strings2);
 
     file_in_1.close();
     file_in_2.close();
@@ -84,7 +86,7 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, list_input_1);
+    IterateFile(file_in_1, strings1);
 
     file_in_1.close();
   }
@@ -97,7 +99,6 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
 void WriteFile(std::string output, int option) {
   std::ofstream file_out;
   std::string result_operation;
-  int count = 0;
 
   file_out.open(output, std::ios::out | std::ios::ate);
 
@@ -109,9 +110,10 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::ifstream& file_in, std::vector<std::string> list) {
+void IterateFile(std::ifstream& file_in, Strings &string) {
   std::string lines, str, result_operation;
   std::stringstream ss;
+  std::vector<std::string> list;
   int count = 0;
 
   while (getline(file_in, lines, '\n')) {
@@ -128,11 +130,12 @@ void IterateFile(std::ifstream& file_in, std::vector<std::string> list) {
         continue;
       } else {
         if (count == 0) {
-          alphabet.SearchAlphabet(list[i]);
-          alphabet.SaveAlphabet(list[i]);
-        }
-        if (count == 1) {
-          strings.SaveStrings(list[i]);
+          std::cout << "El alfabeto: " << list[i] << std::endl;
+          // alphabet.searchAlphabet(list[i]);
+          // alphabet.saveAlphabet(list[i]);
+        } else if (count == 1) {
+          std::cout << "La cadena: " << list[i] << std::endl;
+          string.saveStrings(list[i]);
         }
       }
     }
@@ -151,7 +154,7 @@ std::string Menu(int argc, char* argv[]) {
     case 1:
       ReadFile(argv[1], argv[2], operation);
       // language.concatenation();
-      // return result_operation;
+      //  return result_operation;
       break;
     case 2:
       // language.l_union();

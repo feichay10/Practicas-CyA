@@ -21,15 +21,15 @@
 Alphabet::~Alphabet() {}
 
 // Setters
-void Alphabet::SetAlphabet(std::vector<std::string> _alpha_list) {
+void Alphabet::setAlphaList(std::vector<std::string> _alpha_list) {
   alpha_list = _alpha_list;
 }
 
 // Getters
-std::vector<std::string> Alphabet::GetAlphabet() { return alpha_list; }
+std::vector<std::string> Alphabet::getAlphaList() { return alpha_list; }
 
 // Metodos de la clase Alphabet
-void Alphabet::SearchAlphabet(std::string string) {
+void Alphabet::searchAlphabet(std::string string) {
   std::string alpha;
 
   for (unsigned i = 0; i <= string.length(); i++) {
@@ -43,6 +43,6 @@ void Alphabet::SearchAlphabet(std::string string) {
   std::cout << alpha << " " << std::endl;
 }
 
-void Alphabet::SaveAlphabet(std::string strings){
+void Alphabet::saveAlphabet(std::string strings){
   alpha_list.push_back(strings);
 }

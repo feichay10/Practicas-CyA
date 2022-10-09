@@ -18,6 +18,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -28,17 +29,17 @@ class Language {
   int pow_num;
 
  public:
-  // Constructor
-  // Destructor
+  Language() = default;  // Constructor
+  ~Language();           // Destructor
 
   // Setters
-  void SetPowNum(int); 
+  void setPowNum(int);
 
   // Getters
-  int GetPowNum();
+  int getPowNum();
 
   // Metodos de la clase
-  std::string concatenation(std::string);
+  std::string concatenation(std::vector<std::string>);
   std::string l_union(std::string);
   std::string intersection(std::string);
   std::string difference(std::string);
