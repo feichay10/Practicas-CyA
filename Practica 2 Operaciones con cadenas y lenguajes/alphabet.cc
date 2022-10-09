@@ -18,6 +18,10 @@
 
 #include "alphabet.h"
 
+Alphabet::Alphabet(std::string alpha){
+  alpha_list.emplace_back(alpha);
+}
+
 Alphabet::~Alphabet() {}
 
 // Setters

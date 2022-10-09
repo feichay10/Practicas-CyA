@@ -54,12 +54,13 @@ void CheckParameters(int argc, char* argv[]) {
   }
 }
 
-void ReadFile(std::string input_1, std::string input_2, int option) {
+void ReadFile(std::string input_1, std::string input_2, int option,
+              std::vector<Alphabet>& alpha_list,
+              std::vector<Strings>& string_list) {
   std::ifstream file_in_1, file_in_2;
   std::string lines, str;
   std::stringstream ss;
-  std::vector<std::string> list_input_1;
-  std::vector<std::string> list_input_2;
+
 
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
@@ -72,13 +73,9 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1);
+    IterateFile(file_in_1, strings1, alpha_list, string_list);
     std::cout << std::endl;
-    // for (unsigned i = 0; i < strings1.getStringList().size(); i++){
-    //   std::cout << strings1.getStringList()[i] << std::endl;
-    // }
-  
-    IterateFile(file_in_2, strings2);
+    IterateFile(file_in_2, strings2, alpha_list, string_list);
 
     file_in_1.close();
     file_in_2.close();
@@ -90,13 +87,11 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1);
+    IterateFile(file_in_1, strings1, alpha_list, string_list);
 
     file_in_1.close();
   }
 
-  list_input_1.clear();
-  list_input_2.clear();
   ss.clear();
 }
 
@@ -114,51 +109,51 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::ifstream& file_in, Strings& string) {
+void IterateFile(std::ifstream& file_in, Strings& string,
+                 std::vector<Alphabet>& alpha_list,
+                 std::vector<Strings>& string_list) {
   std::string lines, str, result_operation;
   std::stringstream ss;
-  std::vector<std::string> list; // todo lo que almaceno es de tipo "Strings" 
   int count = 0;
 
   while (getline(file_in, lines, '\n')) {
     ss.str(lines);
     while (ss >> str) {
-      list.push_back(str);  // Cortamos la linea por palabras
-    }
-
-    for (unsigned i = 0; i < list.size(); i++) {
-      if (list[i] == BEGIN_BRACE || list[i] == END_BRACE) {
-        if (list[i] == END_BRACE) {
-          count++;
-        }
-        continue;
-      } else {
-        if (count == 0) {
-          // std::cout << "El alfabeto: " << list[i] << std::endl;
-          // alphabet.searchAlphabet(list[i]);
-          alphabet.saveAlphabet(list[i]);
-        } else if (count == 1) {
-          // std::cout << "\nLa cadena: " << list[i] << std::endl;
-          std::cout << std::endl;
-          string.saveStrings(list[i]);
-        }
+      // list.push_back(str);  // Cortamos la linea por palabras
+      if ((str == BEGIN_BRACE)) {
+        count++;
+      }
+      if (count == 3) {
+        count = 0;
+      } else if (count == 1) {
+        std::cout << "\nEl alfabeto: " << str << std::endl;
+        alpha_list.emplace_back(Alphabet(str));
+      } else if (count == 2) {
+        std::cout << "\nLa cadena: " << str << std::endl;
+        string_list.emplace_back(Strings(str));
       }
     }
 
-    count = 0;  // Reseteamos el contador
-    list.clear();
     ss.clear();
   }
+  std::cout << "Pistolon " << alpha_list.size() << std::endl;
+  std::cout << "Pistolon1 " << string_list.size() << std::endl;
 }
 
 std::string Menu(int argc, char* argv[]) {
   std::string result_operation;
   int operation = atoi(argv[4]);
+  std::vector<Alphabet> alpha;
+  std::vector<Strings> string;
 
   switch (operation) {
     case 1:
-      ReadFile(argv[1], argv[2], operation);
-      language.concatenation(strings1, strings2);
+      ReadFile(argv[1], argv[2], operation, alpha, string);
+      
+      for (unsigned i = 0; i < (string.size() / 2); i++) {
+        language.concatenation(string[i], string[i + 1]);
+        std::cout << std::endl;
+      }
       //  return result_operation;
       break;
     case 2:
@@ -175,7 +170,7 @@ std::string Menu(int argc, char* argv[]) {
       break;
     case 5:
       std::cout << operation << std::endl;
-      ReadFile(argv[1], argv[2], operation);
+      //ReadFile(argv[1], argv[2], operation);
       // language.reverse(strings1);
       //  return result_operation;
       break;

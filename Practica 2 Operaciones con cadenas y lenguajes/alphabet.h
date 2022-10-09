@@ -30,6 +30,7 @@ class Alphabet {
 
  public:
   Alphabet() = default;   // Constructor
+  Alphabet(std::string);
   ~Alphabet();            // Destructor
 
   // Setters (establecer a los atributos)
