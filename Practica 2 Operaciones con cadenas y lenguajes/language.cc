@@ -40,6 +40,7 @@ std::string Language::concatenation(Strings string1, Strings string2) {
   for(auto strings : result_concatenation) {
     std::cout << strings << std::endl;
   }
+  return 0;
 }
 
 // std::string Language::l_union(std::string) {}

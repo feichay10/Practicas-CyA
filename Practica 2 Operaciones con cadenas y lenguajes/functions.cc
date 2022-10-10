@@ -61,7 +61,6 @@ void ReadFile(std::string input_1, std::string input_2, int option,
   std::string lines, str;
   std::stringstream ss;
 
-
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
                       // dos ficheros
@@ -75,7 +74,7 @@ void ReadFile(std::string input_1, std::string input_2, int option,
 
     IterateFile(file_in_1, strings1, alpha_list, string_list);
     std::cout << std::endl;
-    IterateFile(file_in_2, strings2, alpha_list, string_list);
+    // IterateFile(file_in_2, strings2, alpha_list, string_list);
 
     file_in_1.close();
     file_in_2.close();
@@ -118,26 +117,27 @@ void IterateFile(std::ifstream& file_in, Strings& string,
 
   while (getline(file_in, lines, '\n')) {
     ss.str(lines);
-    while (ss >> str) {
-      // list.push_back(str);  // Cortamos la linea por palabras
-      if ((str == BEGIN_BRACE)) {
-        count++;
+    while (ss >> str) {  // Cortamos la linea por palabras
+      std::cout << "Element:  " << str << std::endl;
+      if (str == BEGIN_BRACE || str == END_BRACE) {
+        if (str == END_BRACE) {
+          count++;
+        }
+        continue;
+      } else {
+        if (count == 0) {
+          std::cout << "El alfabeto: " << str << std::endl;
+          alphabet.saveAlphabet(str);
+        } else if (count == 1) {
+          std::cout << "La cadena: " << str << std::endl;
+          std::cout << std::endl;
+          string.saveStrings(str);
+        }
       }
-      if (count == 3) {
-        count = 0;
-      } else if (count == 1) {
-        std::cout << "\nEl alfabeto: " << str << std::endl;
-        alpha_list.emplace_back(Alphabet(str));
-      } else if (count == 2) {
-        std::cout << "\nLa cadena: " << str << std::endl;
-        string_list.emplace_back(Strings(str));
-      }
+    ss.clear();
     }
-
     ss.clear();
   }
-  std::cout << "Pistolon " << alpha_list.size() << std::endl;
-  std::cout << "Pistolon1 " << string_list.size() << std::endl;
 }
 
 std::string Menu(int argc, char* argv[]) {
@@ -149,7 +149,7 @@ std::string Menu(int argc, char* argv[]) {
   switch (operation) {
     case 1:
       ReadFile(argv[1], argv[2], operation, alpha, string);
-      
+
       for (unsigned i = 0; i < (string.size() / 2); i++) {
         language.concatenation(string[i], string[i + 1]);
         std::cout << std::endl;
@@ -170,9 +170,9 @@ std::string Menu(int argc, char* argv[]) {
       break;
     case 5:
       std::cout << operation << std::endl;
-      //ReadFile(argv[1], argv[2], operation);
-      // language.reverse(strings1);
-      //  return result_operation;
+      // ReadFile(argv[1], argv[2], operation);
+      //  language.reverse(strings1);
+      //   return result_operation;
       break;
     case 6:
       // language.pow();
