@@ -25,8 +25,5 @@
 
 int main(int argc, char *argv[]) {
   CheckParameters(argc, argv);
-
-  int option = atoi(argv[4]);
-
-  ReadFile(argv[1], argv[2], option);  // ./p02_languages filein1.txt filein2.txt fileout.txt 1
+  Menu(argc, argv);
 }

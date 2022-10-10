@@ -54,12 +54,12 @@ void CheckParameters(int argc, char* argv[]) {
   }
 }
 
-void ReadFile(std::string input_1, std::string input_2, int option) {
+void ReadFile(std::string input_1, std::string input_2, int option,
+              std::vector<Alphabet>& alpha_list,
+              std::vector<Strings>& string_list) {
   std::ifstream file_in_1, file_in_2;
   std::string lines, str;
   std::stringstream ss;
-  std::vector<Alphabet> alpha;
-  std::vector<Strings> string;
 
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
@@ -72,9 +72,9 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1, alpha, string, option);
+    IterateFile(file_in_1, strings1, alpha_list, string_list);
     std::cout << std::endl;
-    IterateFile(file_in_2, strings2, alpha, string, option);
+    IterateFile(file_in_2, strings2, alpha_list, string_list);
 
     file_in_1.close();
     file_in_2.close();
@@ -86,10 +86,11 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1, alpha, string, option);
+    IterateFile(file_in_1, strings1, alpha_list, string_list);
 
     file_in_1.close();
   }
+
   ss.clear();
 }
 
@@ -109,7 +110,7 @@ void WriteFile(std::string output, int option) {
 
 void IterateFile(std::ifstream& file_in, Strings& string,
                  std::vector<Alphabet>& alpha_list,
-                 std::vector<Strings>& string_list, int option) {
+                 std::vector<Strings>& string_list) {
   std::string lines, str, result_operation;
   std::stringstream ss;
   int count = 0;
@@ -148,15 +149,18 @@ void IterateFile(std::ifstream& file_in, Strings& string,
 std::string Menu(int argc, char* argv[]) {
   std::string result_operation;
   int operation = atoi(argv[4]);
+  std::vector<Alphabet> alpha;
+  std::vector<Strings> string;
 
   switch (operation) {
     case 1:
-      // language.concatenation();
-      //  for (unsigned i = 0; i < (string.size() / 2); i++) {
-      //    language.concatenation(string[i], string[i + 1]);
-      //    std::cout << std::endl;
-      //  }
-      //   return result_operation;
+      ReadFile(argv[1], argv[2], operation, alpha, string);
+
+      for (unsigned i = 0; i < (string.size() / 2); i++) {
+        language.concatenation(string[i], string[i + 1]);
+        std::cout << std::endl;
+      }
+      //  return result_operation;
       break;
     case 2:
       // language.l_union();
