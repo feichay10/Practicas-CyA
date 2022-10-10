@@ -58,8 +58,10 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
   std::ifstream file_in_1, file_in_2;
   std::string lines, str;
   std::stringstream ss;
-  std::vector<Alphabet> alpha;
-  std::vector<Strings> string;
+  std::vector<Alphabet> alpha1;
+  std::vector<Alphabet> alpha2;
+  std::vector<Strings> string1;
+  std::vector<Strings> string2;
 
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
@@ -72,13 +74,12 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1, alpha, string, option);
-    std::cout << std::endl;
-    IterateFile(file_in_2, strings2, alpha, string, option);
+    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, string1,
+                string2, option);
 
     file_in_1.close();
     file_in_2.close();
-  } else {
+  } else if (option == 5 || option == 6) {
     file_in_1.open(input_1, std::ios::in);
 
     if (file_in_1.fail()) {
@@ -86,7 +87,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, strings1, alpha, string, option);
+    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, string1,
+                string2, option);
 
     file_in_1.close();
   }
@@ -107,41 +109,93 @@ void WriteFile(std::string output, int option) {
   file_out.close();
 }
 
-void IterateFile(std::ifstream& file_in, Strings& string,
-                 std::vector<Alphabet>& alpha_list,
-                 std::vector<Strings>& string_list, int option) {
-  std::string lines, str, result_operation;
-  std::stringstream ss;
+void IterateFile(std::ifstream& file_in1, std::ifstream& file_in2,
+                 Strings& string, std::vector<Alphabet>& alpha_list1,
+                 std::vector<Alphabet>& alpha_list2,
+                 std::vector<Strings>& string_list1,
+                 std::vector<Strings>& string_list2, int option) {
+  std::string lines1, lines2, str1, str2, result_operation;
+  std::stringstream ss1, ss2;
   int count = 0;
 
-  while (getline(file_in, lines)) {
-    ss.str(lines);
-    while (ss >> str) {  // Cortamos la linea por palabra
-      if (str == BEGIN_BRACE || str == END_BRACE) {
-        if (str == END_BRACE) {
-          count++;
+  if (option == 1 || option == 2 || option == 3 || option == 4) {
+    while (getline(file_in1, lines1)) {
+      while (getline(file_in2, lines2)) {
+        ss1.str(lines1);
+        ss2.str(lines2);
+        while ((ss1 >> str1) &&
+               (ss2 >> str2)) {  // Cortamos la linea por palabra
+          if ((str1 == BEGIN_BRACE || str1 == END_BRACE) &&
+              (str2 == BEGIN_BRACE || str2 == END_BRACE)) {
+            if ((str1 == END_BRACE) && (str2 == END_BRACE)) {
+              count++;
+              std::cout << "El contador: " << count << std::endl;
+            }
+          } else {
+            if (count == 0) {
+              std::cout << "El alfabeto1 : " << str1 << std::endl;
+              alpha_list1.emplace_back(Alphabet(str1));
+
+              std::cout << "El alfabeto2 : " << str2 << std::endl;
+              alpha_list2.emplace_back(Alphabet(str2));
+            } else if (count == 1) {
+              std::cout << "La cadena1: " << str1 << std::endl;
+              string_list1.emplace_back(Strings(str1));
+
+              std::cout << "La cadena2 : " << str2 << std::endl;
+              string_list2.emplace_back(Strings(str2));
+            }
+          }
+          if (count == 2) {
+            for (unsigned i = 0; i < string_list1.size(); i++) {
+              std::cout << string_list1[i] << " ";
+            }
+            std::cout << std::endl;
+            for (unsigned i = 0; i < string_list2.size(); i++) {
+              std::cout << string_list2[i] << " ";
+            }
+            std::cout << std::endl;
+            alpha_list1.clear();
+            alpha_list2.clear();
+            string_list1.clear();
+            string_list2.clear();
+            count = 0;
+          }
         }
-      } else {
-        if (count == 0) {
-          std::cout << "El alfabeto: " << str << std::endl;
-          alpha_list.emplace_back(Alphabet(str));
-        } else if (count == 1) {
-          std::cout << "La cadena: " << str << std::endl;
-          string_list.emplace_back(Strings(str));
-        }
-      }
-      if (count == 2) {
-        for (unsigned i = 0; i < string_list.size(); i++) {
-          std::cout << string_list[i] << " ";
-        }
-        std::cout << std::endl;
-        //Menu()
-        alpha_list.clear();
-        string_list.clear();
-        count = 0;
+        ss1.clear();
+        ss2.clear();
       }
     }
-    ss.clear();
+  } else if (option == 5 || option == 6) {
+    while (getline(file_in1, lines1)) {
+      ss1.str(lines1);
+      while (ss1 >> str1) {  // Cortamos la linea por palabra
+        if (str1 == BEGIN_BRACE || str1 == END_BRACE) {
+          if (str1 == END_BRACE) {
+            count++;
+          }
+        } else {
+          if (count == 0) {
+            std::cout << "El alfabeto: " << str1 << std::endl;
+            alpha_list1.emplace_back(Alphabet(str1));
+          } else if (count == 1) {
+            std::cout << "La cadena: " << str1<< std::endl;
+            string_list1.emplace_back(Strings(str1));
+          }
+        }
+        if (count == 2) {
+          for (unsigned i = 0; i < string_list1.size(); i++) {
+            std::cout << string_list1[i] << " ";
+          }
+          std::cout << std::endl;
+          Menu();
+          alpha_list1.clear();
+          string_list1.clear();
+          count = 0;
+        }
+      }
+      ss1.clear();
+    }
   }
 }
 
@@ -152,11 +206,7 @@ std::string Menu(int argc, char* argv[]) {
   switch (operation) {
     case 1:
       // language.concatenation();
-      //  for (unsigned i = 0; i < (string.size() / 2); i++) {
-      //    language.concatenation(string[i], string[i + 1]);
-      //    std::cout << std::endl;
-      //  }
-      //   return result_operation;
+      // return result_operation;
       break;
     case 2:
       // language.l_union();
