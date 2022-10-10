@@ -52,3 +52,4 @@ class Strings {
 Strings operator+(Strings& strings1, Strings& strings2);
 bool operator==(Strings& strings1, Strings& strings2);
 bool operator==(Strings& strings1, std::string strings2);
+std::ostream& operator<<(std::ostream& os, Strings& strings);

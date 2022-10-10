@@ -66,3 +66,8 @@ Strings& Strings::operator=(const Strings& strings) {
   this->string_list[0] = strings.string_list[0];
   return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, Strings& strings) {
+  os << strings.getStringList()[0];
+  return os;
+}
