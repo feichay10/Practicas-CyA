@@ -39,5 +39,5 @@ void ReadFile(std::string, std::string, int);
 void WriteFile(std::string, int);
 void IterateFile(std::ifstream &, std::ifstream &, Strings &,
                  std::vector<Alphabet> &, std::vector<Alphabet> &,
-                 std::vector<Strings> &, std::vector<Strings> &, int);
-void Menu();
+                 std::vector<Language> &, std::vector<Language> &, int);
+void Menu(std::vector<Language> &, int);

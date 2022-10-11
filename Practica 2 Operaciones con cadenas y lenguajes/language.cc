@@ -23,21 +23,26 @@
 Language::~Language() {}
 
 void Language::setPowNum(int _pow_num) { pow_num = _pow_num; }
-//void Language::setLanguage(std::string _language) { language = _language; }
+void Language::setLanguage(std::vector<std::string> _language) { 
+  for (auto string : _language) {
+    language.insert(string);
+  }
+}
 
 int Language::getPowNum() { return pow_num; }
-//std::set<std::string> Language::getLanguage() { return language; }
+std::set<std::string> Language::getLanguage() { return language; }
 
 std::string Language::concatenation(Strings string1, Strings string2) {
   std::set<std::string> result_concatenation;
   for (unsigned i = 0; i < string1.getStringList().size(); i++) {
     for (unsigned j = 0; j < string2.getStringList().size(); j++) {
-      result_concatenation.insert(string1.getStringList()[i] + string2.getStringList()[j]);
+      result_concatenation.insert(string1.getStringList()[i] +
+                                  string2.getStringList()[j]);
     }
   }
 
   std::cout << "Concatenacion: " << std::endl;
-  for(auto strings : result_concatenation) {
+  for (auto strings : result_concatenation) {
     std::cout << strings << std::endl;
   }
 }
@@ -48,6 +53,12 @@ std::string Language::concatenation(Strings string1, Strings string2) {
 
 // std::string Language::difference(std::string) {}
 
-// std::string Language::reverse(Strings string1) {}
+// Language Language::reverse(Language language) {
+//   std::cout << "Metodo inversa: " << std::endl;
+//   Language l_reverse;
+//   for (std::set<Strings>::iterator it = language.begin():it != language.end(); it++){
+//     std::cout << *it << std::endl;
+//   }
+// }
 
 // std::string Language::pow(std::string) {}

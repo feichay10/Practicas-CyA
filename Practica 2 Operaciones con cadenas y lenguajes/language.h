@@ -38,18 +38,18 @@ class Language {
 
   // Setters
   void setPowNum(int);
-  //void setLanguage(std::string);
+  void setLanguage(std::vector<std::string>);
 
   // Getters
   int getPowNum();
-  //std::string getLanguage();
+  std::string getLanguage();
 
   // Metodos de la clase
   std::string concatenation(Strings, Strings);
   std::string l_union(std::string);
   std::string intersection(std::string);
   std::string difference(std::string);
-  std::string reverse(Strings);
+  Language reverse(std::vector<Strings>&);
   std::string pow(std::string);
 };
 

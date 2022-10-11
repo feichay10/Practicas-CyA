@@ -60,8 +60,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
   std::stringstream ss;
   std::vector<Alphabet> alpha1;
   std::vector<Alphabet> alpha2;
-  std::vector<Strings> string1;
-  std::vector<Strings> string2;
+  std::vector<Language> language1;
+  std::vector<Language> language2;
 
   if (option == 1 || option == 2 || option == 3 ||
       option == 4) {  // En caso de operaciones que hacen falta la entrada de
@@ -74,8 +74,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, string1,
-                string2, option);
+    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, language1,
+                language2, option);
 
     file_in_1.close();
     file_in_2.close();
@@ -87,8 +87,8 @@ void ReadFile(std::string input_1, std::string input_2, int option) {
       exit(1);
     }
 
-    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, string1,
-                string2, option);
+    IterateFile(file_in_1, file_in_2, strings1, alpha1, alpha2, language1,
+                language2, option);
 
     file_in_1.close();
   }
@@ -112,8 +112,8 @@ void WriteFile(std::string output, int option) {
 void IterateFile(std::ifstream& file_in1, std::ifstream& file_in2,
                  Strings& string, std::vector<Alphabet>& alpha_list1,
                  std::vector<Alphabet>& alpha_list2,
-                 std::vector<Strings>& string_list1,
-                 std::vector<Strings>& string_list2, int option) {
+                 std::vector<Language>& language_list1,
+                 std::vector<Language>& language_list2, int option) {
   std::string lines1, lines2, str1, str2, result_operation;
   std::stringstream ss1, ss2;
   int count = 0;
@@ -140,25 +140,25 @@ void IterateFile(std::ifstream& file_in1, std::ifstream& file_in2,
               alpha_list2.emplace_back(Alphabet(str2));
             } else if (count == 1) {
               std::cout << "La cadena1: " << str1 << std::endl;
-              string_list1.emplace_back(Strings(str1));
+              language_list1.emplace_back(Strings(str1));
 
               std::cout << "La cadena2 : " << str2 << std::endl;
-              string_list2.emplace_back(Strings(str2));
+              language_list2.emplace_back(Strings(str2));
             }
           }
           if (count == 2) {
-            for (unsigned i = 0; i < string_list1.size(); i++) {
-              std::cout << string_list1[i] << " ";
+            for (unsigned i = 0; i < language_list1.size(); i++) {
+              std::cout << language_list1[i] << " ";
             }
             std::cout << std::endl;
-            for (unsigned i = 0; i < string_list2.size(); i++) {
-              std::cout << string_list2[i] << " ";
+            for (unsigned i = 0; i < language_list1.size(); i++) {
+              std::cout << language_list2[i] << " ";
             }
             std::cout << std::endl;
             alpha_list1.clear();
             alpha_list2.clear();
-            string_list1.clear();
-            string_list2.clear();
+            language_list1.clear();
+            language_list2.clear();
             count = 0;
           }
         }
@@ -179,31 +179,29 @@ void IterateFile(std::ifstream& file_in1, std::ifstream& file_in2,
             std::cout << "El alfabeto: " << str1 << std::endl;
             alpha_list1.emplace_back(Alphabet(str1));
           } else if (count == 1) {
-            std::cout << "La cadena: " << str1<< std::endl;
-            string_list1.emplace_back(Strings(str1));
+            std::cout << "El lenguaje: " << str1<< std::endl;
+            language_list1.insert(Strings(str));
           }
         }
-        if (count == 2) {
-          for (unsigned i = 0; i < string_list1.size(); i++) {
-            std::cout << string_list1[i] << " ";
-          }
-          std::cout << std::endl;
-          Menu();
-          alpha_list1.clear();
-          string_list1.clear();
-          count = 0;
-        }
-      }
+      //   if (count == 2) {
+      //     for (unsigned i = 0; i < language_list1.size(); i++) {
+      //       std::cout << language_list1[i] << " ";
+      //     }
+      //     std::cout << std::endl;
+      //     //Menu(language_list1, option);
+      //     alpha_list1.clear();
+      //     language_list1.clear();
+      //     count = 0;
+      //   }
+      // }
+      count = 0;
       ss1.clear();
     }
   }
 }
 
-std::string Menu(int argc, char* argv[]) {
-  std::string result_operation;
-  int operation = atoi(argv[4]);
-
-  switch (operation) {
+void Menu(std::vector<Language>& language_list1, int option) {
+  switch (option) {
     case 1:
       // language.concatenation();
       // return result_operation;
@@ -221,10 +219,7 @@ std::string Menu(int argc, char* argv[]) {
       // return result_operation;
       break;
     case 5:
-      std::cout << operation << std::endl;
-      // ReadFile(argv[1], argv[2], operation);
-      //  language.reverse(strings1);
-      //   return result_operation;
+      language.reverse();
       break;
     case 6:
       // language.pow();
@@ -235,5 +230,4 @@ std::string Menu(int argc, char* argv[]) {
       exit(1);
       break;
   }
-  return result_operation;
 }
