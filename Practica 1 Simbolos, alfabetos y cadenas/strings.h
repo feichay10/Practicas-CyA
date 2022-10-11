@@ -37,12 +37,12 @@ class Strings {
   ~Strings();  // Destructor
 
   // Setters
-  void SetOpcode(int);  
-  void SetString(std::vector<std::string>);
+  void setOpcode(int);  
+  void setString(std::vector<std::string>);
 
   // Getters
-  int GetOpcode();
-  std::vector<std::string> GetString();   
+  int getOpcode();
+  std::vector<std::string> getString();   
 
   //Metodos de la clase
   void ShowStrings(std::vector<std::string>);

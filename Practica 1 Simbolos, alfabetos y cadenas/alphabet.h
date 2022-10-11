@@ -36,10 +36,10 @@ class Alphabet {
   ~Alphabet();            // Destructor
 
   // Setters (establecer a los atributos)
-  void SetAlphabet(std::vector<std::string>);
+  void setAlphabet(std::vector<std::string>);
 
   // Getter (mostrar los atributos)
-  std::vector<std::string> GetAlphabet();
+  std::vector<std::string> getAlphabet();
 
   void SearchAlphabet(std::string Strings_);
 }; 

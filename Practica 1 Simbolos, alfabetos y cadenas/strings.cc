@@ -32,7 +32,7 @@ void Strings::setString(std::vector<std::string> _StringList) {
 
 int Strings::getOpcode() { return opcode; }
 
-std::vector<std::string> Strings::GetString() { return StringList; }
+std::vector<std::string> Strings::getString() { return StringList; }
 
 std::string Strings::length(std::string strings) {
   std::stringstream ss;
