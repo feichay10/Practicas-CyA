@@ -132,11 +132,11 @@ void IterateFile(std::ifstream& file_in, Strings& string,
         }
       }
       if (count == 2) {
+        std::cout << "El lenguage: ";
         for (unsigned i = 0; i < string_list.size(); i++) {
           std::cout << string_list[i] << " ";
         }
         std::cout << std::endl;
-        //Menu()
         alpha_list.clear();
         string_list.clear();
         count = 0;
