@@ -25,5 +25,7 @@
 int main (int argc, char* argv[]){
   CheckParameters(argc);
   std::string in_file = argv[1];
-  ReadFile(in_file);
+  std::vector<std::string> operations, vec_tags;
+  std::vector<language> languages;
+  ReadFile(in_file, operations, languages, vec_tags);
 }

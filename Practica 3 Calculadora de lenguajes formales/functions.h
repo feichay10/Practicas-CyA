@@ -9,6 +9,9 @@
  *
  */
 
+
+#pragma once
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -22,4 +25,4 @@ const char BEGIN_BRACE = '{';
 const char END_BRACE = '}';
 
 void CheckParameters(int num_parameters);
-void ReadFile(std::string input);
+void ReadFile(std::string input, std::vector<std::string>& operations, std::vector<language>& languages, std::vector<std::string>& vec_tags);
