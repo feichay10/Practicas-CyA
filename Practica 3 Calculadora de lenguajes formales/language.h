@@ -21,4 +21,10 @@ class language {
   public: 
     language();
     ~language();
+
+    void set_tag_language(std::string tag);
+    void set_contain_language(std::string contain);
+
+    std::string get_tag_language(int i);
+    std::string get_contain_language(int i);
 };

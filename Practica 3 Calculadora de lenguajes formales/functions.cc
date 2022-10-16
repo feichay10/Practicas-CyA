@@ -27,16 +27,29 @@ void CheckParameters(int num_parameters) {
 
 void ReadFile(std::string input) {
   std::ifstream file_in;
-  std::string line, aux;
+  std::string line, language_tag, language_contain;
+  std::stringstream ss;
+  int i = 0;
+  language tag;
+
 
   file_in.open(input);
   if (file_in.is_open()) {
-    while (std::getline(file_in, line)) {
-      for (int i = 0; i < line.size(); i++) {
-        if (line[i] == ' ') {
-          
+    while (getline(file_in, line, '\n')) {
+      ss << line;
+      while (getline(ss, language_tag, EQUAL)) {
+        if (i == 0) {
+          std::cout << "Tag: " << language_tag << std::endl;
+          tag.set_contain_language(language_tag);
+          i++;
+        } else {
+          UN DESCANSO
+          language_contain = language_tag;
+          std::cout << "Contenido: " << language_contain << std::endl;
+          i = 0;
         }
       }
+      ss.clear();
     }
   } else {
     std::cout << "Error: No se ha podido abrir el fichero" << std::endl;
