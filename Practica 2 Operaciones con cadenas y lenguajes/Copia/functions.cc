@@ -55,8 +55,8 @@ void CheckParameters(int argc, char* argv[]) {
 }
 
 void ReadFile(std::string input_1, std::string input_2, int option,
-              std::vector<Alphabet>& alpha_list,
-              std::vector<Strings>& string_list) {
+              std::vector<Alphabet>* alpha_list,
+              std::vector<Strings>* string_list) {
   std::ifstream file_in_1, file_in_2;
   std::string lines, str;
   std::stringstream ss;
@@ -109,8 +109,8 @@ void WriteFile(std::string output, int option) {
 }
 
 void IterateFile(std::ifstream& file_in, Strings& string,
-                 std::vector<Alphabet>& alpha_list,
-                 std::vector<Strings>& string_list) {
+                 std::vector<Alphabet>* alpha_list,
+                 std::vector<Strings>* string_list) {
   std::string lines, str, result_operation;
   std::stringstream ss;
   int count = 0;
@@ -125,20 +125,20 @@ void IterateFile(std::ifstream& file_in, Strings& string,
       } else {
         if (count == 0) {
           std::cout << "El alfabeto: " << str << std::endl;
-          alpha_list.emplace_back(Alphabet(str));
+          alpha_list->emplace_back(Alphabet(str));
         } else if (count == 1) {
           std::cout << "La cadena: " << str << std::endl;
-          string_list.emplace_back(Strings(str));
+          string_list->emplace_back(Strings(str));
         }
       }
       if (count == 2) {
         std::cout << "El lenguage: ";
-        for (unsigned i = 0; i < string_list.size(); i++) {
-          std::cout << string_list[i] << " ";
+        for (unsigned i = 0; i < string_list->size(); i++) {
+          std::cout << string_list->at(i) << " ";
         }
         std::cout << std::endl;
-        alpha_list.clear();
-        string_list.clear();
+        alpha_list->clear();
+        string_list->clear();
         count = 0;
       }
     }
@@ -154,7 +154,8 @@ std::string Menu(int argc, char* argv[]) {
 
   switch (operation) {
     case 1:
-      ReadFile(argv[1], argv[2], operation, alpha, string);
+      ReadFile(argv[1], argv[2], operation, &alpha, &string);
+  
 
       for (unsigned i = 0; i < (string.size() / 2); i++) {
         language.concatenation(string[i], string[i + 1]);

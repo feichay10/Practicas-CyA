@@ -30,11 +30,11 @@ int Language::getPowNum() { return pow_num; }
 
 std::string Language::concatenation(Strings string1, Strings string2) {
   std::set<std::string> result_concatenation;
-  for (unsigned i = 0; i < string1.getStringList().size(); i++) {
-    for (unsigned j = 0; j < string2.getStringList().size(); j++) {
-      result_concatenation.insert(string1.getStringList()[i] + string2.getStringList()[j]);
-    }
-  }
+  // for (unsigned i = 0; i < string1.getStringList().size(); i++) {
+  //   for (unsigned j = 0; j < string2.getStringList().size(); j++) {
+      result_concatenation.insert(string1.getString() + string2.getString());
+  //   }
+  // }
 
   std::cout << "Concatenacion: " << std::endl;
   for(auto strings : result_concatenation) {

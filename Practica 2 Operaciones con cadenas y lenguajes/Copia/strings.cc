@@ -32,6 +32,14 @@ int Strings::getOpcode() { return opcode; }
 
 std::vector<std::string> Strings::getStringList() { return string_list; }
 
+std::string Strings::getString() {
+  std::string s;
+  for (unsigned i = 0; i < string_list.size(); i++) {
+    s += string_list[i];
+  }
+  return s;
+}
+
 Strings operator+(Strings& strings1, Strings& strings2) {
   return Strings(strings1.getStringList()[0] + strings2.getStringList()[0]);
 }

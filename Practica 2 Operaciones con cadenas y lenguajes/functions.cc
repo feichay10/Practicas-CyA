@@ -183,17 +183,17 @@ void IterateFile(std::ifstream& file_in1, std::ifstream& file_in2,
             language_list1.insert(Strings(str));
           }
         }
-      //   if (count == 2) {
-      //     for (unsigned i = 0; i < language_list1.size(); i++) {
-      //       std::cout << language_list1[i] << " ";
-      //     }
-      //     std::cout << std::endl;
-      //     //Menu(language_list1, option);
-      //     alpha_list1.clear();
-      //     language_list1.clear();
-      //     count = 0;
-      //   }
-      // }
+        if (count == 2) {
+          for (unsigned i = 0; i < language_list1.size(); i++) {
+            std::cout << language_list1[i] << " ";
+          }
+          std::cout << std::endl;
+          //Menu(language_list1, option);
+          alpha_list1.clear();
+          language_list1.clear();
+          count = 0;
+        }
+      }
       count = 0;
       ss1.clear();
     }

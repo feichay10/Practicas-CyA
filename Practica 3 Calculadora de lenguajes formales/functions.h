@@ -14,5 +14,6 @@
 #include <vector>
 #include <fstream>
 
+
 void CheckParameters(int);
 void ReadFile(std::string);

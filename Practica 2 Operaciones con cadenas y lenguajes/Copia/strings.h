@@ -42,6 +42,7 @@ class Strings {
   // Getters
   int getOpcode();
   std::vector<std::string> getStringList();
+  std::string getString();
 
   // Metodos de la clase
   void saveStrings(std::string);
