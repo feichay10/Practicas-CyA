@@ -34,26 +34,27 @@ void ReadFile(std::string input, std::vector<std::string>& operations, std::vect
   std::string line, entry, copy;
   std::stringstream ss;
   std::set<strings> language_set;
+
   file_in.open(input);
   if (file_in.is_open()) {
     while (getline(file_in, line)) {
       ss << line;  // Separar LX del = al lenguage {a,b}
       while (getline(ss, entry, EQUAL)) {
-        if (entry[0] != ' ') {
-          if (entry[entry.size() - 1] == ' ') {
-            for (size_t i = 0; i < entry.size(); i++) {
+        if (entry[0] != ' ') {                          // LX' ' = ' ' {a,b}
+          if (entry[entry.size() - 1] == ' ') {         // entry[entry.size() - 1] --> si el ultimo elemento del LX' ' es un espacio, es una etiqueta
+            for (size_t i = 0; i < entry.size(); i++) { // Hasta que no encuentre ese espacio voy almacenando todas las etiquetas
               if (entry[i] != ' ') {
-                copy.push_back(entry[i]);
+                copy.push_back(entry[i]);               // Meto en un string "copy" L, 1, L, 2, ...
               }
             }
-            vec_tags.push_back(copy);
-            copy.clear();
+            vec_tags.push_back(copy);                   // Directamente seria la etiqueta L1, L2, L3, ...
+            copy.clear();                               
           } else {
-            operations.emplace_back(entry);
+            operations.emplace_back(entry);             // Almacena las operaciones
           }
         } else {
-          int i = 2;
-          copy.clear();
+          int i = 2;                                    // El i + 2 es para avanzar el ' ' y el { 
+          copy.clear();                                 // Para que no se junte con las etiquetas elimino el contenido de copy
           while (entry[i] != END_BRACE) {
             if ((entry[i] != ',') && (entry[i] != ' ')) {
               copy.push_back(entry[i]);
@@ -75,24 +76,89 @@ void ReadFile(std::string input, std::vector<std::string>& operations, std::vect
       language_set.clear();
       ss.clear();
     }
-    for (size_t i = 0; i < vec_tags.size(); i++) {
-      std::cout << "Tag: " << vec_tags[i] << std::endl;
-    }
-    for (size_t i = 0; i < operations.size(); i++) {
-      std::cout << "Operacion: " << operations[i] << std::endl;
-    }
-    for (size_t i = 0; i < languages.size(); i++) {
-      std::set<strings> copia = languages[i].getLanguage();
-      for (auto it = copia.begin(); it != copia.end(); ++it) {
-        std::cout << "Lenguaje " << i + 1 << ": " << *it << std::endl;
-      }
-    }
   } else {
     std::cout << "Error: No se ha podido abrir el fichero" << std::endl;
     exit(EXIT_FAILURE);
   }
 }
 
-void menuOperations() {
-  
+void MenuOperations(std::vector<std::string>& operations,
+                    std::vector<language>& languages,
+                    std::vector<std::string>& vec_tags) {
+  std::string aux_separation;
+  std::vector<std::string> separation_operation;
+
+  std::stack<language> stack_language;
+
+  for (size_t i = 0; i < operations.size(); i++) {
+    for (size_t j = 0; j < operations[i].size(); j++) {
+      while (operations[i][j] != ' ') {
+        aux_separation.push_back(operations[i][j]);
+        j++;
+      }
+      if (aux_separation.size() > 2) {  // Me metia caracteres basura e hice esto
+        std::string copy;
+        copy.push_back(aux_separation[0]);
+        separation_operation.emplace_back(copy);
+        copy.clear();
+        aux_separation.clear();
+      } else {
+        separation_operation.emplace_back(aux_separation);
+        aux_separation.clear();
+      }
+    }
+    for (size_t j = 0; j < separation_operation.size(); j++) {
+      if ((separation_operation[j] == "+") || (separation_operation[j] == "|") || (separation_operation[j] == "^") || (separation_operation[j] == "-") || (separation_operation[j] == "!") || (separation_operation[j] == "*")){
+        language aux_language1, aux_language2;
+        switch(separation_operation[j][0]){
+          case '+':
+            aux_language2 = stack_language.top();
+            stack_language.pop();
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            stack_language.push(aux_language1 + aux_language2);
+            break;
+          case '|':
+            aux_language2 = stack_language.top();
+            stack_language.pop();
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            stack_language.push(aux_language1 | aux_language2);
+            break;
+          case '^':
+            aux_language2 = stack_language.top();
+            stack_language.pop();
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            stack_language.push(aux_language1 ^ aux_language2);
+            break;
+          case '-':
+            aux_language2 = stack_language.top();
+            stack_language.pop();
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            stack_language.push(aux_language1 - aux_language2);
+            break;
+          case '!':
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            stack_language.push(!aux_language1);
+            break;
+          case '*':
+            aux_language1 = stack_language.top();
+            stack_language.pop();
+            int pow = std::stoi(separation_operation[j - 1]);
+            stack_language.push(aux_language1 * pow);
+            break;
+        }
+      } else {
+        for (size_t k = 0; k < vec_tags.size(); k++) {
+          if (separation_operation[j] == vec_tags[k]) {
+            stack_language.push(languages[k]);
+          }
+        }
+      }
+    }
+    std::cout << "La operacion: " << operations[i] << " --> " << stack_language.top() << std::endl;
+  }
 }

@@ -23,7 +23,10 @@ class language {
  public:
   language() = default;
   language(std::set<strings> language);
-  std::set<strings> getLanguage() const;
+  void set_Language(std::set<strings>);
+  void set_Alphabet(alphabet);
+  alphabet get_Alphabet() const;
+  std::set<strings> get_Language() const;
   ~language();
 
  private:
@@ -37,3 +40,5 @@ language operator^(const language& language1, const language& language2);
 language operator-(const language& language1, const language& language2);
 language operator!(const language& language);
 language operator*(const language& language1, int exponent);
+
+std::ostream& operator<<(std::ostream& out, const language& language);

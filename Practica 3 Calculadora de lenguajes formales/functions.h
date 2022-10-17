@@ -17,6 +17,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <stack>
 
 #include "language.h"
 
@@ -26,3 +27,4 @@ const char END_BRACE = '}';
 
 void CheckParameters(int num_parameters);
 void ReadFile(std::string input, std::vector<std::string>& operations, std::vector<language>& languages, std::vector<std::string>& vec_tags);
+void MenuOperations(std::vector<std::string>& operations, std::vector<language>& languages, std::vector<std::string>& vec_tags);

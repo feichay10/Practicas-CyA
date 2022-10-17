@@ -28,4 +28,5 @@ int main (int argc, char* argv[]){
   std::vector<std::string> operations, vec_tags;
   std::vector<language> languages;
   ReadFile(in_file, operations, languages, vec_tags);
+  MenuOperations(operations, languages, vec_tags);
 }

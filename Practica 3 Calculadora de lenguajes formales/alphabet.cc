@@ -16,3 +16,6 @@ void alphabet::set_alphabet(symbol letter) {
   alphabet_.insert(letter);
 }
 
+std::set<symbol> alphabet::get_alphabet() const { 
+  return alphabet_; 
+}

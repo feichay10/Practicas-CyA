@@ -18,9 +18,11 @@ class symbol;
 
 class strings {
   public:
+    strings() = default;
     strings(std::string str);
-    std::vector<symbol> getstring() const;
-    
+    std::vector<symbol> get_string() const;
+    strings reverse();
+
   private:
     std::vector<symbol> strings_;
     
@@ -29,3 +31,4 @@ class strings {
 bool operator<(const strings& strings1, const strings& strings2);
 bool operator==(const strings& strings1, const strings& strings2);
 std::ostream& operator<<(std::ostream& out, const strings& strings);
+strings operator+(const strings& strings1, const strings& strings2);

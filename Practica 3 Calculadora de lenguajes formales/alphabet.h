@@ -19,11 +19,10 @@
 class alphabet {
  public:
   alphabet() = default;
-  //~alphabet();
 
   void set_alphabet(symbol letter);
+  std::set<symbol> get_alphabet() const;
 
  private:
   std::set<symbol> alphabet_;
-  
 };

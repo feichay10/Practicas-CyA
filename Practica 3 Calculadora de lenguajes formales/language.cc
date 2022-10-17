@@ -1,167 +1,260 @@
 /**
  * @file language.cc
  * @author your name (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-10-16
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include "language.h"
+
 #include "strings.h"
 #include "symbol.h"
 
+// Constructor para sacar el alfabeto de las cadenas
 language::language(std::set<strings> language) {
   language_ = language;
-  
-  for(std::set<strings>::iterator it = language_.begin(); it != language_.end(); ++it) {
-    for (size_t i = 0; i < it->getstring().size(); i++) {
-      alphabet_.set_alphabet(it->getstring()[i]);
+
+  for (std::set<strings>::iterator it = language_.begin(); it != language_.end(); ++it) { 
+    for (size_t i = 0; i < it->get_string().size(); i++) {
+      alphabet_.set_alphabet(it->get_string()[i]);
     }
   }
 }
 
-std::set<strings> language::getLanguage() const {
-  return language_;
+std::set<strings> language::get_Language() const { 
+  return language_; 
+}
+
+void language::set_Language(std::set<strings> setlanguage) {
+  language_ = setlanguage;
+}
+
+void language::set_Alphabet(alphabet alphabet) { 
+  alphabet_ = alphabet;
+}
+
+alphabet language::get_Alphabet() const { 
+  return alphabet_;
 }
 
 language::~language() {}
 
+/**
+ * @brief Concatenar dos lenguajes
+ * 
+ * @param language1 
+ * @param language2 
+ * @return language 
+ */
+
 language operator+(const language& language1, const language& language2) {
-  language concatenados;
-  std::set<strings> copia1 = language1.getLanguage(), copia2 = language2.getLanguage(), language;
-  if (copia1.size() == 1) {
-    for (std::set<strings>::iterator it{copia1.begin()}; it != copia1.end(); it++) {
+  language concatenation;
+  std::set<strings> aux1 = language1.get_Language(), aux2 = language2.get_Language(), language_;
+  /**
+   * @brief Verificar si es de tamaño 1 y la unica cadena es el &, significa que concatenamos & con el lenguaje 2 y sacamos el resultado que es el lenguaje 2
+   * 
+   */
+  if (aux1.size() == 1) {
+    for (std::set<strings>::iterator it = aux1.begin(); it != aux1.end(); it++) {
       if (*it == strings("&")) {
         return language2;
       }
     }
   }
-  if (copia2.size() == 1) {
-    for (std::set<strings>::iterator it{copia2.begin()}; it != copia2.end(); it++) {
-    if (*it == strings("&")) {
-      return language1;
+
+  /**
+   * @brief Verificar si es de tamaño 1 y la unica cadena es el &, significa que concatenamos & con el lenguaje 1 y sacamos el resultado que es el lenguaje 1
+   * 
+   */
+  if (aux2.size() == 1) {
+    for (std::set<strings>::iterator it = aux2.begin(); it != aux2.end(); it++) {
+      if (*it == strings("&")) {
+        return language1;
+      }
     }
   }
-  }
-  for (std::set<strings>::iterator it1{copia1.begin()}; it1 != copia1.end(); it1++) {
-    for (std::set<strings>::iterator it2{copia2.begin()}; it2 != copia2.end(); it2++) {
+
+  /**
+   * @brief Si no son de tamaño 1 hace la concatenacion de los dos lenguajes
+   * 
+   * @param it1 
+   */
+
+  for (std::set<strings>::iterator it1 = aux1.begin(); it1 != aux1.end(); it1++) { // Recorremos el lenguaje 1
+    for (std::set<strings>::iterator it2 = aux2.begin(); it2 != aux2.end(); it2++) { // Recorremos el lenguage 2
       if (*it1 == strings("&")) {
-          language.insert(*it2);
-        } else if (*it2 == strings("&")) {
-          language.insert(*it1);
-        } else {
-          language.insert(*it1 + *it2);
-        }
+        language_.insert(*it2); // Si la cadena es & solo insertamos la cadena del lenguaje 2
+      } else if (*it2 == strings("&")) {
+        language_.insert(*it1); // Si la cadena es & solo insertamos la cadena del lenguaje 1
+      } else {
+        language_.insert(*it1 + *it2); // si no es & concatenamos las cadenas de los dos lenguajes
+      }
     }
   }
-  concatenados.setLanguage(language);
-  concatenados.setAlfabeto(Union(language1, language2));
-  return concatenados;
+  concatenation.set_Language(language_); // Seteamos el lenguaje concatenado
+  concatenation.set_Alphabet(language1.get_Alphabet()); // El alfabeto es el mismo que el del lenguaje 1
+  return concatenation;
 }
 
 language operator|(const language& language1, const language& language2) {
-  language lenguaje_union;
-  std::set<strings> cadenas, copia1 = language1.getLanguage(), copia2 = language2.getLanguage();
-  for (std::set<strings>::iterator it{copia1.begin()}; it != copia1.end(); it++) {
-    cadenas.insert(*it);
+  language language_union;
+  std::set<strings> strings_, aux1 = language1.get_Language(), aux2 = language2.get_Language();
+
+  // Recorrer el lenguaje 1 y agregarlo al lenguaje union
+  for (std::set<strings>::iterator it = aux1.begin(); it != aux1.end(); it++) {
+    strings_.insert(*it);
   }
-  for (std::set<strings>::iterator it{copia2.begin()}; it != copia2.end(); it++) {
-    cadenas.insert(*it);
+
+  // Recorrer el lenguaje 2 y agregarlo al lenguaje union
+  for (std::set<strings>::iterator it = aux2.begin(); it != aux2.end(); it++) {
+    strings_.insert(*it);
   }
-  lenguaje_union.setLanguage(cadenas);
-  lenguaje_union.setAlfabeto(Union(language1, language2));
-  return lenguaje_union;
+
+  language_union.set_Language(strings_);  // Seteamos el lenguaje union
+  language_union.set_Alphabet(language1.get_Alphabet()); // El alfabeto es el mismo que el del lenguaje 1
+  return language_union;
 }
 
+/**
+ * @brief Intersección de dos lenguajes
+ * 
+ * @param language1 
+ * @param language2 
+ * @return language 
+ */
 language operator^(const language& language1, const language& language2) {
   language intersection;
-  std::set<strings> cadenas, copia1 = language1.getLanguage(), copia2 = language2.getLanguage();
-  for (std::set<strings>::iterator it1{copia1.begin()}; it1 != copia1.end(); it1++) {
-    for (std::set<strings>::iterator it2{copia2.begin()}; it2 != copia2.end(); it2++) {
+  std::set<strings> strings_, aux1 = language1.get_Language(), aux2 = language2.get_Language();
+  for (std::set<strings>::iterator it1 = aux1.begin(); it1 != aux1.end(); it1++) {
+    for (std::set<strings>::iterator it2 = aux2.begin(); it2 != aux2.end(); it2++) {
       if (*it1 == *it2) {
-        cadenas.insert(*it1);
-      }
+        strings_.insert(*it2);
+      } 
     }
   }
-  intersection.setLanguage(cadenas);
-  intersection.setAlfabeto(Intersection(language1, language2));
+  intersection.set_Language(strings_);
+  intersection.set_Alphabet(language1.get_Alphabet());
   return intersection;
 }
 
+/**
+ * @brief Diferencia de dos lenguajes 
+ * 
+ * @param language1 
+ * @param language2 
+ * @return language 
+ */
 language operator-(const language& language1, const language& language2) {
-  size_t contador{0};
-  language diferencia;
-  std::set<strings> cadenas, copia1 = language1.getLanguage(), copia2 = language2.getLanguage();
-  for (std::set<strings>::iterator it1{copia1.begin()}; it1 != copia1.end(); it1++) {
-    for (std::set<strings>::iterator it2{copia2.begin()}; it2 != copia2.end(); it2++) {
+  size_t count = 0;
+  language difference;
+  std::set<strings> strings_, aux1 = language1.get_Language(), aux2 = language2.get_Language();
+
+  for (std::set<strings>::iterator it1 = aux1.begin(); it1 != aux1.end(); it1++) {
+    for (std::set<strings>::iterator it2 = aux2.begin(); it2 != aux2.end(); it2++) {
       if (*it1 == *it2) {
-        ++contador;
+        ++count;
       }
     }
-    if (contador < 1) {
-      cadenas.insert(*it1);
+    if (count < 1) {
+      strings_.insert(*it1);
     }
-    contador = 0;
+    count = 0;
   }
-  contador = 0;
-  for (std::set<strings>::iterator it2{copia2.begin()}; it2 != copia2.end(); it2++) {
-    for (std::set<strings>::iterator it1{copia1.begin()}; it1 != copia1.end(); it1++) {
+
+  count = 0;
+
+  for (std::set<strings>::iterator it2 = aux2.begin(); it2 != aux2.end(); it2++) {
+    for (std::set<strings>::iterator it1 = aux1.begin(); it1 != aux1.end(); it1++) {
       if (*it2 == *it1) {
-        ++contador;
+        ++count;
       }
     }
-    if (contador < 1) {
-      cadenas.insert(*it2);
+    if (count < 1) {
+      strings_.insert(*it2);
     }
-    contador = 0;
+    count = 0;
   }
-  diferencia.setLanguage(cadenas);
-  diferencia.setAlfabeto(Union(language1, language2));
-  return diferencia;
+
+  difference.set_Language(strings_);
+  difference.set_Alphabet(language1.get_Alphabet());
+  return difference;
 }
 
-language operator!(const language& language) {
-  language invertido;
-  strings copia_cadena;
-  std::set<strings> cadenas, copia_lenguaje{language.getLanguage()};
-  for (std::set<strings>::iterator it{copia_lenguaje.begin()}; it != copia_lenguaje.end(); it++) {
-    copia_cadena = *it;
-    cadenas.insert(copia_cadena.Inverted());
+/**
+ * @brief 
+ * 
+ * @param language_ 
+ * @return language 
+ */
+
+language operator!(const language& language_) {
+  language reverse;
+  strings aux_string;
+  std::set<strings> strings_, copy_language = language_.get_Language();
+
+  for (std::set<strings>::iterator it = copy_language.begin(); it != copy_language.end(); it++) {
+    aux_string = *it;
+    strings_.insert(aux_string.reverse());
   }
-  invertido.setLanguage(cadenas);
-  invertido.setAlfabeto(language.getAlfabeto());
-  return invertido;
+
+  reverse.set_Language(strings_);
+  reverse.set_Alphabet(language_.get_Alphabet());
+  return reverse;
 }
 
 language operator*(const language& language_, int exponent) {
-  language potencia;
+  language pow;
   if (exponent == 0) {
-    std::set<strings> vacia;
-    vacia.insert(strings("&"));
-    potencia.setAlfabeto(language_.getAlfabeto());
-    potencia.setLanguage(vacia);
-    return potencia;
+    std::set<strings> empty_string;
+
+    empty_string.insert(strings("&"));
+    pow.set_Language(empty_string);
+    return pow;
   }
-  std::set<strings> cadena_copia = language_.getLanguage(), potencia_acum;
-  for (int i{1}; i < exponent; i++) {
-    for (std::set<strings>::iterator it1{cadena_copia.begin()}; it1 != cadena_copia.end(); it1++) {
-      for (std::set<strings>::iterator it2{cadena_copia.begin()}; it2 != cadena_copia.end(); it2++) {
+
+  /**
+   * @brief Lo mismo que la concatenacion pero lo repite "concatenaion" veces
+   * 
+   */
+
+  std::set<strings> aux_string = language_.get_Language(), pow_acum;
+  for (int i = 1; i < exponent; i++) {
+    for (std::set<strings>::iterator it1 = aux_string.begin(); it1 != aux_string.end(); it1++) {
+      for (std::set<strings>::iterator it2 = aux_string.begin(); it2 != aux_string.end(); it2++) {
         if (*it1 == strings("&")) {
-          potencia_acum.insert(*it2);
+          pow_acum.insert(*it2);
         } else if (*it2 == strings("&")) {
-          potencia_acum.insert(*it1);
+          pow_acum.insert(*it1);
         } else {
-          potencia_acum.insert(*it1 + *it2);
+          pow_acum.insert(*it1 + *it2);
         }
       }
     }
-    cadena_copia = potencia_acum;
-    potencia_acum.clear();
+    aux_string = pow_acum;
+    pow_acum.clear();
   }
-  potencia.setLanguage(cadena_copia);
-  potencia.setAlfabeto(language_.getAlfabeto());
-  return potencia;
+  pow.set_Language(aux_string);
+  pow.set_Alphabet(language_.get_Alphabet());
+  return pow;
+}
+
+std::ostream& operator<<(std::ostream& os, const language& language_) {
+  std::set<strings> strings_ = language_.get_Language();
+  os << " Alfabeto: { ";
+  std::set<symbol> aux = language_.get_Alphabet().get_alphabet();
+  for (std::set<symbol>::iterator it = aux.begin(); it != aux.end(); it++) {
+    os << *it << " ";
+  }
+
+  os << "} Lenguaje: { ";
+  for (std::set<strings>::iterator it = strings_.begin(); it != strings_.end(); it++) {
+    os << *it << " ";
+  }
+  
+  os << "}";
+  return os;
 }
