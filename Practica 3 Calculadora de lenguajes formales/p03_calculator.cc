@@ -7,10 +7,10 @@
  * Curso: 2º
  * Práctica 3: Calculadora de lenguajes formales
  * @file p03_calculator.cc
- * @author your name (you@domain.com)
+ * @author Cheuk Kelly Ng Pante
  * @brief 
  * @version 0.1
- * @date 2022-10-14
+ * @date 2022-10-18
  * 
  * @copyright Copyright (c) 2022
  * 

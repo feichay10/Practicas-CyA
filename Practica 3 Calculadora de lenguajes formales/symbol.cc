@@ -1,13 +1,21 @@
 /**
+ *
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Asignatura: Computabilidad y Algoritmia
+ * Curso: 2º
+ * Práctica 3: Calculadora de lenguajes formales
  * @file symbol.cc
- * @author your name (you@domain.com)
+ * @author Cheuk Kelly Ng Pante
  * @brief 
  * @version 0.1
- * @date 2022-10-16
+ * @date 2022-10-18
  * 
  * @copyright Copyright (c) 2022
  * 
  */
+
 #include "symbol.h"
 
 symbol::symbol(char symbol) {
