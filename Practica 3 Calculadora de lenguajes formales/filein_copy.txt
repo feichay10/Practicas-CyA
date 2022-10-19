@@ -1,0 +1,6 @@
+A = {0, 1, 01, 10}
+pepito = {&, 10, 11}
+C = {&}
+D = {}
+A pepito | C +
+A pepito +
