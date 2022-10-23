@@ -20,13 +20,13 @@
 #include <iostream>
 #include <string>
 
-#include "fileoperations.h"
+#include "FileOperations.h"
 
 const std::string HELP = "--help";
 
 int main(int argc, char* argv[]) {
   std::string input, output;
-  fileoperations file;
+  FileOperations file;
 
   if (argc == 3) {
     input = argv[1];
