@@ -21,12 +21,21 @@
 #include <string>
 
 #include "FileOperations.h"
+#include "Comments.h"
+#include "Variables.h"
+#include "Loops.h"
 
 const std::string HELP = "--help";
+
+void printAll(std::string, FileOperations &, Comments &, Comments &, Variables &, Loops &);
 
 int main(int argc, char* argv[]) {
   std::string input, output;
   FileOperations file;
+  Comments description;
+  Comments comments;
+  Variables variables;
+  Loops loops;
 
   if (argc == 3) {
     input = argv[1];
@@ -55,6 +64,49 @@ int main(int argc, char* argv[]) {
     std::cout << "Error en la apertura de los ficheros" << std::endl;
   }
 
-  file.ReadFile(file_in);
+  file.ReadFile(file_in, description, comments, variables, loops);
+  printAll(input, file, description, comments, variables, loops);
   file.WriteFile(file_out);
+}
+
+void printAll(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
+  std::cout << "PROGRAM: " << name_program << std::endl;
+  std::cout << "DESCRIPTION: " << std::endl;
+  std::cout << std::endl;
+  std::cout << "VARIABLES: " << std::endl;
+  if (!variables.IsIntEmpty() || !variables.IsDoubleEmpty()) {
+    for (unsigned i = 0; i < variables.GetSizeInt(); i++) {
+      std::cout << "[Line " << variables.GetFirstInt(i) << "]: INT ";
+      std::cout << variables.GetSecondInt(i) << std::endl;
+    }
+
+    for (unsigned i = 0; i < variables.GetSizeDouble(); i++) {
+      std::cout << "[Line " << variables.GetFirstDouble(i) << "]: DOUBLE ";
+      std::cout << variables.GetSecondDouble(i) << std::endl;
+    }
+  }
+  std::cout << std::endl;
+  std::cout << "STATEMENTS: " << std::endl;
+  if (!loops.IsForEmpty() || !loops.IsWhileEmpty()) {
+    for (unsigned i = 0; i < loops.GetSizeFor(); i++) {
+      std::cout << "[Line " << loops.GetFirstFor(i) << "]: " << loops.GetSecondFor(i) << std::endl;
+    }
+
+    for (unsigned i = 0; i < loops.GetSizeWhile(); i++) {
+      std::cout << "[Line " << loops.GetFirstWhile(i) << "]: " << loops.GetSecondWhile(i) << std::endl;
+    }
+  }
+  std::cout << std::endl;
+  std::cout << "MAIN: " << std::endl;
+  if(main.GetMainExist()) {
+    std::cout << "True" << std::endl << std::endl;
+  } else {
+    std::cout << "False" << std::endl << std::endl;;
+  }
+  std::cout << "COMMENTS: " << std::endl;
+  if(!comments.IsCommentsEmpty()) {
+    for (unsigned i = 0; i < comments.GetSizeComments(); i++) {
+      std::cout << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;
+    }
+  }
 }

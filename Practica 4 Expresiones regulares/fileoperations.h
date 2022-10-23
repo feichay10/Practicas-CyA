@@ -18,28 +18,25 @@
 
 #pragma once
 
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <regex>
-#include <fstream>
-#include <sstream>
-#include <iostream>
 
-#include "Variables.h"
+#include "Comments.h"
 #include "Loops.h"
+#include "Variables.h"
 
 class FileOperations {
  public:
-  void ReadFile(std::ifstream&);
-  void WriteFile(std::ofstream&);
+  bool GetMainExist();
+  void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&);
+  void WriteFile(std::ofstream);
 
-  private:
-    std::string lines_;
-    int line_pos_ = 0;
-    Variables variables_;
-    Loops loops_;
-    bool main_exist_;
-
-    std::string name_program_;
-    std::vector<std::string> lines_program_;
+ private:
+  std::string lines_;
+  int line_pos_ = 0;
+  bool main_exist_;
 };

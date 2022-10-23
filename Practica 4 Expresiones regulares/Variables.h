@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file Cont_variables.h
+ * @file Variables.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief
  * @version 0.1
@@ -25,11 +25,20 @@
 
 class Variables {
  public:
+  unsigned GetSizeInt();
+  int GetFirstInt(int);
+  std::string GetSecondInt(int);
+  unsigned GetSizeDouble();
+  int GetFirstDouble(int);
+  std::string GetSecondDouble(int);
   void SearchInt(std::string &, int);
   void SearchDouble(std::string &, int);
+  bool IsIntEmpty();
+  bool IsDoubleEmpty();
 
  private:
   std::string variable_int_;
   std::string variable_double_;
-  //std::vector<std::pair<int, std::string>> variables_;
+  std::vector<std::pair<int, std::string>> var_int_vector_;
+  std::vector<std::pair<int, std::string>> var_double_vector_;
 };
