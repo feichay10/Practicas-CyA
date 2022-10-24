@@ -25,7 +25,7 @@
 
 class Comments {
  public:
-  unsigned GetSizedDescription();
+  unsigned GetSizeDescription();
   int GetFirstDescription(int);
   std::string GetSecondDescription(int);
   unsigned GetSizeComments();

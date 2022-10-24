@@ -66,12 +66,20 @@ int main(int argc, char* argv[]) {
 
   file.ReadFile(file_in, description, comments, variables, loops);
   printAll(input, file, description, comments, variables, loops);
-  file.WriteFile(file_out);
+  file.WriteFile(file_out, description, comments, variables, loops);
+
+  file_in.close();
+  file_out.close();
 }
 
 void printAll(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
   std::cout << "PROGRAM: " << name_program << std::endl;
   std::cout << "DESCRIPTION: " << std::endl;
+  if(!description.IsDescriptionEmpty()) {
+    for (unsigned i = 0; i < description.GetSizeDescription(); i++) {
+      std::cout << description.GetSecondDescription(i) << std::endl;
+    }
+  }
   std::cout << std::endl;
   std::cout << "VARIABLES: " << std::endl;
   if (!variables.IsIntEmpty() || !variables.IsDoubleEmpty()) {

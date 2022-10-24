@@ -39,6 +39,45 @@ void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Com
   }
 }
 
-void FileOperations::WriteFile(std::ofstream &file_out) {
+void FileOperations::WriteFile(std::ofstream &file_out, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
   // file_out << "PROGRAM: " << name_program << std::endl;
+  //std::cout << "PROGRAM: " << name_program << std::endl;
+  // std::cout << "DESCRIPTION: " << std::endl;
+  // std::cout << std::endl;
+  // std::cout << "VARIABLES: " << std::endl;
+  // if (!variables.IsIntEmpty() || !variables.IsDoubleEmpty()) {
+  //   for (unsigned i = 0; i < variables.GetSizeInt(); i++) {
+  //     std::cout << "[Line " << variables.GetFirstInt(i) << "]: INT ";
+  //     std::cout << variables.GetSecondInt(i) << std::endl;
+  //   }
+
+  //   for (unsigned i = 0; i < variables.GetSizeDouble(); i++) {
+  //     std::cout << "[Line " << variables.GetFirstDouble(i) << "]: DOUBLE ";
+  //     std::cout << variables.GetSecondDouble(i) << std::endl;
+  //   }
+  // }
+  // std::cout << std::endl;
+  // std::cout << "STATEMENTS: " << std::endl;
+  // if (!loops.IsForEmpty() || !loops.IsWhileEmpty()) {
+  //   for (unsigned i = 0; i < loops.GetSizeFor(); i++) {
+  //     std::cout << "[Line " << loops.GetFirstFor(i) << "]: " << loops.GetSecondFor(i) << std::endl;
+  //   }
+
+  //   for (unsigned i = 0; i < loops.GetSizeWhile(); i++) {
+  //     std::cout << "[Line " << loops.GetFirstWhile(i) << "]: " << loops.GetSecondWhile(i) << std::endl;
+  //   }
+  // }
+  // std::cout << std::endl;
+  // std::cout << "MAIN: " << std::endl;
+  // if(main_exist_) {
+  //   std::cout << "True" << std::endl << std::endl;
+  // } else {
+  //   std::cout << "False" << std::endl << std::endl;;
+  // }
+  // std::cout << "COMMENTS: " << std::endl;
+  // if(!comments.IsCommentsEmpty()) {
+  //   for (unsigned i = 0; i < comments.GetSizeComments(); i++) {
+  //     std::cout << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;
+  //   }
+  // }
 }

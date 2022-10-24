@@ -25,15 +25,15 @@
 #include <string>
 #include <vector>
 
-#include "Comments.h"
-#include "Loops.h"
 #include "Variables.h"
+#include "Loops.h"
+#include "Comments.h"
 
 class FileOperations {
  public:
   bool GetMainExist();
   void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&);
-  void WriteFile(std::ofstream);
+  void WriteFile(std::ofstream&, Comments&, Comments&, Variables&, Loops&);
 
  private:
   std::string lines_;

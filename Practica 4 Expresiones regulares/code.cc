@@ -8,7 +8,7 @@
  * @brief Ejercicios Informatica Basica
  *        Version 1: Funcion factorial
  * 
- * @see https:// github.com/IB -2022 -2023/IB-class -code -examples/
+ * @see https://github.com/IB-2022-2023/IB-class-code-examples/
  */
 
 #include <iostream>
@@ -29,11 +29,13 @@ int Factorial(int number){
   }
 }
 
+// Funcion Main
 int main () {
   std::cout << "Introduzca el numero de factoriales a calcular: ";
   int limit;
   double limit1;
   std::cin >> limit;
+  //Bucle para calcular los factoriales
   for (int i = 1; i <= limit; ++i){
     std::cout << i << "! = " << (double)Factorial(i) << std::endl;
   }
