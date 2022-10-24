@@ -39,4 +39,5 @@ class Comments {
  private:
   std::vector<std::pair<int, std::string>> var_description_vector_;
   std::vector<std::pair<int, std::string>> var_comments_vector_;
+  std::vector<int> var_description_line_;
 };

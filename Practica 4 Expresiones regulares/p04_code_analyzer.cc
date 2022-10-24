@@ -31,6 +31,7 @@ void printAll(std::string, FileOperations &, Comments &, Comments &, Variables &
 
 int main(int argc, char* argv[]) {
   std::string input, output;
+  std::regex cpp_file(".*\\.cc");
   FileOperations file;
   Comments description;
   Comments comments;
@@ -46,6 +47,10 @@ int main(int argc, char* argv[]) {
       std::cout << " con dos parametros. Un fichero de entrada, y otro de salida.";
       std::cout << " Por ejemplo: ./p04_code_analyzer code.cc codescheme.txt" << std::endl;
       exit(0);
+    } 
+    if (!(regex_search(argv[1], cpp_file))) {
+      std::cout << "El fichero de entrada no es un fichero.cc" << std::endl;
+      exit(1);
     }
   } else {
     std::cout << "Parametros erroneos, para ver el funcionamiento del programa,";
@@ -112,6 +117,9 @@ void printAll(std::string name_program, FileOperations &main, Comments &descript
     std::cout << "False" << std::endl << std::endl;;
   }
   std::cout << "COMMENTS: " << std::endl;
+  // for (unsigned i = 0; i < comments.GetSizeDescriptionLine(); i++) {
+  //   std::cout << "[Line " << comments.GetDescriptionLine(i) << " - " << comments.GetDescriptionLine(i + 1) << "] DESCRIPTION" << std::endl;
+  // }
   if(!comments.IsCommentsEmpty()) {
     for (unsigned i = 0; i < comments.GetSizeComments(); i++) {
       std::cout << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;
