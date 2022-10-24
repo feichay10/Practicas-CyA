@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file File_operations.h
+ * @file FileOperations.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief
  * @version 0.1
@@ -38,5 +38,5 @@ class FileOperations {
  private:
   std::string lines_;
   int line_pos_ = 0;
-  bool main_exist_;
+  bool main_exist_ = false;
 };

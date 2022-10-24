@@ -59,27 +59,23 @@ bool Comments::IsCommentsEmpty() {
 }
 
 void Comments::SearchDescription(std::string &line, int line_pos) {
-  std::regex description_regex1("\\/\\*+|\\*+\\/");
-  std::regex description_regex2("[*]\\*?\\*(.)*"); // ^(\*)\\*?\\*(.)*
-  std::regex description_regex3("\\*/\\w");
-  std::regex description_regex_prueba("\/[*](?:.|\n)*?[*]\/"); //^(\*)\\*?\\*(.)*
+  std::regex description_regex1("^(\\s*)?\\/\\*");
+  std::regex description_regex2("^(\\s*)?\\*"); // ^(\*)\\*?\\*(.)*
+  std::regex description_regex3("^(\\s*)?\\*\\/");
 
-  // if (regex_search(line, description_regex1) || regex_search(line, description_regex2) || regex_search(line, description_regex3)) {
-  //   var_description_vector_.push_back({line_pos, line});
-  //   //std::cout << "[Line " << line_pos << "] " << "COMMENT: Description" << line << std::endl;
-  // }
-
-  if (regex_search(line, description_regex_prueba)) {
+  if (regex_search(line, description_regex1) || regex_search(line, description_regex2) || regex_search(line, description_regex3)) {
     var_description_vector_.push_back({line_pos, line});
     //std::cout << "[Line " << line_pos << "] " << "COMMENT: Description" << line << std::endl;
   }
 }
 
 void Comments::SearchComments(std::string &line, int line_pos) {
-  std::regex comments_regex("^(//)(.)*");
+  std::regex comments_regex("^(\t)+(.)*|^//(.)*");   // ^(\t)+(.)*|^//(.)*
+  std::smatch match;
 
   if (regex_search(line, comments_regex)) {
-    var_comments_vector_.push_back({line_pos, line});
+    regex_search(line, match, comments_regex);
+    var_comments_vector_.push_back({line_pos, match[0]});
     //std::cout << "[Line " << line_pos << "] " << line << std::endl;
   }
 }
