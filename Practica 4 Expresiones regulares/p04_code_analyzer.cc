@@ -27,36 +27,18 @@
 
 const std::string HELP = "--help";
 
-void printAll(std::string, FileOperations &, Comments &, Comments &, Variables &, Loops &);
+void check_parameters(std::string &, std::string &, int, char**);
+void print_all(std::string, FileOperations &, Comments &, Comments &, Variables &, Loops &);
 
 int main(int argc, char* argv[]) {
   std::string input, output;
-  std::regex cpp_file(".*\\.cc");
   FileOperations file;
   Comments description;
   Comments comments;
   Variables variables;
   Loops loops;
 
-  if (argc == 3) {
-    input = argv[1];
-    output = argv[2];
-  } else if (argc == 2) {
-    if (argv[1] == HELP) {
-      std::cout << "Para la correcta ejecución del programa, este debe invocarse";
-      std::cout << " con dos parametros. Un fichero de entrada, y otro de salida.";
-      std::cout << " Por ejemplo: ./p04_code_analyzer code.cc codescheme.txt" << std::endl;
-      exit(0);
-    } 
-    if (!(regex_search(argv[1], cpp_file))) {
-      std::cout << "El fichero de entrada no es un fichero.cc" << std::endl;
-      exit(1);
-    }
-  } else {
-    std::cout << "Parametros erroneos, para ver el funcionamiento del programa,";
-    std::cout << " ejecute ./p04_code_analyzer --help" << std::endl;
-    exit(1);
-  }
+  check_parameters(input, output, argc, argv);
 
   std::ifstream file_in;
   std::ofstream file_out;
@@ -67,17 +49,46 @@ int main(int argc, char* argv[]) {
 
   if (file_in.fail() && file_out.fail()){
     std::cout << "Error en la apertura de los ficheros" << std::endl;
+    exit(1);
   }
 
   file.ReadFile(file_in, description, comments, variables, loops);
-  printAll(input, file, description, comments, variables, loops);
-  file.WriteFile(file_out, description, comments, variables, loops);
+  print_all(input, file, description, comments, variables, loops);
+  file.WriteFile(input, file_out, description, comments, variables, loops);
 
   file_in.close();
   file_out.close();
 }
 
-void printAll(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
+void check_parameters(std::string &input, std::string &output, int argc, char *argv[]) {
+  std::regex cpp_file("(.cc)$");
+
+  if (argc == 3) {
+    input = argv[1];
+    output = argv[2];
+    if (!(regex_search(argv[1], cpp_file))) {
+      std::cout << "El fichero de entrada no es un fichero.cc" << std::endl;
+      exit(1);
+    }
+  } else if (argc == 2) {
+    if (argv[1] == HELP) {
+      std::cout << "Para la correcta ejecución del programa, este debe invocarse";
+      std::cout << " con dos parametros. Un fichero de entrada (codigo en c++), y otro de salida.";
+      std::cout << " Por ejemplo: ./p04_code_analyzer code.cc codescheme.txt" << std::endl;
+      exit(0);
+    }
+    if (!(regex_search(argv[1], cpp_file))) {
+      std::cout << "El fichero de entrada no es un fichero.cc" << std::endl;
+      exit(1);
+    }
+  } else {
+    std::cout << "Parametros erroneos, para ver el funcionamiento del programa,";
+    std::cout << " ejecute ./p04_code_analyzer --help" << std::endl;
+    exit(1);
+  }
+}
+
+void print_all(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
   std::cout << "PROGRAM: " << name_program << std::endl;
   std::cout << "DESCRIPTION: " << std::endl;
   if(!description.IsDescriptionEmpty()) {
@@ -102,11 +113,11 @@ void printAll(std::string name_program, FileOperations &main, Comments &descript
   std::cout << "STATEMENTS: " << std::endl;
   if (!loops.IsForEmpty() || !loops.IsWhileEmpty()) {
     for (unsigned i = 0; i < loops.GetSizeFor(); i++) {
-      std::cout << "[Line " << loops.GetFirstFor(i) << "]: " << loops.GetSecondFor(i) << std::endl;
+      std::cout << "[Line " << loops.GetFirstFor(i) << "]: LOOP " << loops.GetSecondFor(i) << std::endl;
     }
 
     for (unsigned i = 0; i < loops.GetSizeWhile(); i++) {
-      std::cout << "[Line " << loops.GetFirstWhile(i) << "]: " << loops.GetSecondWhile(i) << std::endl;
+      std::cout << "[Line " << loops.GetFirstWhile(i) << "]: LOOP " << loops.GetSecondWhile(i) << std::endl;
     }
   }
   std::cout << std::endl;
@@ -117,9 +128,7 @@ void printAll(std::string name_program, FileOperations &main, Comments &descript
     std::cout << "False" << std::endl << std::endl;;
   }
   std::cout << "COMMENTS: " << std::endl;
-  // for (unsigned i = 0; i < comments.GetSizeDescriptionLine(); i++) {
-  //   std::cout << "[Line " << comments.GetDescriptionLine(i) << " - " << comments.GetDescriptionLine(i + 1) << "] DESCRIPTION" << std::endl;
-  // }
+  std::cout << "[Line 1 - " << description.GetLineDescription() << "] DESCRIPTION"<< std::endl;
   if(!comments.IsCommentsEmpty()) {
     for (unsigned i = 0; i < comments.GetSizeComments(); i++) {
       std::cout << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;

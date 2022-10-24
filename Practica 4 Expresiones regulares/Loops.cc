@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file Loops.cc
+ * @file loops.cc
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief 
  * @version 0.1
@@ -60,16 +60,16 @@ bool Loops::IsWhileEmpty() {
 
 void Loops::SearchFor(std::string &line, int line_pos) {
   std::regex for_regex("( )*(for)(.)*\\((.)*\\)(.)*");
+
   if (regex_search(line, for_regex)) {
     var_for_vector_.push_back({line_pos, "for"});
-    //std::cout << "[Line " << line_pos << "] " << "LOOP: for" << std::endl;
   }
 }
 
 void Loops::SearchWhile(std::string &line, int line_pos) {
   std::regex while_regex("( )*(while)(.)*\\((.)*\\)(.)*");
+  
   if (regex_search(line, while_regex)) {
     var_while_vector_.push_back({line_pos, "while"});
-    //std::cout << "[Line " << line_pos << "] " << "LOOP: while" << std::endl;
   }
 }

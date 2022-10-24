@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file Comments.h
+ * @file comments.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief
  * @version 0.1
@@ -35,9 +35,11 @@ class Comments {
   void SearchComments(std::string &, int);
   bool IsDescriptionEmpty();
   bool IsCommentsEmpty();
+  void SetLineDescription(int);
+  int GetLineDescription();
 
  private:
   std::vector<std::pair<int, std::string>> var_description_vector_;
   std::vector<std::pair<int, std::string>> var_comments_vector_;
-  std::vector<int> var_description_line_;
+  int line_description_;
 };

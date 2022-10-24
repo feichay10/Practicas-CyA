@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file FileOperations.h
+ * @file fileoperations.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief
  * @version 0.1
@@ -33,7 +33,7 @@ class FileOperations {
  public:
   bool GetMainExist();
   void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&);
-  void WriteFile(std::ofstream&, Comments&, Comments&, Variables&, Loops&);
+  void WriteFile(std::string, std::ofstream&, Comments&, Comments&, Variables&, Loops&);
 
  private:
   std::string lines_;

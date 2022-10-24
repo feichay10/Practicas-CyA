@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 4: Expresiones regulares
- * @file Variables.cc
+ * @file variables.cc
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief
  * @version 0.1
@@ -69,7 +69,6 @@ void Variables::SearchInt(std::string &line, int line_pos) {
     var_int += line.substr(pos + 3, pos_final);
 
     var_int_vector_.push_back({line_pos, var_int});
-    //std::cout << "[Line " << line_pos << "] " << "INT: " << var_int << std::endl;
   }
 }
 
@@ -79,12 +78,11 @@ void Variables::SearchDouble(std::string &line, int line_pos) {
   std::regex double_rex("( )*(double)(.)*(;|\\w)");
 
   if (regex_match(line, double_rex)) {
-    pos = line.find("double");
-    pos_final = (line.find(";") - pos - 6);
+    pos = line.find("double");                          
+    pos_final = (line.find(";") - pos - 6);    
     var_double += line.substr(pos + 6, pos_final);
 
     var_double_vector_.push_back({line_pos, var_double});
-    //std::cout << "[Line " << line_pos << "] " << "DOUBLE: " << var_double << std::endl;
   }
 }
 

@@ -1,7 +1,7 @@
 CC=g++
 CXXFLAGS=-g -std=c++14 -Wall
 
-OBJS = p04_code_analyzer.o FileOperations.o Comments.o Variables.o Loops.o
+OBJS = p04_code_analyzer.o fileoperations.o comments.o variables.o loops.o
 
 all: ${OBJS}
 	$(CC) $(CXXFLAGS) -o p04_code_analyzer ${OBJS}
