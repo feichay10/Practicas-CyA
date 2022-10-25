@@ -38,7 +38,7 @@ int main() {
   std::cout << "Introduzca el numero de factoriales a calcular: ";
   int limit;
   int numero = 3629;
-  double numero_double = 0.5;
+  double numero_double = 1111;
   std::cin >> limit;
   //Bucle para sacar el factorial de los numeros del 0 al limit
   for (int i = 1; i <= limit; ++i) {

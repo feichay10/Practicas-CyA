@@ -14,10 +14,16 @@ DESCRIPTION:
  */
 
 VARIABLES: 
+[Line 23]: INT  gato
+[Line 28]: INT  factorial{1}
+[Line 41]: INT  limit
+[Line 31]: DOUBLE  xgato = 2
+[Line 42]: DOUBLE  limit1
 
 STATEMENTS: 
-[Line 25]: LOOP for
-[Line 39]: LOOP for
+[Line 29]: LOOP for
+[Line 45]: LOOP for
+[Line 22]: LOOP while
 
 MAIN: 
 True
@@ -25,4 +31,12 @@ True
 COMMENTS: 
 [Line 1 - 12] DESCRIPTION
 [Line 17]: // Returns the factorial of the argument
-[Line 32]: // Funcion Main
+[Line 37]: // Funcion Main
+[Line 39]:   // int prueba = 0;
+[Line 44]:   // Bucle para calcular los factoriales
+[Line 46]:     // Comentario de prueba
+
+RETURNS: 
+[Line 26]: RETURN  1
+[Line 33]: RETURN  factorial
+[Line 49]: RETURN  0
