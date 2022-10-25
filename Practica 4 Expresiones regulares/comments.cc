@@ -16,7 +16,7 @@
  * 
  */
 
-#include "Comments.h"
+#include "comments.h"
 
 unsigned Comments::GetSizeDescription() {
   return var_description_vector_.size();
@@ -68,7 +68,7 @@ int Comments::GetLineDescription() {
 
 
 void Comments::SearchDescription(std::string &line, int line_pos) {
-  std::regex description_regex1("^(\\s*)?\\/\\*");
+  std::regex description_regex1("^(/)(\\*)*$"); //^(\\s*)?\\/\\*
   std::regex description_regex2("^(\\s*)?\\*");    
   std::regex description_regex3("^(\\s*)?\\*\\/");
 
@@ -82,7 +82,7 @@ void Comments::SearchDescription(std::string &line, int line_pos) {
 }
 
 void Comments::SearchComments(std::string &line, int line_pos) {
-  std::regex comments_regex("^(\t)+(.)*|^//(.)*");   
+  std::regex comments_regex("(\\/\\/) (.)*");   //^(\t)+(.)*|^//(.)* 
 
   if (regex_search(line, comments_regex)) {
     var_comments_vector_.push_back({line_pos, line});

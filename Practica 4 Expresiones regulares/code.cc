@@ -16,14 +16,19 @@
 
 // Returns the factorial of the argument
 int Factorial(int number) {
+  bool x = true;
   switch (number) {
     case 0:
+      while (x) {
+        int gato;
+      }
     case 1:
       return 1;
     default:
-      int factorial = 1;
-      for (int i = 1; i < number; ++i) {
+      int factorial{1};
+      for (int i = 1; i <= number; ++i) {
         factorial *= i;
+        double xgato = 2;
       }
       return factorial;
   }
@@ -37,6 +42,7 @@ int main() {
   std::cin >> limit;
   // Bucle para calcular los factoriales
   for (int i = 1; i <= limit; ++i) {
+    // Comentario de prueba
     std::cout << i << "! = " << (double)Factorial(i) << std::endl;
   }
   return 0;
