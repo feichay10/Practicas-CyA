@@ -16,7 +16,7 @@
  *
  */
 
-#include "FileOperations.h"
+#include "fileoperations.h"
 
 bool FileOperations::GetMainExist() {
   return main_exist_;

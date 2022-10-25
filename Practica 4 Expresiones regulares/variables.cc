@@ -16,7 +16,7 @@
  *
  */
 
-#include "Variables.h"
+#include "variables.h"
 
 unsigned Variables::GetSizeInt() {
   return var_int_vector_.size();
@@ -68,21 +68,21 @@ void Variables::SearchInt(std::string &line, int line_pos) {
     pos_final = (line.find(";") - pos - 3);
     var_int += line.substr(pos + 3, pos_final);
 
-    std::cout << "[Line " << line_pos << "] " << "INT: " << var_int << std::endl;
+    var_int_vector_.push_back({line_pos, var_int});
   }
 }
 
 void Variables::SearchDouble(std::string &line, int line_pos) {
   std::string var_double;
   size_t pos, pos_final;
-  std::regex double_rex("( )*(double)(.)*(;|\\w)");
+  std::regex double_regex("( )*(double)(.)*(;|\\w)");
 
-  if (regex_match(line, double_rex)) {
-    pos = line.find("double");
-    pos_final = (line.find(";") - pos - 6);
+  if (regex_match(line, double_regex)) {
+    pos = line.find("double");                          
+    pos_final = (line.find(";") - pos - 6);    
     var_double += line.substr(pos + 6, pos_final);
 
-    std::cout << "[Line " << line_pos << "] " << "DOUBLE: " << var_double << std::endl;
+    var_double_vector_.push_back({line_pos, var_double});
   }
 }
 

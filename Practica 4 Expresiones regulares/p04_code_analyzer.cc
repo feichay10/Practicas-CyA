@@ -20,10 +20,10 @@
 #include <iostream>
 #include <string>
 
-#include "FileOperations.h"
-#include "Comments.h"
-#include "Variables.h"
-#include "Loops.h"
+#include "fileoperations.h"
+#include "comments.h"
+#include "variables.h"
+#include "loops.h"
 
 const std::string HELP = "--help";
 

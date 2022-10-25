@@ -24,12 +24,19 @@
 #include "comments.h"
 #include "variables.h"
 #include "loops.h"
+<<<<<<< HEAD
 #include "return.h"
+=======
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
 const std::string HELP = "--help";
 
 void check_parameters(std::string &, std::string &, int, char**);
+<<<<<<< HEAD
 void print_all(std::string, FileOperations &, Comments &, Comments &, Variables &, Loops &, Return &);
+=======
+void print_all(std::string, FileOperations &, Comments &, Comments &, Variables &, Loops &);
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
 int main(int argc, char* argv[]) {
   std::string input, output;
@@ -38,7 +45,10 @@ int main(int argc, char* argv[]) {
   Comments comments;
   Variables variables;
   Loops loops;
+<<<<<<< HEAD
   Return return_;
+=======
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
   check_parameters(input, output, argc, argv);
 
@@ -54,9 +64,15 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
+<<<<<<< HEAD
   file.ReadFile(file_in, description, comments, variables, loops, return_);
   print_all(input, file, description, comments, variables, loops, return_);
   file.WriteFile(input, file_out, description, comments, variables, loops, return_);
+=======
+  file.ReadFile(file_in, description, comments, variables, loops);
+  print_all(input, file, description, comments, variables, loops);
+  file.WriteFile(input, file_out, description, comments, variables, loops);
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
   file_in.close();
   file_out.close();
@@ -90,7 +106,11 @@ void check_parameters(std::string &input, std::string &output, int argc, char *a
   }
 }
 
+<<<<<<< HEAD
 void print_all(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops, Return &return_) {
+=======
+void print_all(std::string name_program, FileOperations &main, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
   std::cout << "PROGRAM: " << name_program << std::endl;
   std::cout << "DESCRIPTION: " << std::endl;
   if(!description.IsDescriptionEmpty()) {
@@ -136,6 +156,7 @@ void print_all(std::string name_program, FileOperations &main, Comments &descrip
       std::cout << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;
     }
   }
+<<<<<<< HEAD
   std::cout << std::endl;
   std::cout << "RETURNS: " << std::endl;
   if (!return_.IsReturnEmpty()) {
@@ -143,4 +164,6 @@ void print_all(std::string name_program, FileOperations &main, Comments &descrip
       std::cout << "[Line " << return_.GetFirstReturn(i) << "]: RETURN " << return_.GetSecondReturn(i) << std::endl;
     }
   }
+=======
+>>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 }

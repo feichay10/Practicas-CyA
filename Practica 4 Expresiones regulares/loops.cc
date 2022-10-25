@@ -16,7 +16,7 @@
  * 
  */
 
-#include "Loops.h"
+#include "loops.h"
 
 unsigned Loops::GetSizeFor() {
   return var_for_vector_.size();

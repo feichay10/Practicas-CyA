@@ -25,9 +25,9 @@
 #include <string>
 #include <vector>
 
-#include "Variables.h"
-#include "Loops.h"
-#include "Comments.h"
+#include "variables.h"
+#include "loops.h"
+#include "comments.h"
 
 class FileOperations {
  public:
