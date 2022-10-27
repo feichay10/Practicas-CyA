@@ -23,8 +23,6 @@ bool FileOperations::GetMainExist() {
 }
 
 void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Comments &comments, Variables &variables, Loops &loops, Return &return_) {
-void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
-
   std::regex SearchMain("^int main");
   std::smatch match_main;
 
@@ -44,10 +42,6 @@ void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Com
 }
 
 void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out, Comments &description, Comments &comments, Variables &variables, Loops &loops, Return &return_) {
-  }
-}
-
-void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
   file_out << "PROGRAM: " << name_program << std::endl;
   file_out << "DESCRIPTION: " << std::endl;
   if(!description.IsDescriptionEmpty()) {
