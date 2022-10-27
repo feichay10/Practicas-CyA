@@ -30,14 +30,11 @@
 #include "comments.h"
 #include "return.h"
 
-
 class FileOperations {
  public:
   bool GetMainExist();
   void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&, Return&);
   void WriteFile(std::string, std::ofstream&, Comments&, Comments&, Variables&, Loops&, Return&);
-  void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&);
-  void WriteFile(std::string, std::ofstream&, Comments&, Comments&, Variables&, Loops&);
 
  private:
   std::string lines_;
