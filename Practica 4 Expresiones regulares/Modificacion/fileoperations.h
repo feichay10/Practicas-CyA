@@ -28,21 +28,13 @@
 #include "variables.h"
 #include "loops.h"
 #include "comments.h"
-<<<<<<< HEAD
 #include "return.h"
-=======
->>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
 class FileOperations {
  public:
   bool GetMainExist();
-<<<<<<< HEAD
   void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&, Return&);
   void WriteFile(std::string, std::ofstream&, Comments&, Comments&, Variables&, Loops&, Return&);
-=======
-  void ReadFile(std::ifstream&, Comments&, Comments&, Variables&, Loops&);
-  void WriteFile(std::string, std::ofstream&, Comments&, Comments&, Variables&, Loops&);
->>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
 
  private:
   std::string lines_;

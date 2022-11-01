@@ -22,11 +22,7 @@ bool FileOperations::GetMainExist() {
   return main_exist_;
 }
 
-<<<<<<< HEAD
 void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Comments &comments, Variables &variables, Loops &loops, Return &return_) {
-=======
-void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
->>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
   std::regex SearchMain("^int main");
   std::smatch match_main;
 
@@ -41,18 +37,11 @@ void FileOperations::ReadFile(std::ifstream &file_in, Comments &description, Com
     if (regex_search(lines_, match_main, SearchMain)) {
       main_exist_ = true;
     }
-<<<<<<< HEAD
     return_.SearchReturn(lines_, line_pos_);
   }
 }
 
 void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out, Comments &description, Comments &comments, Variables &variables, Loops &loops, Return &return_) {
-=======
-  }
-}
-
-void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out, Comments &description, Comments &comments, Variables &variables, Loops &loops) {
->>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
   file_out << "PROGRAM: " << name_program << std::endl;
   file_out << "DESCRIPTION: " << std::endl;
   if(!description.IsDescriptionEmpty()) {
@@ -98,7 +87,6 @@ void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out
       file_out << "[Line " << comments.GetFirstComments(i) << "]: " << comments.GetSecondComments(i) << std::endl;
     }
   }
-<<<<<<< HEAD
   file_out << std::endl;
   file_out << "RETURNS: " << std::endl;
   if (!return_.IsReturnEmpty()) {
@@ -106,6 +94,5 @@ void FileOperations::WriteFile(std::string name_program, std::ofstream &file_out
       file_out << "[Line " << return_.GetFirstReturn(i) << "]: RETURN " << return_.GetSecondReturn(i) << std::endl;
     }
   }
-=======
->>>>>>> cf0e1cbe192ca5057b4dd068e99cce043a8cf315
+
 }
