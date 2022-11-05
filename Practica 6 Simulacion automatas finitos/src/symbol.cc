@@ -18,16 +18,19 @@
 
 #include "symbol.h"
 
-Symbol::Symbol(char symbol) {
-  symbol_.clear();
-  symbol_.push_back(symbol);
+Symbol::Symbol() {
+
+}
+
+Symbol::Symbol(std::string symbol) {
+  SetSymbol(symbol);
 }
 
 void Symbol::SetSymbol(std::string symbol){
   symbol_ = symbol;
 }
 
-std::string Symbol::GetSymbol() const {
+std::string Symbol::GetSymbol(){
   return symbol_;
 }
 

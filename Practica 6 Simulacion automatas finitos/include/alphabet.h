@@ -8,20 +8,19 @@
  * Práctica 6: Simulación de Autómatas Finitos
  * @file alphabet.h
  * @author Cheuk Kelly Ng Pante
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-11-8
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #pragma once
 
 #include <iostream>
-#include <vector>
 #include <string>
-#include <set>
+#include <vector>
 
 #include "symbol.h"
 
@@ -31,8 +30,12 @@ class Alphabet {
   Alphabet(std::string);
   Alphabet(std::vector<std::string>);
 
+  void SetWord(std::string);
   void SetSymbol(Symbol);
   void SetAlphabet(Symbol);
+
+  std::string GetSymbol(int);
+  std::vector<Symbol> GetAlphabet();
 
  private:
   std::vector<std::string> list_;

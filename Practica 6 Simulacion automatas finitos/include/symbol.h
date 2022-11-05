@@ -19,14 +19,15 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 class Symbol {
  public:
-  Symbol() = default;
-  Symbol(char symbol);
+  Symbol();
+  Symbol(std::string symbol);
 
   void SetSymbol(std::string);
-  std::string GetSymbol() const;
+  std::string GetSymbol();
   unsigned GetSize();
 
  private:
