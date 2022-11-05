@@ -18,18 +18,23 @@
 
 #pragma once
 
-#include <set>
+#include <iostream>
+#include <vector>
 #include <string>
+#include <set>
 
 #include "symbol.h"
 
-class alphabet {
+class Alphabet {
  public:
-  alphabet() = default;
+  Alphabet();
+  Alphabet(std::string);
+  Alphabet(std::vector<std::string>);
 
-  void set_alphabet(symbol letter);
-  std::set<symbol> get_alphabet() const;
+  void SetSymbol(Symbol);
+  void SetAlphabet(Symbol);
 
  private:
-  std::set<symbol> alphabet_;
+  std::vector<std::string> list_;
+  std::vector<Symbol> alphabet_;
 };

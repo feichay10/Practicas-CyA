@@ -18,19 +18,17 @@
 
 #pragma once
 
-#include <string>
+#include <iostream>
 
-class symbol {
+class Symbol {
  public:
-  symbol() = default;
-  symbol(char symbol);
-  bool operator<(const symbol& symbol);
-  std::string getsymbol() const;
+  Symbol() = default;
+  Symbol(char symbol);
+
+  void SetSymbol(std::string);
+  std::string GetSymbol() const;
+  unsigned GetSize();
 
  private:
   std::string symbol_;
 };
-
-bool operator<(const symbol& symbol1, const symbol& symbol2);
-bool operator==(const symbol& symbol1, const symbol& symbol2);
-std::ostream& operator<<(std::ostream& out, const symbol& symbol);

@@ -18,30 +18,19 @@
 
 #include "symbol.h"
 
-symbol::symbol(char symbol) {
+Symbol::Symbol(char symbol) {
   symbol_.clear();
   symbol_.push_back(symbol);
 }
 
-bool symbol::operator<(const symbol& symbol) {
-  return (symbol_.size() < symbol.getsymbol().size());
+void Symbol::SetSymbol(std::string symbol){
+  symbol_ = symbol;
 }
 
-std::string symbol::getsymbol() const {
+std::string Symbol::GetSymbol() const {
   return symbol_;
 }
 
-// Este operador es para el insert del set, es para el alphabet
-bool operator<(const symbol& symbol1, const symbol& symbol2) {
-  return (symbol1.getsymbol() < symbol2.getsymbol());
-}
-
-// Comparar dos simbolos para ver si son iguales 
-bool operator==(const symbol& symbol1, const symbol& symbol2) {
-  return (symbol1.getsymbol()[0] == symbol2.getsymbol()[0]);
-}
-
-std::ostream& operator<<(std::ostream& out, const symbol& symbol) {
-  out << symbol.getsymbol();
-  return out;
+unsigned Symbol::GetSize() {
+  return symbol_.size();
 }

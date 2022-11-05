@@ -8,25 +8,33 @@
  * Práctica 6: Simulación de Autómatas Finitos
  * @file dfa.h
  * @author Cheuk Kelly Ng Pante
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-11-08
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
-#pragma once  
+#pragma once
 
+#include <fstream>
 #include <iostream>
 #include <vector>
-#include <fstream>
 
-#include "../include/state.h"
 #include "../include/alphabet.h"
+#include "../include/state.h"
 
-class Dfa{
-  public: 
-    Dfa(std::ifstream &);
-  private:
+class Dfa {
+ public:
+  Dfa(std::ifstream &);
+
+  bool Read(std::string);
+  bool IsAlphabet(std::string);
+
+ private:
+  int states_size_;
+  int first_state_;
+  std::vector<State> states_;
+  Alphabet alphabet_;
 };

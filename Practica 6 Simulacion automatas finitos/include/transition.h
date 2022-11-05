@@ -18,10 +18,9 @@
 
 #pragma once
 
-#include <string.h>
-
 #include <iostream>
 #include <vector>
+#include <string>
 
 class Transition {
  public:
