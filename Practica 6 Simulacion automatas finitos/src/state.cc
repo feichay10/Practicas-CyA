@@ -47,6 +47,7 @@ void State::SetState(std::string line) {
   std::string aux;
   size_t pos = 0;
   Transition next;
+  Alphabet alphabet;
   aux = line.at(pos); // Coger el nombre del estado
   pos++;
   
@@ -107,7 +108,7 @@ void State::SetState(std::string line) {
       std::cout << "Con el simbolo '" << transitions_.at(i).GetSymbol() << "' va a ";
       std::cout << "q" << transitions_.at(i).GetPos() << std::endl;
     }
-    transitions_.clear();
+    //transitions_.clear();
   }
 }
 
@@ -120,12 +121,19 @@ bool State::IsStart() {
 }
 
 Transition State::GetTransition(std::string symbol) {
+  
   for (unsigned i = 0; i < transitions_.size(); i++) {
     if (transitions_.at(i).GetSymbol() == symbol) {
       return transitions_.at(i);
     }
   }
+  std::cout << "f" << symbol << "c" << std::endl;
+  std::cout << "birulo" << transitions_.size() << std::endl;
   exit(1);
+}
+
+std::string State::GetName() {
+  return name_;
 }
 
 void State::clear() {

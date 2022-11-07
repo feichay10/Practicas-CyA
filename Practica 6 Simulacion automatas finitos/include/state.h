@@ -22,6 +22,7 @@
 #include <string>
 
 #include "transition.h"
+#include "../include/alphabet.h"
 
 class State {
  public:

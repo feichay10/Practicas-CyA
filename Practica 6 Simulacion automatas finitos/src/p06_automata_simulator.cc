@@ -16,17 +16,17 @@
  *
  */
 
-#include <fstream>
 #include <iostream>
+#include <fstream>
 #include <regex>
-#include <string>
+#include <cstring>
 
 #include "../include/automata.h"
-#include "../include/state.h"
 
 const std::string HELP = "--help";
 
 void check_parameters(std::string &, std::string &, int, char**);
+bool check_automata(std::string);
 
 int main(int argc, char* argv[]) { 
   std::string strings, automata_in, strings_in, line;
@@ -46,16 +46,17 @@ int main(int argc, char* argv[]) {
   Automata automata(automata_file);
 
   std::cout << std::endl;
-  do {
-    strings_file >> strings;
-    std::cout << strings;
-    if (automata.Read(strings)) {
-      std::cout << " --- Accepted" << std::endl;
+ 
+  while(getline(strings_file, line)) {
+    std::cout << line << std::endl;
+    if (automata.Read(line)) {
+      std::cout << line << " -- Accepted" << std::endl;
     } else {
-      std::cout << " --- Rejected" << std::endl;
+      std::cout << line << " -- Rejected" << std::endl;
     }
-    strings.clear();
-  } while(!strings_file.eof());
+  }
+
+  strings.clear();
 
   automata_file.close();
   strings_file.close();

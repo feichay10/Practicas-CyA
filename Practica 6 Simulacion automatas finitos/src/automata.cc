@@ -73,17 +73,22 @@ bool Automata::Read(std::string line) {
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
-  if (!IsAlphabet(line)) {
-    return false;
-  }
+  // if (!IsAlphabet(line)) {
+  //   std::cout << "adios" << std::endl;
+  //   return false;
+  // }
   State actual = states_.at(start_state_);
   Transition next;
   std::string aux;
 
-  for (unsigned i = 0; i < line.size(); i++) {
-    aux = line.at(i);
+  for (unsigned i = 0; i < line.size() - 1; i++) {
+    aux = line.at(i);     
+    // std::cout << "aaaa" << std::endl;
+    //std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(aux);
+    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << aux << std::endl;
     actual = states_.at(next.GetPos());
   }
+  //std::cout << std::endl;
   return actual.IsAceptation();
 }
