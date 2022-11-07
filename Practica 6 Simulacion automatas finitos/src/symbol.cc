@@ -16,7 +16,7 @@
  * 
  */
 
-#include "symbol.h"
+#include "../include/symbol.h"
 
 Symbol::Symbol() {
 

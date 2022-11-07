@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 6: Simulación de Autómatas Finitos
- * @file dfa.h
+ * @file automata.h
  * @author Cheuk Kelly Ng Pante
  * @brief
  * @version 0.1
@@ -25,16 +25,17 @@
 #include "../include/alphabet.h"
 #include "../include/state.h"
 
-class Dfa {
+class Automata{
  public:
-  Dfa(std::ifstream &);
+  Automata(std::ifstream &);
 
-  bool Read(std::string);
   bool IsAlphabet(std::string);
+  bool Read(std::string);
 
  private:
-  int states_size_;
-  int first_state_;
+  std::string alphabet_symbols_;
+  int num_states_;
+  int start_state_;
   std::vector<State> states_;
   Alphabet alphabet_;
 };

@@ -21,7 +21,7 @@
 #include <regex>
 #include <string>
 
-#include "../include/dfa.h"
+#include "../include/automata.h"
 #include "../include/state.h"
 
 const std::string HELP = "--help";
@@ -29,22 +29,35 @@ const std::string HELP = "--help";
 void check_parameters(std::string &, std::string &, int, char**);
 
 int main(int argc, char* argv[]) { 
-  std::string strings, dfa_in, strings_in;
-  std::ifstream dfa_file, strings_file;
+  std::string strings, automata_in, strings_in, line;
+  std::ifstream automata_file, strings_file;
 
-  check_parameters(dfa_in, strings_in, argc, argv); 
+  check_parameters(automata_in, strings_in, argc, argv); 
   
-  dfa_file.open(dfa_in, std::ios::in);
+  automata_file.open(automata_in, std::ios::in);
   strings_file.open(strings_in, std::ios::in);
 
-  if (dfa_file.fail() || strings_file.fail()) {
+  if (automata_file.fail() || strings_file.fail()) {
     std::cout << "Error en la apertura de los ficheros " << std::endl;
     exit(1);
   }
 
-  Dfa dfa(dfa_file);
+  std::cout << "Fichero de autómata cargado correctamente" << std::endl;
+  Automata automata(automata_file);
 
-  dfa_file.close();
+  std::cout << std::endl;
+  do {
+    strings_file >> strings;
+    std::cout << strings;
+    if (automata.Read(strings)) {
+      std::cout << " --- Accepted" << std::endl;
+    } else {
+      std::cout << " --- Rejected" << std::endl;
+    }
+    strings.clear();
+  } while(!strings_file.eof());
+
+  automata_file.close();
   strings_file.close();
 }
 

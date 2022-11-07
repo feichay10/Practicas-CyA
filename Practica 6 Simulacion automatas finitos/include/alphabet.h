@@ -34,9 +34,12 @@ class Alphabet {
   void SetSymbol(Symbol);
   void SetAlphabet(Symbol);
 
+  Symbol GetWord(int);
   std::string GetSymbol(int);
   std::vector<Symbol> GetAlphabet();
 
+  unsigned GetListSize();
+  unsigned GetAlphabetSize();
  private:
   std::vector<std::string> list_;
   std::vector<Symbol> alphabet_;

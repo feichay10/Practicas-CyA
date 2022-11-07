@@ -16,7 +16,11 @@
  * 
  */
 
-#include "alphabet.h"
+#include "../include/alphabet.h"
+
+Alphabet::Alphabet() {
+
+}
 
 Alphabet::Alphabet(std::string word) {
   list_.push_back(word);
@@ -30,16 +34,16 @@ void Alphabet::SetWord(std::string word) {
   list_.push_back(word);
 }
 
-void Alphabet::SetSymbol(Symbol s) {
+void Alphabet::SetSymbol(Symbol symbols) {
   bool flag = true;
   
   for (unsigned i = 0; i < alphabet_.size(); i++) {
-    if (alphabet_.at(i).GetSymbol() == s.GetSymbol()) {
+    if (alphabet_.at(i).GetSymbol() == symbols.GetSymbol()) {
       flag = false;
     }
   }
   if (flag == true) {
-    alphabet_.push_back(s);
+    alphabet_.push_back(symbols);
   }
 }
 
@@ -49,4 +53,16 @@ std::string Alphabet::GetSymbol(int pos) {
 
 std::vector<Symbol> Alphabet::GetAlphabet() {
   return alphabet_;
+}
+
+Symbol Alphabet::GetWord(int pos) {
+  return alphabet_.at(pos);
+}
+
+unsigned Alphabet::GetListSize() {
+  return list_.size();
+}
+
+unsigned Alphabet::GetAlphabetSize() {
+  return alphabet_.size();
 }
