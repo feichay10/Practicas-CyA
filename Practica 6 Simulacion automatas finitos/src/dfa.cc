@@ -70,6 +70,8 @@ bool Dfa::IsAlphabet(std::string strings) {
 }
 
 bool Dfa::Read(std::string line) {
+  bool aux = false;
+
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
@@ -87,6 +89,13 @@ bool Dfa::Read(std::string line) {
     // if (symbol == alphabet_.GetWord(i).GetSymbol()) {
     //   return false;
     // }
+
+    for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
+      symbol = line.at(i);
+      if (symbol == alphabet_.GetWord(j).GetSymbol()) {
+        aux = true;
+      }
+    }
     //std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(symbol);
     //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
