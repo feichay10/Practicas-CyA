@@ -66,3 +66,24 @@ unsigned Alphabet::GetListSize() {
 unsigned Alphabet::GetAlphabetSize() {
   return alphabet_.size();
 }
+
+bool Alphabet::AlphabetComprobation(std::string strings) {
+  if (strings == "&") {
+    return true;
+  } else {
+    size_t count = 0;
+    for (size_t i = 0; i < strings.size(); i++) {
+      for (size_t j = 0; j < alphabet_.size(); j++) {
+        Symbol auxiliary = alphabet_[j];
+        if (strings[i] == auxiliary.GetSymbol()[i]) {
+          count++;
+        }
+      }
+    }
+    if (count == strings.size()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

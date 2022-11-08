@@ -40,6 +40,8 @@ class Alphabet {
 
   unsigned GetListSize();
   unsigned GetAlphabetSize();
+
+  bool AlphabetComprobation(std::string);
  private:
   std::vector<std::string> list_;
   std::vector<Symbol> alphabet_;

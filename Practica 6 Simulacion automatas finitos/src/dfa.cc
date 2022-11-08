@@ -50,51 +50,20 @@ Dfa::Dfa(std::ifstream& dfa_file) {
   }
 }
 
-bool Dfa::IsAlphabet(std::string strings) {
-  bool aux = false;
-  std::string symbol;
-
-  for (unsigned i = 0; i < strings.size(); i++) {
-    aux = false;
-    for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
-      symbol = strings.at(i);
-      if (symbol == alphabet_.GetWord(j).GetSymbol()) {
-        aux = true;
-      }
-    }
-    if (!aux) {
-      return false;
-    }
-  }
-  return true;
-}
-
 bool Dfa::Read(std::string line) {
-  bool aux = false;
-
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
-  // if (!IsAlphabet(line)) {
-  //   return false;
-  // }
+
   State actual = states_.at(start_state_);
   Transition next;
   std::string symbol;
 
   for (unsigned i = 0; i < line.size() - 1; i++) {
     symbol = line.at(i);     
-    std::cout << "symbol: " << symbol << std::endl;
-    //std::cout << "alpha: " << alphabet_.GetWord(i).GetSymbol() << std::endl;
-    // if (symbol == alphabet_.GetWord(i).GetSymbol()) {
-    //   return false;
-    // }
-
-    for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
-      symbol = line.at(i);
-      if (symbol == alphabet_.GetWord(j).GetSymbol()) {
-        aux = true;
-      }
+    if (!alphabet_.AlphabetComprobation(symbol)) {
+      std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del DFA" << std::endl;
+      return false;
     }
     //std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(symbol);

@@ -29,7 +29,6 @@ class Dfa{
  public:
   Dfa(std::ifstream &);
 
-  bool IsAlphabet(std::string);
   bool Read(std::string);
 
  private:
