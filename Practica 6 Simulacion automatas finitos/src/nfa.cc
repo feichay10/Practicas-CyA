@@ -51,7 +51,6 @@ Nfa::Nfa(std::ifstream& nfa_file) {
 }
 
 bool Nfa::IsBranchAccepted(int pos, State actual, std::string line) {
-  std::cout << "lapiz" << std::endl;
   std::string symbol, subline;
   std::vector<int> positions;
   Transition next = actual.at(pos);
@@ -78,36 +77,55 @@ bool Nfa::IsBranchAccepted(int pos, State actual, std::string line) {
 }
 
 bool Nfa::Read(std::string line) {
+  // if (line.at(0) == '&') {
+  //   return states_.at(start_state_).IsAceptation();
+  // }
+  // State actual = states_.at(start_state_);
+  // Transition next;
+  // std::string symbol, subline;
+  // std::vector<int> positions;
+
+  // for (unsigned i = 0; i < line.size() - 1; i++) {
+  //   //std::cout << actual.GetName() << " transita a ";
+  //   symbol = line.at(i);
+  //   positions = actual.TransitionsPos(symbol);
+
+  //   std::cout << actual.GetName() << " transita a ";
+
+  //   if (positions.size() > 1) {
+  //     for (unsigned j = 0; j < positions.size(); j++) {
+  //       subline = line.substr(i + 1,  line.size());
+  //       if (IsBranchAccepted(positions.at(j), actual, subline)) {
+  //         return true;
+  //       }
+  //     }
+  //   } else {
+  //     next = actual.GetTransition(symbol);
+  //     std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
+  //     actual = states_.at(next.GetPos());
+  //   }
+  // }
+  // return actual.IsAceptation();
+
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
-  std::cout << "hola" << std::endl;
+
   State actual = states_.at(start_state_);
   Transition next;
-  std::string symbol, subline;
-  std::vector<int> positions;
+  std::string symbol;
 
   for (unsigned i = 0; i < line.size() - 1; i++) {
-    //std::cout << actual.GetName() << " transita a ";
-    symbol = line.at(i);
-    std::cout << "simbolo: " << symbol << std::endl;
-    positions = actual.TransitionsPos(symbol);
-    std::cout << "posiciones: " << positions.size() << std::endl;
-
-    std::cout << actual.GetName() << " transita a ";
-
-    if (positions.size() > 1) {
-      for (unsigned j = 0; j < positions.size(); j++) {
-        subline = line.substr(i + 1,  line.size());
-        if (IsBranchAccepted(positions.at(j), actual, subline)) {
-          return true;
-        }
-      }
-    } else {
-      next = actual.GetTransition(symbol);
-      std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
-      actual = states_.at(next.GetPos());
+    symbol = line.at(i);     
+    if (!alphabet_.AlphabetComprobation(symbol)) {
+      std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del DFA" << std::endl;
+      return false;
     }
+    //std::cout << actual.GetName() << "transita a ";
+    next = actual.GetTransition(symbol);
+    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
+    actual = states_.at(next.GetPos());
   }
+  //std::cout << std::endl;
   return actual.IsAceptation();
 }
