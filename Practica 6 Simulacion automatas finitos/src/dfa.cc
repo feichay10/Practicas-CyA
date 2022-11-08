@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 6: Simulación de Autómatas Finitos
- * @file automata.cc
+ * @file dfa.cc
  * @author Cheuk Kelly Ng Pante
  * @brief
  * @version 0.1
@@ -16,14 +16,14 @@
  *
  */
 
-#include "../include/automata.h"
+#include "../include/dfa.h"
 
-Automata::Automata(std::ifstream& automata_file) {
+Dfa::Dfa(std::ifstream& dfa_file) {
   State actual;
   int count = 0;
-  std::string line, name, aux;
+  std::string line, aux;
 
-  while(getline(automata_file, line)){
+  while(getline(dfa_file, line)){
     if(count == 0){
       for (size_t i = 0; i < line.size() - 1; i++) {
         if(line[i] != ' '){
@@ -50,31 +50,30 @@ Automata::Automata(std::ifstream& automata_file) {
   }
 }
 
-bool Automata::IsAlphabet(std::string strings) {
-  bool aux = false;
-  std::string symbol;
+// bool dfa::IsAlphabet(std::string strings) {
+//   bool aux = false;
+//   std::string symbol;
 
-  for (unsigned i = 0; i < strings.size(); i++) {
-    aux = false;
-    for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
-      symbol = strings.at(i);
-      if (symbol == alphabet_.GetWord(j).GetSymbol()) {
-        aux = true;
-      }
-    }
-    if (!aux) {
-      return false;
-    }
-  }
-  return true;
-}
+//   for (unsigned i = 0; i < strings.size(); i++) {
+//     aux = false;
+//     for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
+//       symbol = strings.at(i);
+//       if (symbol == alphabet_.GetWord(j).GetSymbol()) {
+//         aux = true;
+//       }
+//     }
+//     if (!aux) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
-bool Automata::Read(std::string line) {
+bool Dfa::Read(std::string line) {
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
   // if (!IsAlphabet(line)) {
-  //   std::cout << "adios" << std::endl;
   //   return false;
   // }
   State actual = states_.at(start_state_);
@@ -83,7 +82,6 @@ bool Automata::Read(std::string line) {
 
   for (unsigned i = 0; i < line.size() - 1; i++) {
     aux = line.at(i);     
-    // std::cout << "aaaa" << std::endl;
     //std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(aux);
     //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << aux << std::endl;

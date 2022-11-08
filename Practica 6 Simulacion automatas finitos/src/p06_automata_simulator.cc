@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 6: Simulación de Autómatas Finitos
- * @file p06_automata_simulator.cc
+ * @file p06_dfa_simulator.cc
  * @author Cheuk Kelly Ng Pante
  * @brief
  * @version 0.1
@@ -21,20 +21,21 @@
 #include <regex>
 #include <cstring>
 
-#include "../include/automata.h"
+#include "../include/dfa.h"
 
 const std::string HELP = "--help";
 
 void check_parameters(std::string &, std::string &, int, char**);
-bool check_automata(std::string);
+bool check_automata(std::ifstream &);
 
 int main(int argc, char* argv[]) { 
   std::string strings, automata_in, strings_in, line;
-  std::ifstream automata_file, strings_file;
+  std::ifstream automata_file, automata_file_copy, strings_file;
 
   check_parameters(automata_in, strings_in, argc, argv); 
   
   automata_file.open(automata_in, std::ios::in);
+  automata_file_copy.open(automata_in, std::ios::in);
   strings_file.open(strings_in, std::ios::in);
 
   if (automata_file.fail() || strings_file.fail()) {
@@ -42,22 +43,26 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  std::cout << "Fichero de autómata cargado correctamente" << std::endl;
-  Automata automata(automata_file);
+  if(!check_automata(automata_file)) {
+    std::cout << "Es un DFA" << std::endl;
+    Dfa dfa(automata_file_copy);
 
-  std::cout << std::endl;
- 
-  while(getline(strings_file, line)) {
-    std::cout << line << std::endl;
-    if (automata.Read(line)) {
-      std::cout << line << " -- Accepted" << std::endl;
-    } else {
-      std::cout << line << " -- Rejected" << std::endl;
+    std::cout << std::endl;
+
+    while(getline(strings_file, line)) {
+      std::cout << line << std::endl;
+      if (dfa.Read(line)) {
+        std::cout << "Accepted" << std::endl << std::endl;
+      } else {
+        std::cout << "Rejected" << std::endl << std::endl;
+      }
     }
+  } else {
+    std::cout << "Es un NFA" << std::endl;
+    
   }
 
   strings.clear();
-
   automata_file.close();
   strings_file.close();
 }
@@ -78,7 +83,7 @@ void check_parameters(std::string &input_fa, std::string &input_txt, int argc, c
     if (argv[1] == HELP) {
       std::cout << "Para la correcta ejecución del programa, este debe invocarse";
       std::cout << " con dos parametros. Un fichero de entrada .fa y otro fichero de tipo .txt.";
-      std::cout << " Por ejemplo: ./p06_automata_simulator input.fa input.txt" << std::endl;
+      std::cout << " Por ejemplo: ./p06_dfa_simulator input.fa input.txt" << std::endl;
       exit(0);
     }
     if (!(regex_search(argv[1], fa_file))) {
@@ -86,8 +91,45 @@ void check_parameters(std::string &input_fa, std::string &input_txt, int argc, c
       exit(1);
     }
   } else {
-    std::cout << "Modo de empleo: ./p06_automata_simulator input.fa input.txt" << std::endl;
-    std::cout << "Pruebe ’p06_automata_simulator --help’ para más información." << std::endl;
+    std::cout << "Modo de empleo: ./p06_dfa_simulator input.fa input.txt" << std::endl;
+    std::cout << "Pruebe ’p06_dfa_simulator --help’ para más información." << std::endl;
     exit(1);
+  }
+}
+
+bool check_automata(std::ifstream& automata) {
+  std::string line, alpha, aux;
+  int count = 0;
+  int transitions_num;
+  int count_dfa = 0;
+  int count_states = 0;
+
+  std::cout << "Checking automata..." << std::endl;
+
+  while(getline(automata, line)){
+    if(count == 0){
+      for (size_t i = 0; i < line.size() - 1; i++) {
+        if(line[i] != ' '){
+          alpha += line[i];
+        }
+      }
+    } 
+    else if(count > 2){
+      aux = line.at(4);                   // Coge el numero de transiciones
+      transitions_num = stoi(aux);
+      if(alpha.size() == transitions_num) {
+        count_dfa++;
+      } 
+      count_states++;
+    }
+    count++;
+  }
+
+  if (count_dfa == count_states) {
+    std::cout << "El automata es un DFA" << std::endl;
+    return false;
+  } else {
+    std::cout << "El automata es un NFA" << std::endl;
+    return true;
   }
 }
