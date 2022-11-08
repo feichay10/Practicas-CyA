@@ -44,6 +44,10 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
+  /**
+   * @brief Si es un DFA hace operaciones de DFA y si es un NFA hace operaciones de NFA
+   * 
+   */
   if(!check_automata(automata_file)) {
     std::cout << "Es un DFA" << std::endl;
     Dfa dfa(automata_file_copy);
@@ -76,6 +80,14 @@ int main(int argc, char* argv[]) {
   strings_file.close();
 }
 
+/**
+ * @brief Comprueba que los parámetros introducidos son correctos
+ * 
+ * @param input_fa 
+ * @param input_txt 
+ * @param argc 
+ * @param argv 
+ */
 void check_parameters(std::string &input_fa, std::string &input_txt, int argc, char *argv[]) {
   std::regex fa_file("(.fa)$");
   std::regex txt_file("(.txt)$");
@@ -106,6 +118,13 @@ void check_parameters(std::string &input_fa, std::string &input_txt, int argc, c
   }
 }
 
+/**
+ * @brief Comprueba si el autómata es un DFA o un NFA
+ * 
+ * @param automata 
+ * @return true 
+ * @return false 
+ */
 bool check_automata(std::ifstream& automata) {
   std::string line, alpha, aux;
   int count = 0;
