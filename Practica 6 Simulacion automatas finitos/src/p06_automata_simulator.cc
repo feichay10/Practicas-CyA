@@ -22,6 +22,7 @@
 #include <cstring>
 
 #include "../include/dfa.h"
+#include "../include/nfa.h"
 
 const std::string HELP = "--help";
 
@@ -46,9 +47,7 @@ int main(int argc, char* argv[]) {
   if(!check_automata(automata_file)) {
     std::cout << "Es un DFA" << std::endl;
     Dfa dfa(automata_file_copy);
-
     std::cout << std::endl;
-
     while(getline(strings_file, line)) {
       std::cout << line << std::endl;
       if (dfa.Read(line)) {
@@ -59,11 +58,21 @@ int main(int argc, char* argv[]) {
     }
   } else {
     std::cout << "Es un NFA" << std::endl;
-    
+    Nfa nfa(automata_file_copy);
+    std::cout << std::endl;
+    while(getline(strings_file, line)) {
+      std::cout << line << std::endl;
+      if (nfa.Read(line)) {
+        std::cout << "Accepted" << std::endl << std::endl;
+      } else {
+        std::cout << "Rejected" << std::endl << std::endl;
+      }
+    }
   }
 
   strings.clear();
   automata_file.close();
+  automata_file_copy.close();
   strings_file.close();
 }
 
@@ -100,12 +109,10 @@ void check_parameters(std::string &input_fa, std::string &input_txt, int argc, c
 bool check_automata(std::ifstream& automata) {
   std::string line, alpha, aux;
   int count = 0;
-  int transitions_num;
+  unsigned transitions_num;
   int count_dfa = 0;
   int count_states = 0;
-
-  std::cout << "Checking automata..." << std::endl;
-
+  
   while(getline(automata, line)){
     if(count == 0){
       for (size_t i = 0; i < line.size() - 1; i++) {

@@ -78,12 +78,12 @@ bool Dfa::Read(std::string line) {
   // }
   State actual = states_.at(start_state_);
   Transition next;
-  std::string aux;
+  std::string symbol;
 
   for (unsigned i = 0; i < line.size() - 1; i++) {
-    aux = line.at(i);     
+    symbol = line.at(i);     
     //std::cout << actual.GetName() << "transita a ";
-    next = actual.GetTransition(aux);
+    next = actual.GetTransition(symbol);
     //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << aux << std::endl;
     actual = states_.at(next.GetPos());
   }

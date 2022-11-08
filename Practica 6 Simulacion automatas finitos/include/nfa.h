@@ -27,9 +27,9 @@
 
 class Nfa{
  public:
-  Nfa(std::ifstream &);
+  Nfa(std::ifstream&);
 
-  bool IsAlphabet(std::string);
+  bool IsBranchAccepted(int , State, std::string);
   bool Read(std::string);
 
  private:

@@ -108,7 +108,6 @@ void State::SetState(std::string line) {
       std::cout << "Con el simbolo '" << transitions_.at(i).GetSymbol() << "' va a ";
       std::cout << "q" << transitions_.at(i).GetPos() << std::endl;
     }
-    //transitions_.clear();
   }
 }
 
@@ -120,20 +119,31 @@ bool State::IsStart() {
   return start_;
 }
 
+std::string State::GetName() {
+  return name_;
+}
+
 Transition State::GetTransition(std::string symbol) {
-  
   for (unsigned i = 0; i < transitions_.size(); i++) {
     if (transitions_.at(i).GetSymbol() == symbol) {
       return transitions_.at(i);
     }
   }
-  std::cout << "f" << symbol << "c" << std::endl;
-  std::cout << "birulo" << transitions_.size() << std::endl;
   exit(1);
 }
 
-std::string State::GetName() {
-  return name_;
+Transition State::at(int pos) {
+  return transitions_.at(pos);
+}
+
+std::vector<int> State::TransitionsPos(std::string symbol) {
+  std::vector<int> aux;
+  for (unsigned i = 0; i < transitions_.size(); i++) {
+    if (symbol == transitions_.at(i).GetSymbol()) {
+      aux.push_back(i);
+    }
+  }
+  return aux;
 }
 
 void State::clear() {

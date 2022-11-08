@@ -38,6 +38,8 @@ class State {
   bool IsStart();
   std::string GetName();
   Transition GetTransition(std::string);
+  Transition at(int);
+  std::vector<int> TransitionsPos(std::string);
 
   void clear();
  private:
