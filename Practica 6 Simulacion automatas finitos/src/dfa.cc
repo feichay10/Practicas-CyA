@@ -50,24 +50,24 @@ Dfa::Dfa(std::ifstream& dfa_file) {
   }
 }
 
-// bool dfa::IsAlphabet(std::string strings) {
-//   bool aux = false;
-//   std::string symbol;
+bool Dfa::IsAlphabet(std::string strings) {
+  bool aux = false;
+  std::string symbol;
 
-//   for (unsigned i = 0; i < strings.size(); i++) {
-//     aux = false;
-//     for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
-//       symbol = strings.at(i);
-//       if (symbol == alphabet_.GetWord(j).GetSymbol()) {
-//         aux = true;
-//       }
-//     }
-//     if (!aux) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
+  for (unsigned i = 0; i < strings.size(); i++) {
+    aux = false;
+    for (unsigned j = 0; j < alphabet_.GetAlphabetSize(); j++) {
+      symbol = strings.at(i);
+      if (symbol == alphabet_.GetWord(j).GetSymbol()) {
+        aux = true;
+      }
+    }
+    if (!aux) {
+      return false;
+    }
+  }
+  return true;
+}
 
 bool Dfa::Read(std::string line) {
   if (line.at(0) == '&') {
@@ -82,9 +82,14 @@ bool Dfa::Read(std::string line) {
 
   for (unsigned i = 0; i < line.size() - 1; i++) {
     symbol = line.at(i);     
+    std::cout << "symbol: " << symbol << std::endl;
+    //std::cout << "alpha: " << alphabet_.GetWord(i).GetSymbol() << std::endl;
+    // if (symbol == alphabet_.GetWord(i).GetSymbol()) {
+    //   return false;
+    // }
     //std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(symbol);
-    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << aux << std::endl;
+    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
     actual = states_.at(next.GetPos());
   }
   //std::cout << std::endl;

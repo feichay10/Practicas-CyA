@@ -101,9 +101,9 @@ void State::SetState(std::string line) {
     }
 
     std::cout << std::endl;
-    std::cout << "Nombre del estado = " << name_ << std::endl;
+    std::cout << "Estado = " << name_ << std::endl;
     std::cout << "¿Estado de aceptacion? " << aceptation_ << std::endl;
-    std::cout << "Transiciones: " << std::endl;
+    std::cout << "Transiciones: " << transitions_.size() << std::endl;
     for (unsigned i = 0; i < transitions_.size(); i++) {
       std::cout << "Con el simbolo '" << transitions_.at(i).GetSymbol() << "' va a ";
       std::cout << "q" << transitions_.at(i).GetPos() << std::endl;

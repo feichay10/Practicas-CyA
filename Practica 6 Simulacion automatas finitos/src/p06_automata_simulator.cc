@@ -114,7 +114,7 @@ bool check_automata(std::ifstream& automata) {
   int count_states = 0;
   
   while(getline(automata, line)){
-    if(count == 0){
+    if(count == 0){                       // Coger el numero de simbolos en el alfabeto
       for (size_t i = 0; i < line.size() - 1; i++) {
         if(line[i] != ' '){
           alpha += line[i];
