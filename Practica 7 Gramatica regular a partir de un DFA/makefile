@@ -7,7 +7,7 @@ text4 = Se ha eliminado el fichero ejecutable y los ficheros objetos.
 CC=g++
 CXXFLAGS=-g -std=c++14 -Wall
 
-OBJS = src/p06_automata_simulator.o src/symbol.o src/alphabet.o src/transition.o src/state.o src/dfa.o src/nfa.o
+OBJS = src/p07_dfa2grammar.o src/symbol.o src/alphabet.o src/transition.o src/state.o src/automata
 
 all: ${OBJS}
 	@echo $(text0)

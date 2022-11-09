@@ -69,21 +69,21 @@ int main(int argc, char* argv[]) {
  */
 void check_parameters(std::string &input_fa, std::string &input_txt, int argc, char *argv[]) {
   std::regex fa_file("(.fa)$");
-  std::regex txt_file("(.txt)$");
+  std::regex txt_file("(.gra)$");
 
   if (argc == 3) {
     input_fa = argv[1];
     input_txt = argv[2];
 
     if (!(regex_search(argv[2], txt_file))) {
-      std::cout << "El segundo fichero de entrada no es un fichero .txt" << std::endl;
+      std::cout << "El segundo fichero de entrada no es un fichero .gra" << std::endl;
       exit(1);
     }
   } else if (argc == 2) {
     if (argv[1] == HELP) {
       std::cout << "Para la correcta ejecución del programa, este debe invocarse";
-      std::cout << " con dos parametros. Un fichero de entrada .fa y otro fichero de tipo .txt.";
-      std::cout << " Por ejemplo: ./p06_automata_simulator input.fa input.txt" << std::endl;
+      std::cout << " con dos parametros. Un fichero de entrada .fa y otro fichero de tipo .gra.";
+      std::cout << " Por ejemplo: ./p07_dfa2grammar input.fa input.txt" << std::endl;
       exit(0);
     }
     if (!(regex_search(argv[1], fa_file))) {
@@ -92,7 +92,7 @@ void check_parameters(std::string &input_fa, std::string &input_txt, int argc, c
     }
   } else {
     std::cout << "Modo de empleo: ./p06_automata_simulator input.fa input.txt" << std::endl;
-    std::cout << "Pruebe ’p06_automata_simulator --help’ para más información." << std::endl;
+    std::cout << "Pruebe ’p07_dfa2grammar --help’ para más información." << std::endl;
     exit(1);
   }
 }
