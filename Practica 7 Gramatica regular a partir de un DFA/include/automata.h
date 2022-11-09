@@ -6,14 +6,14 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 6: Simulación de Autómatas Finitos
- * @file nfa.h
+ * @file automata.h
  * @author Cheuk Kelly Ng Pante
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-11-08
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #pragma once
@@ -25,9 +25,9 @@
 #include "../include/alphabet.h"
 #include "../include/state.h"
 
-class Nfa{
+class Automata{
  public:
-  Nfa(std::ifstream&);
+  Automata(std::ifstream &);
 
   bool Read(std::string);
 

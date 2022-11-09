@@ -50,6 +50,7 @@ Nfa::Nfa(std::ifstream& nfa_file) {
   }
 }
 
+
 bool Nfa::Read(std::string line) {
   /**
    * @brief Reconoce si hay una cadena vacia 

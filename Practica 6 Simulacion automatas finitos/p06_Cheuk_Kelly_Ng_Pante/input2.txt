@@ -1,0 +1,8 @@
+&
+abccba
+acba
+bbca
+abac
+aaacb
+aabbc
+abcabcabc

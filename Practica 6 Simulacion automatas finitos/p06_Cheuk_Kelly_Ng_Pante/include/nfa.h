@@ -30,7 +30,7 @@ class Nfa{
   Nfa(std::ifstream&);
 
   bool Read(std::string);
-
+  
  private:
   std::string alphabet_symbols_;
   int num_states_;

@@ -6,11 +6,11 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 6: Simulación de Autómatas Finitos
- * @file nfa.h
+ * @file symbol.h
  * @author Cheuk Kelly Ng Pante
  * @brief 
  * @version 0.1
- * @date 2022-11-08
+ * @date 2022-11-8
  * 
  * @copyright Copyright (c) 2022
  * 
@@ -18,23 +18,18 @@
 
 #pragma once
 
-#include <fstream>
 #include <iostream>
-#include <vector>
+#include <string>
 
-#include "../include/alphabet.h"
-#include "../include/state.h"
-
-class Nfa{
+class Symbol {
  public:
-  Nfa(std::ifstream&);
+  Symbol();
+  Symbol(std::string symbol);
 
-  bool Read(std::string);
+  void SetSymbol(std::string);
+  std::string GetSymbol();
+  unsigned GetSize();
 
  private:
-  std::string alphabet_symbols_;
-  int num_states_;
-  int start_state_;
-  std::vector<State> states_;
-  Alphabet alphabet_;
+  std::string symbol_;
 };
