@@ -62,19 +62,19 @@ int main(int argc, char *argv[]) {
  * @brief Comprueba que los parámetros introducidos son correctos
  *
  * @param input_fa
- * @param input_txt
+ * @param input_gra
  * @param argc
  * @param argv
  */
-void check_parameters(std::string &input_fa, std::string &input_txt, int argc, char *argv[]) {
+void check_parameters(std::string &input_fa, std::string &input_gra, int argc, char *argv[]) {
   std::regex fa_file("(.fa)$");
-  std::regex txt_file("(.gra)$");
+  std::regex gra_file("(.gra)$");
 
   if (argc == 3) {
     input_fa = argv[1];
-    input_txt = argv[2];
+    input_gra = argv[2];
 
-    if (!(regex_search(argv[2], txt_file))) {
+    if (!(regex_search(argv[2], gra_file))) {
       std::cout << "El fichero de salida no es un fichero .gra" << std::endl;
       exit(1);
     }
