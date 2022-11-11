@@ -5,12 +5,12 @@
  * Grado en Ingeniería Informática
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
- * Práctica 6: Simulación de Autómatas Finitos
+ * Práctica 7: Gramática Regular a partir de una DFA
  * @file state.h
  * @author Cheuk Kelly Ng Pante
  * @brief
  * @version 0.1
- * @date 2022-11-08
+ * @date 2022-11-15
  *
  * @copyright Copyright (c) 2022
  *
@@ -21,8 +21,8 @@
 #include <iostream>
 #include <string>
 
-#include "transition.h"
 #include "../include/alphabet.h"
+#include "transition.h"
 
 class State {
  public:
@@ -42,6 +42,7 @@ class State {
   std::vector<int> TransitionsPos(std::string);
 
   void clear();
+
  private:
   bool start_;
   bool aceptation_;

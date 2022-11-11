@@ -5,12 +5,12 @@
  * Grado en Ingeniería Informática
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
- * Práctica 6: Simulación de Autómatas Finitos
- * @file Automata.cc
+ * Práctica 7: Gramática Regular a partir de una DFA
+ * @file automata.cc
  * @author Cheuk Kelly Ng Pante
  * @brief
  * @version 0.1
- * @date 2022-11-04
+ * @date 2022-11-15
  *
  * @copyright Copyright (c) 2022
  *
@@ -24,11 +24,11 @@ Automata::Automata(std::ifstream& automata_file) {
   std::string line, aux;
 
   /**
-   * @brief Lee el fichero (Automata_file) y lo almacena en la variable line
+   * @brief Lee el fichero (automata_file) y lo almacena en la variable line
    * 
    */
   while(getline(automata_file, line)){
-    if(count == 0){                                                     // Recoge los simbolos del alfabeto del Automata
+    if(count == 0){                                                     // Recoge los simbolos del alfabeto del automata
       for (size_t i = 0; i < line.size() - 1; i++) {
         if(line[i] != ' '){
           alphabet_symbols_ += line[i];
@@ -45,7 +45,7 @@ Automata::Automata(std::ifstream& automata_file) {
       start_state_ = std::stoi(line);
       std::cout << "Estado inicial: " << start_state_ << std::endl;
     } 
-    else if(count != 0){                                                // Recoge los estados del Automata  
+    else if(count != 0){                                                // Recoge los estados del automata  
       actual.SetState(line);
       states_.push_back(actual);
       actual.clear();
@@ -68,13 +68,13 @@ bool Automata::Read(std::string line) {
   std::string symbol;                           
 
   /**
-   * @brief Recorre la cadena de entrada y comprueba si la cadena de entrada tiene simbolos que pertenecen al Automata
+   * @brief Recorre la cadena de entrada y comprueba si la cadena de entrada tiene simbolos que pertenecen al automata
    * 
    */
   for (unsigned i = 0; i < line.size() - 1; i++) {
     symbol = line.at(i);     
     if (!alphabet_.AlphabetComprobation(symbol)) {
-      std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del Automata" << std::endl;
+      std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del automata" << std::endl;
       return false;
     }
     //std::cout << actual.GetName() << "transita a ";
@@ -85,3 +85,5 @@ bool Automata::Read(std::string line) {
   //std::cout << std::endl;
   return actual.IsAceptation();
 }
+
+std::string Automata::ConvertToGrammar(){}

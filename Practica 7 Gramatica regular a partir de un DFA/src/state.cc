@@ -5,15 +5,15 @@
  * Grado en Ingeniería Informática
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
- * Práctica 6: Simulación de Autómatas Finitos
+ * Práctica 7: Gramática Regular a partir de una DFA
  * @file state.cc
  * @author Cheuk Kelly Ng Pante
- * @brief 
+ * @brief
  * @version 0.1
- * @date 2022-11-08
- * 
+ * @date 2022-11-15
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include "../include/state.h"
