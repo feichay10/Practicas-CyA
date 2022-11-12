@@ -23,17 +23,17 @@ Symbol::Symbol() {
 }
 
 Symbol::Symbol(std::string symbol) {
-  SetSymbol(symbol);
+  setSymbol(symbol);
 }
 
-void Symbol::SetSymbol(std::string symbol){
+void Symbol::setSymbol(std::string symbol){
   symbol_ = symbol;
 }
 
-std::string Symbol::GetSymbol(){
+std::string Symbol::getSymbol(){
   return symbol_;
 }
 
-unsigned Symbol::GetSize() {
+unsigned Symbol::getSize() {
   return symbol_.size();
 }

@@ -31,19 +31,19 @@ State::State(bool aceptation, int transitions_num) {
   name_ = aux + std::to_string(transitions_num);
 }
 
-void State::SetAceptation() {
+void State::setAceptation() {
   aceptation_ = true;
 }
 
-void State::SetStart() {
+void State::setStart() {
   start_ = true;
 }
 
-void State::SetName(std::string name){
+void State::setName(std::string name){
   name_ = name;
 }
 
-void State::SetState(std::string line) {
+void State::setState(std::string line) {
   std::string aux;
   size_t pos = 0;
   Transition next;
@@ -88,14 +88,14 @@ void State::SetState(std::string line) {
   if (transitions_num_ != 0) {
     for (size_t i = pos; i < line.size() - 1; i++) {
       aux = line.at(i);
-      next.SetSymbol(aux);
+      next.setSymbol(aux);
       i++;
       if (line.at(i) == ' ') {
         i++;
       }
       aux = line.at(i);
       pos = stoi(aux);
-      next.SetPos(pos);
+      next.setPos(pos);
       transitions_.push_back(next);
       i++;
     }
@@ -105,10 +105,23 @@ void State::SetState(std::string line) {
     std::cout << "¿Estado de aceptacion? " << aceptation_ << std::endl;
     std::cout << "Transiciones: " << transitions_.size() << std::endl;
     for (unsigned i = 0; i < transitions_.size(); i++) {
-      std::cout << "Con el simbolo '" << transitions_.at(i).GetSymbol() << "' va a ";
-      std::cout << "q" << transitions_.at(i).GetPos() << std::endl;
+      std::cout << "Con el simbolo '" << transitions_.at(i).getSymbol() << "' va a ";
+      std::cout << "q" << transitions_.at(i).getPos() << std::endl;
     }
   }
+}
+
+std::string State::getName() {
+  return name_;
+}
+
+Transition State::getTransition(std::string symbol) {
+  for (unsigned i = 0; i < transitions_.size(); i++) {
+    if (transitions_.at(i).getSymbol() == symbol) {
+      return transitions_.at(i);
+    }
+  }
+  exit(1);
 }
 
 bool State::IsAceptation() {
@@ -119,19 +132,6 @@ bool State::IsStart() {
   return start_;
 }
 
-std::string State::GetName() {
-  return name_;
-}
-
-Transition State::GetTransition(std::string symbol) {
-  for (unsigned i = 0; i < transitions_.size(); i++) {
-    if (transitions_.at(i).GetSymbol() == symbol) {
-      return transitions_.at(i);
-    }
-  }
-  exit(1);
-}
-
 Transition State::at(int pos) {
   return transitions_.at(pos);
 }
@@ -139,7 +139,7 @@ Transition State::at(int pos) {
 std::vector<int> State::TransitionsPos(std::string symbol) {
   std::vector<int> aux;
   for (unsigned i = 0; i < transitions_.size(); i++) {
-    if (symbol == transitions_.at(i).GetSymbol()) {
+    if (symbol == transitions_.at(i).getSymbol()) {
       aux.push_back(i);
     }
   }

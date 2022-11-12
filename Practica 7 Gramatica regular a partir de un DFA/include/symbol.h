@@ -26,9 +26,9 @@ class Symbol {
   Symbol();
   Symbol(std::string symbol);
 
-  void SetSymbol(std::string);
-  std::string GetSymbol();
-  unsigned GetSize();
+  void setSymbol(std::string);
+  std::string getSymbol();
+  unsigned getSize();
 
  private:
   std::string symbol_;

@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 
   if(check_automata(automata_file)) {
     Automata automata(automata_file_copy);
-    //Grammar grammar = automata.ConvertToGrammar();
+    // Grammar grammar = automata.ConvertToGrammar();
   } 
 
   automata_file.close();

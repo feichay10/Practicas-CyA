@@ -30,16 +30,15 @@ class Alphabet {
   Alphabet(std::string);
   Alphabet(std::vector<std::string>);
 
-  void SetWord(std::string);
-  void SetSymbol(Symbol);
-  void SetAlphabet(Symbol);
+  void setWord(std::string);
+  void setSymbol(Symbol);
+  void setAlphabet(Symbol);
 
-  Symbol GetWord(int);
-  std::string GetSymbol(int);
-  std::vector<Symbol> GetAlphabet();
-
-  unsigned GetListSize();
-  unsigned GetAlphabetSize();
+  Symbol getWord(int);
+  std::string getSymbol(int);
+  std::vector<Symbol> getAlphabet();
+  unsigned getListSize();
+  unsigned getAlphabetSize();
 
   bool AlphabetComprobation(std::string);
 

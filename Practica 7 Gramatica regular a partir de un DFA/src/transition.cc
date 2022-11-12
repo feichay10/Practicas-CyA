@@ -25,27 +25,27 @@ Transition::Transition(std::string symbol, std::string state_to) {
   state_to_ = state_to;
 }
 
-void Transition::SetSymbol(const std::string symbol) {
+void Transition::setSymbol(const std::string symbol) {
   symbol_ = symbol;
 }
 
-void Transition::SetStateTo(const std::string state_to) {
+void Transition::setStateTo(const std::string state_to) {
   state_to_ = "q" + state_to;
   pos_ = stoi(state_to);
 }
 
-void Transition::SetPos(int pos) {
+void Transition::setPos(int pos) {
   pos_ = pos;
 }
 
-std::string Transition::GetSymbol() const {
+std::string Transition::getSymbol() const {
   return symbol_;
 }
 
-std::string Transition::GetStateTo() const {
+std::string Transition::getStateTo() const {
   return state_to_;
 }
 
-int Transition::GetPos() const {
+int Transition::getPos() const {
   return pos_;
 }

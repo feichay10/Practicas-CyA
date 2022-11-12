@@ -27,13 +27,13 @@ class Transition {
   Transition();
   Transition(std::string, std::string);
 
-  void SetSymbol(const std::string);
-  void SetStateTo(const std::string);
-  void SetPos(int);
+  void setSymbol(const std::string);
+  void setStateTo(const std::string);
+  void setPos(int);
 
-  std::string GetSymbol() const;
-  std::string GetStateTo() const;
-  int GetPos() const;
+  std::string getSymbol() const;
+  std::string getStateTo() const;
+  int getPos() const;
 
  private:
   std::string symbol_;

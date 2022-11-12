@@ -23,17 +23,13 @@ Automata::Automata(std::ifstream& automata_file) {
   int count = 0;
   std::string line, aux;
 
-  /**
-   * @brief Lee el fichero (automata_file) y lo almacena en la variable line
-   * 
-   */
   while(getline(automata_file, line)){
     if(count == 0){                                                     // Recoge los simbolos del alfabeto del automata
       for (size_t i = 0; i < line.size() - 1; i++) {
         if(line[i] != ' '){
           alphabet_symbols_ += line[i];
           std::cout << "Simbolo del alfabeto: " << alphabet_symbols_ << std::endl;
-          alphabet_.SetSymbol(alphabet_symbols_);
+          alphabet_.setSymbol(alphabet_symbols_);
           alphabet_symbols_.clear();
         }
       }
@@ -46,7 +42,7 @@ Automata::Automata(std::ifstream& automata_file) {
       std::cout << "Estado inicial: " << start_state_ << std::endl;
     } 
     else if(count != 0){                                                // Recoge los estados del automata  
-      actual.SetState(line);
+      actual.setState(line);
       states_.push_back(actual);
       actual.clear();
     }
@@ -55,10 +51,6 @@ Automata::Automata(std::ifstream& automata_file) {
 }
 
 bool Automata::Read(std::string line) {
-  /**
-   * @brief Reconoce si hay una cadena vacia 
-   * 
-   */
   if (line.at(0) == '&') {
     return states_.at(start_state_).IsAceptation();
   }
@@ -67,10 +59,6 @@ bool Automata::Read(std::string line) {
   Transition next;                              
   std::string symbol;                           
 
-  /**
-   * @brief Recorre la cadena de entrada y comprueba si la cadena de entrada tiene simbolos que pertenecen al automata
-   * 
-   */
   for (unsigned i = 0; i < line.size() - 1; i++) {
     symbol = line.at(i);     
     if (!alphabet_.AlphabetComprobation(symbol)) {
@@ -78,12 +66,14 @@ bool Automata::Read(std::string line) {
       return false;
     }
     //std::cout << actual.GetName() << "transita a ";
-    next = actual.GetTransition(symbol); 
-    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
-    actual = states_.at(next.GetPos());
+    next = actual.getTransition(symbol); 
+    //std::cout << states_.at(next.getPos()).GetName() << " con el simbolo " << symbol << std::endl;
+    actual = states_.at(next.getPos());
   }
   //std::cout << std::endl;
   return actual.IsAceptation();
 }
 
-Grammar Automata::ConvertToGrammar(){ }
+Grammar Automata::ConvertToGrammar(Grammar grammar){ 
+  
+}

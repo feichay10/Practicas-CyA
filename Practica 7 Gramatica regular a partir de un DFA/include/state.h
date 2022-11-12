@@ -29,15 +29,16 @@ class State {
   State();
   State(bool, int);
 
-  void SetAceptation();
-  void SetStart();
-  void SetName(std::string);
-  void SetState(std::string);
+  void setAceptation();
+  void setStart();
+  void setName(std::string);
+  void setState(std::string);
+
+  std::string getName();
+  Transition getTransition(std::string);
 
   bool IsAceptation();
   bool IsStart();
-  std::string GetName();
-  Transition GetTransition(std::string);
   Transition at(int);
   std::vector<int> TransitionsPos(std::string);
 

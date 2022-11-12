@@ -30,15 +30,15 @@ Alphabet::Alphabet(std::vector<std::string> list) {
   list_ = list;
 }
 
-void Alphabet::SetWord(std::string word) {
+void Alphabet::setWord(std::string word) {
   list_.push_back(word);
 }
 
-void Alphabet::SetSymbol(Symbol symbols) {
+void Alphabet::setSymbol(Symbol symbols) {
   bool flag = true;
   
   for (unsigned i = 0; i < alphabet_.size(); i++) {
-    if (alphabet_.at(i).GetSymbol() == symbols.GetSymbol()) {
+    if (alphabet_.at(i).getSymbol() == symbols.getSymbol()) {
       flag = false;
     }
   }
@@ -47,23 +47,23 @@ void Alphabet::SetSymbol(Symbol symbols) {
   }
 }
 
-std::string Alphabet::GetSymbol(int pos) {
+std::string Alphabet::getSymbol(int pos) {
   return list_.at(pos);
 }
 
-std::vector<Symbol> Alphabet::GetAlphabet() {
+std::vector<Symbol> Alphabet::getAlphabet() {
   return alphabet_;
 }
 
-Symbol Alphabet::GetWord(int pos) {
+Symbol Alphabet::getWord(int pos) {
   return alphabet_.at(pos);
 }
 
-unsigned Alphabet::GetListSize() {
+unsigned Alphabet::getListSize() {
   return list_.size();
 }
 
-unsigned Alphabet::GetAlphabetSize() {
+unsigned Alphabet::getAlphabetSize() {
   return alphabet_.size();
 }
 
@@ -75,7 +75,7 @@ bool Alphabet::AlphabetComprobation(std::string strings) {
     for (size_t i = 0; i < strings.size(); i++) {
       for (size_t j = 0; j < alphabet_.size(); j++) {
         Symbol auxiliary = alphabet_[j];
-        if (strings[i] == auxiliary.GetSymbol()[i]) {
+        if (strings[i] == auxiliary.getSymbol()[i]) {
           count++;
         }
       }
