@@ -24,12 +24,13 @@
 
 #include "../include/alphabet.h"
 #include "../include/state.h"
+#include "../include/grammar.h"
 
 class Automata {
  public:
   Automata(std::ifstream &);
   bool Read(std::string);
-  std::string ConvertToGrammar();
+  Grammar ConvertToGrammar();
 
  private:
   std::string alphabet_symbols_;

@@ -86,4 +86,4 @@ bool Automata::Read(std::string line) {
   return actual.IsAceptation();
 }
 
-std::string Automata::ConvertToGrammar(){}
+Grammar Automata::ConvertToGrammar(){ }
