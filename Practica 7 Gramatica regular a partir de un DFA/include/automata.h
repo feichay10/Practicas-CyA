@@ -47,7 +47,7 @@ class Automata {
  private:
   std::string alphabet_symbols_;
   int num_states_;
-  int start_state_;
+  std::string start_state_;
   std::vector<State> states_;
   Alphabet alphabet_;
 };

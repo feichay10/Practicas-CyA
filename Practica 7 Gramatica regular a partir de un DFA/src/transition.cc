@@ -34,7 +34,7 @@ void Transition::setStateTo(const std::string state_to) {
   pos_ = stoi(state_to);
 }
 
-void Transition::setPos(int pos) {
+void Transition::setPos(std::string pos) {
   pos_ = pos;
 }
 
@@ -46,6 +46,6 @@ std::string Transition::getStateTo() const {
   return state_to_;
 }
 
-int Transition::getPos() const {
+std::string Transition::getPos() const {
   return pos_;
 }

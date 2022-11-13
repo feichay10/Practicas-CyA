@@ -29,14 +29,14 @@ class Transition {
 
   void setSymbol(const std::string);
   void setStateTo(const std::string);
-  void setPos(int);
+  void setPos(std::string);
 
   std::string getSymbol() const;
   std::string getStateTo() const;
-  int getPos() const;
+  std::string getPos() const;
 
  private:
   std::string symbol_;
   std::string state_to_;
-  int pos_;
+  std::string pos_;
 };

@@ -26,18 +26,22 @@ class Grammar {
  public:
   Grammar();
 
+  void setNum_terminal_symbols(int);
   void setTerminal_symbols(std::string);
   void setNon_terminal_symbols(std::string);
   void setStart_symbol(std::string);
 
+  int getNum_terminal_symbols();
   std::string getTerminal_symbols();
   std::string getNon_terminal_symbols();
   std::string getStart_symbol();
-
+  
+  std::string GetNonTerminalSymbol(std::string);
   void PrintOnScreen();
   void PrintToFile(std::ofstream &);
 
  private:
+  int num_terminal_symbols_;
   std::string terminal_symbols_;
   std::string non_terminal_symbols_;
   std::string start_symbol_;

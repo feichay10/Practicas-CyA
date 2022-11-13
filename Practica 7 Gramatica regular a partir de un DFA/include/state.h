@@ -22,6 +22,7 @@
 #include <string>
 
 #include "../include/alphabet.h"
+#include "../include/grammar.h"
 #include "transition.h"
 
 class State {

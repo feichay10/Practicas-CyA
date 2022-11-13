@@ -48,7 +48,8 @@ void State::setState(std::string line) {
   size_t pos = 0;
   Transition next;
   Alphabet alphabet;
-  aux = line.at(pos); // Coger el nombre del estado
+  Grammar grammar;
+  aux = line.at(pos);               // Coger el nombre del estado
   pos++;
   
   if (line.size() != pos) {
@@ -57,9 +58,9 @@ void State::setState(std::string line) {
     }
   }
   
-  name_ = "q"  + aux;
+  name_ = grammar.GetNonTerminalSymbol(aux);
+  //name_ = aux;
 
-  // Condicion para saber si es el estado de aceptacion o no
   if (line.at(pos) == '0') {
     aceptation_ = false; // No es de aceptacion
   } else {
@@ -94,8 +95,8 @@ void State::setState(std::string line) {
         i++;
       }
       aux = line.at(i);
-      pos = stoi(aux);
-      next.setPos(pos);
+      aux = grammar.GetNonTerminalSymbol(aux);
+      next.setPos(aux);
       transitions_.push_back(next);
       i++;
     }
@@ -106,7 +107,7 @@ void State::setState(std::string line) {
     std::cout << "Transiciones: " << transitions_.size() << std::endl;
     for (unsigned i = 0; i < transitions_.size(); i++) {
       std::cout << "Con el simbolo '" << transitions_.at(i).getSymbol() << "' va a ";
-      std::cout << "q" << transitions_.at(i).getPos() << std::endl;
+      std::cout << transitions_.at(i).getPos() << std::endl;
     }
   }
 }

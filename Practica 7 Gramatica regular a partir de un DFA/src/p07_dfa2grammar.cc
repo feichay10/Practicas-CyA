@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
   std::string strings, automata_in, grammar_out, line;
   std::ifstream automata_file, automata_file_copy;
   std::ofstream grammar_file;
+  Grammar grammar;
 
   check_parameters(automata_in, grammar_out, argc, argv);
 
@@ -47,8 +48,13 @@ int main(int argc, char *argv[]) {
 
   if(check_automata(automata_file)) {
     Automata automata(automata_file_copy);
-    // Grammar grammar = automata.ConvertToGrammar();
-  } 
+    automata.ConvertToGrammar(grammar);
+
+    // std::string aux;
+    // Grammar grammar;
+    // aux = grammar.GetNonTerminalSymbol(0);
+    // std::cout << aux << std::endl;
+  }
 
   automata_file.close();
   automata_file_copy.close();
