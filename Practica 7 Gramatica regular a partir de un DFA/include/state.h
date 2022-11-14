@@ -37,6 +37,7 @@ class State {
 
   std::string getName();
   Transition getTransition(std::string);
+  std::vector<Transition> getTransitions();
   std::string getStates(int);
   unsigned getStatesSize();
 

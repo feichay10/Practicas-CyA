@@ -48,11 +48,17 @@ Grammar::Grammar(Automata &dfa){
   start_symbol_ = states[0].getName();
   num_productions_ = dfa.getNum_states();
   for(size_t i = 0; i < states.size(); i++) {
-    for(size_t j = 6; j < states.size(); i++) {
-      productions_.push_back(states.at(j).getName());
-    }
     std::string production = states[i].getName() + " -> ";
     productions_.push_back(production);
+    std::vector<Transition> transition_aux = states[i].getTransitions();
+    for(size_t j = 0; j < transition_aux.size(); j++) {
+      std::string production_aux = productions_[i];
+      production_aux += transition_aux[j].getSymbol() + transition_aux[j].getPos();
+      productions_[i] = production_aux;
+      if(j != transition_aux.size() - 1) {
+        productions_[i] += " | ";
+      }
+    }
   }
 }
 
@@ -117,4 +123,7 @@ void Grammar::PrintToFile(std::ofstream &output_file) {
   }
   output_file << start_symbol_ << std::endl;
   output_file << num_productions_ << std::endl;
+    for(unsigned i = 0; i < productions_.size(); i++) {
+    output_file << productions_[i] << std::endl;
+  }
 }

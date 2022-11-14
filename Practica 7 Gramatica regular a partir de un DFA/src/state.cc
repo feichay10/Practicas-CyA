@@ -126,6 +126,10 @@ Transition State::getTransition(std::string symbol) {
   exit(1);
 }
 
+std::vector<Transition> State::getTransitions() {
+  return transitions_;
+}
+
 std::string State::getStates(int pos) {
   return states_.at(pos);
 }
