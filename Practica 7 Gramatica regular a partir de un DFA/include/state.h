@@ -52,6 +52,6 @@ class State {
   bool aceptation_;
   std::string name_;
   int transitions_num_;
-  std::vector<std::string> states_;
   std::vector<Transition> transitions_;
+  std::vector<std::string> states_;
 };

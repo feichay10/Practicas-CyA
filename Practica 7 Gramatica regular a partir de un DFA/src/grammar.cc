@@ -23,8 +23,17 @@
 
 Grammar::Grammar() {
 
+
+
 } 
 
+// S 0 2 a S b A
+// A 0 2 a B b B
+// B 1 2 a B b B
+
+// S -> aS | bA
+// A -> aB | bB
+// B -> aB | bB | &
 Grammar::Grammar(Automata &dfa){
   std::vector<State> states = dfa.getStates();
 
@@ -36,12 +45,13 @@ Grammar::Grammar(Automata &dfa){
   for(unsigned i = 0; i < states.size(); i++) {
     non_terminal_symbols_.push_back(states[i].getName());
   }
-  start_symbol_ = dfa.getStates()[0].getName();
+  start_symbol_ = states[0].getName();
   num_productions_ = dfa.getNum_states();
-  for(unsigned i = 0; i < states.size(); i++) {
+  for(size_t i = 0; i < states.size(); i++) {
+    for(size_t j = 6; j < states.size(); i++) {
+      productions_.push_back(states.at(j).getName());
+    }
     std::string production = states[i].getName() + " -> ";
-    
-    // std::cout << "production: " << production << std::endl;
     productions_.push_back(production);
   }
 }

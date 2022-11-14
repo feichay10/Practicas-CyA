@@ -95,7 +95,6 @@ Grammar Automata::ConvertToGrammar() {
 }
 
 // bool Automata::Read(std::string line) {
-  
 //   if (line.at(0) == '&') {
 //     return states_.at(start_state_).IsAceptation();
 //   }
@@ -104,18 +103,17 @@ Grammar Automata::ConvertToGrammar() {
 //   Transition next;                              
 //   std::string symbol;                           
 
-
 //   for (unsigned i = 0; i < line.size() - 1; i++) {
 //     symbol = line.at(i);     
 //     if (!alphabet_.AlphabetComprobation(symbol)) {
 //       std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del DFA" << std::endl;
 //       return false;
 //     }
-//     std::cout << actual.GetName() << "transita a ";
-//     next = actual.GetTransition(symbol); 
-//     std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
-//     actual = states_.at(next.GetPos());
+//     //std::cout << actual.GetName() << "transita a ";
+//     next = actual.getTransition(symbol); 
+//     //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
+//     actual = states_.at(next.getPos());
 //   }
-//   std::cout << std::endl;
+//   //std::cout << std::endl;
 //   return actual.IsAceptation();
 // }

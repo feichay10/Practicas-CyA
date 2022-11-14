@@ -51,4 +51,7 @@ class Grammar {
   int num_productions_;
   std::vector<std::string> productions_;
   Alphabet alphabet_;
+
+  std::string terminal_symbol_;
+  std::string non_terminal_symbol_;
 };
