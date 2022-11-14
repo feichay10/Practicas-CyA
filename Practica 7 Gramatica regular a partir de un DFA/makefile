@@ -1,7 +1,7 @@
 text0 = 
 text1 = Se procedera a compilar la práctica...
 text2 = Modo de empleo:
-text3 = ./p07_dfa2grammar input.fa input.txt
+text3 = ./p07_dfa2grammar input.fa output.gra
 text4 = Se ha eliminado el fichero ejecutable y los ficheros objetos.
 
 CC=g++

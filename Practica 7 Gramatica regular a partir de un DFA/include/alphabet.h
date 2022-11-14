@@ -27,22 +27,13 @@
 class Alphabet {
  public:
   Alphabet();
-  Alphabet(std::string);
-  Alphabet(std::vector<std::string>);
 
-  void setWord(std::string);
   void setSymbol(Symbol);
-  void setAlphabet(Symbol);
-
-  Symbol getWord(int);
   std::string getSymbol(int);
-  std::vector<Symbol> getAlphabet();
-  unsigned getListSize();
   unsigned getAlphabetSize();
 
   bool AlphabetComprobation(std::string);
 
  private:
-  std::vector<std::string> list_;
   std::vector<Symbol> alphabet_;
 };

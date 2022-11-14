@@ -37,6 +37,8 @@ class State {
 
   std::string getName();
   Transition getTransition(std::string);
+  std::string getStates(int);
+  unsigned getStatesSize();
 
   bool IsAceptation();
   bool IsStart();
@@ -50,5 +52,6 @@ class State {
   bool aceptation_;
   std::string name_;
   int transitions_num_;
+  std::vector<std::string> states_;
   std::vector<Transition> transitions_;
 };

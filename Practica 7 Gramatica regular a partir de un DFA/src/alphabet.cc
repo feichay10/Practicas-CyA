@@ -22,18 +22,6 @@ Alphabet::Alphabet() {
 
 }
 
-Alphabet::Alphabet(std::string word) {
-  list_.push_back(word);
-}
-
-Alphabet::Alphabet(std::vector<std::string> list) {
-  list_ = list;
-}
-
-void Alphabet::setWord(std::string word) {
-  list_.push_back(word);
-}
-
 void Alphabet::setSymbol(Symbol symbols) {
   bool flag = true;
   
@@ -43,24 +31,12 @@ void Alphabet::setSymbol(Symbol symbols) {
     }
   }
   if (flag == true) {
-    alphabet_.push_back(symbols);
+    alphabet_.emplace_back(symbols);
   }
 }
 
 std::string Alphabet::getSymbol(int pos) {
-  return list_.at(pos);
-}
-
-std::vector<Symbol> Alphabet::getAlphabet() {
-  return alphabet_;
-}
-
-Symbol Alphabet::getWord(int pos) {
-  return alphabet_.at(pos);
-}
-
-unsigned Alphabet::getListSize() {
-  return list_.size();
+  return alphabet_.at(pos).getSymbol();
 }
 
 unsigned Alphabet::getAlphabetSize() {

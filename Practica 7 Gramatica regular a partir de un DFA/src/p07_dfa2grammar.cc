@@ -23,6 +23,7 @@
 
 #include "../include/automata.h"
 #include "../include/grammar.h"
+#include "../include/state.h"
 
 const std::string HELP = "--help";
 
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
   std::string strings, automata_in, grammar_out, line;
   std::ifstream automata_file, automata_file_copy;
   std::ofstream grammar_file;
+  Automata togrammar;
   Grammar grammar;
 
   check_parameters(automata_in, grammar_out, argc, argv);
@@ -47,13 +49,11 @@ int main(int argc, char *argv[]) {
   }
 
   if(check_automata(automata_file)) {
-    Automata automata(automata_file_copy);
-    automata.ConvertToGrammar(grammar);
-
-    // std::string aux;
-    // Grammar grammar;
-    // aux = grammar.GetNonTerminalSymbol(0);
-    // std::cout << aux << std::endl;
+    Automata automata1(automata_file_copy);       // constructor DFA
+    grammar = automata1.ConvertToGrammar();       // convert to grammar
+    std::cout << std::endl;
+    grammar.PrintOnScreen();
+    grammar.PrintToFile(grammar_file);
   }
 
   automata_file.close();

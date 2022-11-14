@@ -57,9 +57,10 @@ void State::setState(std::string line) {
       pos++;
     }
   }
-  
+
   name_ = grammar.GetNonTerminalSymbol(aux);
-  //name_ = aux;
+  states_.push_back(name_);
+
 
   if (line.at(pos) == '0') {
     aceptation_ = false; // No es de aceptacion
@@ -123,6 +124,14 @@ Transition State::getTransition(std::string symbol) {
     }
   }
   exit(1);
+}
+
+std::string State::getStates(int pos) {
+  return states_.at(pos);
+}
+
+unsigned State::getStatesSize() {
+  return states_.size();
 }
 
 bool State::IsAceptation() {
