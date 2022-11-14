@@ -9,4 +9,4 @@ S
 3
 S -> aS | bA
 A -> aB | bB
-B -> aB | bB
+B -> aB | bB | &

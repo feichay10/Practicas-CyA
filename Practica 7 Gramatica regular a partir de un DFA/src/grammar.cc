@@ -59,6 +59,9 @@ Grammar::Grammar(Automata &dfa){
         productions_[i] += " | ";
       }
     }
+    if (states[i].IsAceptation()) {
+      productions_[i] += " | &";
+    }
   }
 }
 
