@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file state.h
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementación de la clase 'State'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -25,6 +25,10 @@
 #include "../include/grammar.h"
 #include "transition.h"
 
+/**
+ * @brief Clase 'State' que representa un estado de la máquina de estados finitos
+ * 
+ */
 class State {
  public:
   State();

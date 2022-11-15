@@ -7,8 +7,9 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file p07_dfa2grammar.cc
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Programa principal que lee un fichero de entrada y genera un fichero
+ * de salida con la gramática regular equivalente a la dada el DFA.
  * @version 0.1
  * @date 2022-11-15
  *
@@ -16,10 +17,10 @@
  *
  */
 
-#include <string>
 #include <fstream>
 #include <iostream>
 #include <regex>
+#include <string>
 
 #include "../include/automata.h"
 #include "../include/grammar.h"
@@ -30,11 +31,16 @@ const std::string HELP = "--help";
 void check_parameters(std::string &, std::string &, int, char **);
 bool check_automata(std::ifstream &);
 
+/**
+ * @brief Programa principal
+ *
+ * @param argc Numero de argumentos
+ * @param argv Posicion de los argumentos
+ */
 int main(int argc, char *argv[]) {
   std::string strings, automata_in, grammar_out, line;
   std::ifstream automata_file, automata_file_copy;
   std::ofstream grammar_file;
-  Automata togrammar;
   Grammar grammar;
 
   check_parameters(automata_in, grammar_out, argc, argv);
@@ -48,9 +54,9 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  if(check_automata(automata_file)) {
-    Automata automata1(automata_file_copy);       // constructor DFA
-    grammar = automata1.ConvertToGrammar();       // convert to grammar
+  if (check_automata(automata_file)) {
+    Automata automata1(automata_file_copy);  // Construccion del DFA
+    grammar = automata1.ConvertToGrammar();  // convert to grammar
     std::cout << std::endl;
     grammar.PrintOnScreen();
     grammar.PrintToFile(grammar_file);
@@ -64,41 +70,51 @@ int main(int argc, char *argv[]) {
 /**
  * @brief Comprueba que los parámetros introducidos son correctos
  *
- * @param input_fa
- * @param output_gra
- * @param argc
- * @param argv
+ * @param input_fa Fichero de entrada
+ * @param output_gra Fichero de salida
+ * @param argc Numero de argumentos
+ * @param argv Posicion de los argumentos
  */
-void check_parameters(std::string &input_fa, std::string &output_gra, int argc, char *argv[]) {
+void check_parameters(std::string &input_fa, std::string &output_gra, int argc,
+                      char *argv[]) {
   std::regex fa_file("(.fa)$");
   std::regex gra_file("(.gra)$");
 
   if (argc == 3) {
     input_fa = argv[1];
     output_gra = argv[2];
-  if (!(regex_search(argv[2], gra_file))) {
-    std::cout << "El fichero de salida no es un fichero .gra" << std::endl;
-    exit(1);
-  }
+    if (!(regex_search(argv[2], gra_file))) {
+      std::cout << "El fichero de salida no es un fichero .gra" << std::endl;
+      exit(1);
+    }
   } else if (argc == 2) {
     if (argv[1] == HELP) {
-      std::cout << " Para la correcta ejecución del programa, este debe invocarse";
-      std::cout << " con dos parametros. Un fichero de entrada .fa y otro fichero de salida de tipo .gra." << std::endl;
-      std::cout << " En el fichero de tipo .fa estará contenido el DFA que va a contener la especificacion de una gramatica regular, ";
+      std::cout
+          << " Para la correcta ejecución del programa, este debe invocarse";
+      std::cout << " con dos parametros. Un fichero de entrada .fa y otro "
+                   "fichero de salida de tipo .gra."
+                << std::endl;
+      std::cout << " En el fichero de tipo .fa estará contenido el DFA que va "
+                   "a contener la especificacion de una gramatica regular, ";
       std::cout << " por ejemplo: input.fa" << std::endl;
-      std::cout << " En el fichero de tipo .gra contendrá la especificación de una gramática regular, ";
+      std::cout << " En el fichero de tipo .gra contendrá la especificación de "
+                   "una gramática regular, ";
       std::cout << " por ejemplo: output.gra" << std::endl;
-      std::cout << " La ejecución del programa es: " << argv[0] << " input.fa output.gra" << std::endl;
+      std::cout << " La ejecución del programa es: " << argv[0]
+                << " input.fa output.gra" << std::endl;
       std::cout << std::endl;
       exit(0);
     }
     if (!(regex_search(argv[1], fa_file))) {
-      std::cout << "El primer fichero de entrada no es un fichero .fa" << std::endl;
+      std::cout << "El primer fichero de entrada no es un fichero .fa"
+                << std::endl;
       exit(1);
     }
   } else {
-    std::cout << "Modo de empleo: ./p07_dfa2grammar input.fa output.gra" << std::endl;
-    std::cout << "Pruebe ’p07_dfa2grammar --help’ para más información." << std::endl;
+    std::cout << "Modo de empleo: ./p07_dfa2grammar input.fa output.gra"
+              << std::endl;
+    std::cout << "Pruebe ’p07_dfa2grammar --help’ para más información."
+              << std::endl;
     exit(1);
   }
 }
@@ -106,9 +122,9 @@ void check_parameters(std::string &input_fa, std::string &output_gra, int argc, 
 /**
  * @brief Comprueba si el autómata es un automata o un NFA
  *
- * @param automata
- * @return true
- * @return false
+ * @param automata Fichero de entrada, que es un automata
+ * @return true Si el automata es un DFA
+ * @return false  Si el automata es un NFA
  */
 bool check_automata(std::ifstream &automata) {
   std::string line, alpha, aux;

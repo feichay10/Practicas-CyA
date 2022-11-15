@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file grammar.cc
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementación de los diferentes metodos de la clase 'Grammar'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -18,115 +18,103 @@
 
 #include "../include/grammar.h"
 #include "../include/automata.h"
-#include "../include/state.h"
-#include "../include/transition.h"
 
-Grammar::Grammar() {
+/**
+ * @brief Constructor por defecto
+ * 
+ */
+Grammar::Grammar() {}
 
-
-
-} 
-
-// S 0 2 a S b A
-// A 0 2 a B b B
-// B 1 2 a B b B
-
-// S -> aS | bA
-// A -> aB | bB
-// B -> aB | bB | &
-Grammar::Grammar(Automata &dfa){
+/**
+ * @brief Constructor de la clase 'Grammar', recibe un DFA y lo convierte a una gramática regular
+ * 
+ * @param dfa Recibe un DFA
+ */
+Grammar::Grammar(Automata &dfa) {
   std::vector<State> states = dfa.getStates();
 
-  num_terminal_symbols_ = dfa.getNum_alphabet_symbols();
-  for(unsigned i = 0; i < dfa.getNum_alphabet_symbols(); i++) {
-    terminal_symbols_.push_back(dfa.getAlphabet_symbols(i));
+  num_terminal_symbols_ = dfa.getNumAlphabetSymbols();                        // Número de símbolos terminales  
+  for (int i = 0; i < dfa.getNumAlphabetSymbols(); i++) {
+    terminal_symbols_.push_back(dfa.getAlphabetSymbols(i));                   // Símbolos terminales
   }
-  num_non_terminal_symbols_ = dfa.getNum_states();
-  for(unsigned i = 0; i < states.size(); i++) {
-    non_terminal_symbols_.push_back(states[i].getName());
+  num_non_terminal_symbols_ = dfa.getNumStates();                             // Número de símbolos no terminales
+  for (unsigned i = 0; i < states.size(); i++) {
+    non_terminal_symbols_.push_back(states[i].getName());                     // Símbolos no terminales
   }
-  start_symbol_ = states[0].getName();
-  num_productions_ = dfa.getNum_states();
-  for(size_t i = 0; i < states.size(); i++) {
-    std::string production = states[i].getName() + " -> ";
-    productions_.push_back(production);
-    std::vector<Transition> transition_aux = states[i].getTransitions();
-    for(size_t j = 0; j < transition_aux.size(); j++) {
-      std::string production_aux = productions_[i];
-      production_aux += transition_aux[j].getSymbol() + transition_aux[j].getPos();
-      productions_[i] = production_aux;
-      if(j != transition_aux.size() - 1) {
-        productions_[i] += " | ";
+  start_symbol_ = states[0].getName();                                        // Start
+  num_productions_ = dfa.getNumStates();                                      // Número de producciones
+  for (size_t i = 0; i < states.size(); i++) {
+    std::string production = states[i].getName() + " -> ";                    // Producciones, se añade el símbolo no terminal
+    productions_.push_back(production);                                       // Se añade la producción en un vector
+    std::vector<Transition> transition_aux = states[i].getTransitions();      // Se obtienen las transiciones del estado
+    for (size_t j = 0; j < transition_aux.size(); j++) {                      
+      std::string production_aux = productions_[i];                                       // Se obtiene la producción
+      production_aux += transition_aux[j].getSymbol() + transition_aux[j].getPos();       // Se añade el símbolo terminal y el símbolo no terminal
+      productions_[i] = production_aux;                                                   // Se actualiza la producción                        
+      if (j != transition_aux.size() - 1) {
+        productions_[i] += " | ";                                                         // Se añade el símbolo '|' si no es la última transición
       }
     }
     if (states[i].IsAceptation()) {
-      productions_[i] += " | &";
+      productions_[i] += " | &";                                                         // Se añade el símbolo '&' si es un estado de aceptación
     }
   }
 }
 
-void Grammar::setNum_terminal_symbols(int num_terminal_symbols) {
-  num_terminal_symbols_ = num_terminal_symbols;
-}
-
-void Grammar::setNum_non_terminal_symbols(int num_non_terminal_symbols) {
-  num_non_terminal_symbols_ = num_non_terminal_symbols;
-}
-
-
-void Grammar::setStart_symbol(std::string start_symbol) {
-  start_symbol_ = start_symbol;
-}
-
-int Grammar::getNum_terminal_symbols() {
-  return num_terminal_symbols_;
-}
-
-int Grammar::getNum_non_terminal_symbols() {
-  return num_non_terminal_symbols_;
-}
-
-std::string Grammar::getStart_symbol() {
-  return start_symbol_;
-}
-
-
-std::string Grammar::GetNonTerminalSymbol(std::string symbol) {
-  int n = stoi(symbol);
+/**
+ * @brief Metodo para pasar el nombre de un estado a un símbolo no terminal
+ * 
+ * @param state Recibe el nombre de un estado
+ * @return std::string 
+ */
+std::string Grammar::GetNonTerminalSymbol(std::string state) {
+  int n = stoi(state);
   std::string no_terminal_symbols = "SABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   return no_terminal_symbols.substr(n, 1);
 }
 
+/**
+ * @brief Metodo para imprimir la gramática regular por pantalla
+ * 
+ */
 void Grammar::PrintOnScreen() {
-  std::cout << "Grammar:" << std::endl;
-  std::cout << "Number of terminal symbols: " << num_terminal_symbols_ << std::endl;
-  for (unsigned i = 0; i < terminal_symbols_.size(); i++){
+  std::cout << "DFA to Grammar:" << std::endl;
+  std::cout << "Number of terminal symbols: " << num_terminal_symbols_
+            << std::endl;
+  for (unsigned i = 0; i < terminal_symbols_.size(); i++) {
     std::cout << "Terminal symbol: " << terminal_symbols_[i] << std::endl;
   }
-  std::cout << "Number of non-terminal symbols: " << num_non_terminal_symbols_ << std::endl;
-  for (unsigned i = 0; i < non_terminal_symbols_.size(); i++){
-    std::cout << "Non-terminal symbol: " << non_terminal_symbols_[i] << std::endl;
+  std::cout << "Number of non-terminal symbols: " << num_non_terminal_symbols_
+            << std::endl;
+  for (unsigned i = 0; i < non_terminal_symbols_.size(); i++) {
+    std::cout << "Non-terminal symbol: " << non_terminal_symbols_[i]
+              << std::endl;
   }
   std::cout << "Start Non-terminal-symbol: " << start_symbol_ << std::endl;
   std::cout << "Number of productions: " << num_productions_ << std::endl;
-  for(unsigned i = 0; i < productions_.size(); i++) {
+  for (unsigned i = 0; i < productions_.size(); i++) {
     std::cout << "Production: " << productions_[i] << std::endl;
   }
 }
 
+/**
+ * @brief Metodo para escribir la gramática regular en un fichero
+ * 
+ * @param output_file Fichero de salida introducido por el usuario
+ */
 void Grammar::PrintToFile(std::ofstream &output_file) {
   output_file << num_terminal_symbols_ << std::endl;
-  for (unsigned i = 0; i < terminal_symbols_.size(); i++){
+  for (unsigned i = 0; i < terminal_symbols_.size(); i++) {
     output_file << terminal_symbols_[i] << std::endl;
   }
   output_file << num_non_terminal_symbols_ << std::endl;
-  for (unsigned i = 0; i < non_terminal_symbols_.size(); i++){
+  for (unsigned i = 0; i < non_terminal_symbols_.size(); i++) {
     output_file << non_terminal_symbols_[i] << std::endl;
   }
   output_file << start_symbol_ << std::endl;
   output_file << num_productions_ << std::endl;
-    for(unsigned i = 0; i < productions_.size(); i++) {
+  for (unsigned i = 0; i < productions_.size(); i++) {
     output_file << productions_[i] << std::endl;
   }
 }

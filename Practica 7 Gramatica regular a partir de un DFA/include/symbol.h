@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file symbol.h
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementación de la clase 'Symbol'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -21,6 +21,10 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief Clase 'Symbol' que representa un simbolo
+ * 
+ */
 class Symbol {
  public:
   Symbol();

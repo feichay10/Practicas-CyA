@@ -8,7 +8,7 @@
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file alphabet.h
  * @author Cheuk Kelly Ng Pante
- * @brief
+ * @brief Contiene la implementación de la clase 'Alphabet'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -24,6 +24,10 @@
 
 #include "symbol.h"
 
+/**
+ * @brief Clase que representa un alfabeto
+ * 
+ */
 class Alphabet {
  public:
   Alphabet();

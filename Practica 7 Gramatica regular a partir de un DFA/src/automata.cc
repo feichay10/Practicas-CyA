@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file automata.cc
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementación de los diferentes metodos de la clase 'Automata'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -19,10 +19,18 @@
 #include "../include/automata.h"
 #include "../include/grammar.h"
 
-Automata::Automata() {
+/**
+ * @brief Constructor por defecto
+ *
+ */
+Automata::Automata() {}
 
-}
-
+/**
+ * @brief Constructor de la clase 'Automata', recibe un fichero de entrada que
+ * es un DFA y lo contruye
+ *
+ * @param automata_file Fichero de entrada que contiene un DFA
+ */
 Automata::Automata(std::ifstream& automata_file) {
   State actual;
   int count = 0;
@@ -54,66 +62,57 @@ Automata::Automata(std::ifstream& automata_file) {
   }
 }
 
-void Automata::setAlphabet_symbols(std::string alphabet_symbols) {
-  alphabet_symbols_ = alphabet_symbols;
-}
-
-void Automata::setNum_states(int num_states) { 
-  num_states_ = num_states; 
-}
-
-void Automata::setStates(std::vector<State> states) { 
-  states_ = states;
-}
-
-void Automata::setAlphabet(Alphabet alphabet) { 
-  alphabet_ = alphabet; 
-}
-
-std::string Automata::getAlphabet_symbols(int pos) { 
+/**
+ * @brief Devuelve el simbolo del alfabeto
+ * 
+ * @param pos Posicion del simbolo del alfabeto
+ * @return std::string 
+ */
+std::string Automata::getAlphabetSymbols(int pos) {
   return alphabet_.getSymbol(pos);
 }
 
-int Automata::getNum_states() { 
+/**
+ * @brief Devuelve el numero de estados
+ * 
+ * @return int 
+ */
+int Automata::getNumStates() { 
   return num_states_; 
 }
 
+/**
+ * @brief Devuelve los estados del automata
+ * 
+ * @return std::vector<State> 
+ */
 std::vector<State> Automata::getStates() { 
   return states_; 
 }
 
-int Automata::getNum_alphabet_symbols() { 
+/**
+ * @brief Devuelve el numero de simbolos del alfabeto
+ * 
+ * @return int 
+ */
+int Automata::getNumAlphabetSymbols() { 
   return num_alphabet_symbols_; 
 }
 
+/**
+ * @brief Devuelve el tamaño del estado
+ * 
+ * @return unsigned o
+ */
 unsigned Automata::getStateSize() { 
   return state_.getStatesSize(); 
 }
 
-Grammar Automata::ConvertToGrammar() {
-  return Grammar(*this);
+/**
+ * @brief Convierte un DFA a una gramatica regular y retorna un objeto de la clase 'Grammar', el propio contructor de la clase
+ * 
+ * @return Grammar 
+ */
+Grammar Automata::ConvertToGrammar() { 
+  return Grammar(*this); 
 }
-
-// bool Automata::Read(std::string line) {
-//   if (line.at(0) == '&') {
-//     return states_.at(start_state_).IsAceptation();
-//   }
-
-//   State actual = states_.at(start_state_);      
-//   Transition next;                              
-//   std::string symbol;                           
-
-//   for (unsigned i = 0; i < line.size() - 1; i++) {
-//     symbol = line.at(i);     
-//     if (!alphabet_.AlphabetComprobation(symbol)) {
-//       std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del DFA" << std::endl;
-//       return false;
-//     }
-//     //std::cout << actual.GetName() << "transita a ";
-//     next = actual.getTransition(symbol); 
-//     //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
-//     actual = states_.at(next.getPos());
-//   }
-//   //std::cout << std::endl;
-//   return actual.IsAceptation();
-// }

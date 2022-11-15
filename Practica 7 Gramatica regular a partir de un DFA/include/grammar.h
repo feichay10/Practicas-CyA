@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file grammar.h
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementacion de la clase 'Grammar'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -25,18 +25,15 @@
 #include "alphabet.h"
 
 class Automata;
+/**
+ * @brief Clase que representa una gramática regular
+ * 
+ */
 class Grammar {
  public:
   Grammar();
   Grammar(Automata &);
 
-  void setNum_terminal_symbols(int);
-  void setNum_non_terminal_symbols(int);
-  void setStart_symbol(std::string);
-
-  int getNum_terminal_symbols();
-  int getNum_non_terminal_symbols();
-  std::string getStart_symbol();
   std::string GetNonTerminalSymbol(std::string);
   
   void PrintOnScreen();

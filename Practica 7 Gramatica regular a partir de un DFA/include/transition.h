@@ -7,8 +7,8 @@
  * Curso: 2º
  * Práctica 7: Gramática Regular a partir de una DFA
  * @file transition.h
- * @author Cheuk Kelly Ng Pante
- * @brief
+ * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
+ * @brief Contiene la implementación de la clase 'Transition'
  * @version 0.1
  * @date 2022-11-15
  *
@@ -22,6 +22,10 @@
 #include <string>
 #include <vector>
 
+/**
+ * @brief Clase 'Transition' que representa una transición
+ * 
+ */
 class Transition {
  public:
   Transition();
