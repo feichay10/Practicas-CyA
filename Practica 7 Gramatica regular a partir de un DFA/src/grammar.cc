@@ -80,21 +80,21 @@ std::string Grammar::GetNonTerminalSymbol(std::string state) {
  */
 void Grammar::PrintOnScreen() {
   std::cout << "DFA to Grammar:" << std::endl;
-  std::cout << "Number of terminal symbols: " << num_terminal_symbols_
+  std::cout << "Numero de simbolos terminales: " << num_terminal_symbols_
             << std::endl;
   for (unsigned i = 0; i < terminal_symbols_.size(); i++) {
-    std::cout << "Terminal symbol: " << terminal_symbols_[i] << std::endl;
+    std::cout << "Simbolo terminal: " << terminal_symbols_[i] << std::endl;
   }
-  std::cout << "Number of non-terminal symbols: " << num_non_terminal_symbols_
+  std::cout << "Numero de simbolos no terminales: " << num_non_terminal_symbols_
             << std::endl;
   for (unsigned i = 0; i < non_terminal_symbols_.size(); i++) {
-    std::cout << "Non-terminal symbol: " << non_terminal_symbols_[i]
+    std::cout << "Simbolo no terminal: " << non_terminal_symbols_[i]
               << std::endl;
   }
-  std::cout << "Start Non-terminal-symbol: " << start_symbol_ << std::endl;
-  std::cout << "Number of productions: " << num_productions_ << std::endl;
+  std::cout << "Start: " << start_symbol_ << std::endl;
+  std::cout << "Numero de producciones: " << num_productions_ << std::endl;
   for (unsigned i = 0; i < productions_.size(); i++) {
-    std::cout << "Production: " << productions_[i] << std::endl;
+    std::cout << "Produccion " << i + 1 << ": " << productions_[i] << std::endl;
   }
 }
 
