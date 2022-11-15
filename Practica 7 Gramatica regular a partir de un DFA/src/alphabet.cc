@@ -38,7 +38,7 @@ void Alphabet::setSymbol(Symbol symbols) {
     }
   }
   if (flag == true) {
-    alphabet_.emplace_back(symbols);
+    alphabet_.push_back(symbols);
   }
 }
 

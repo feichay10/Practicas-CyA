@@ -75,8 +75,7 @@ int main(int argc, char *argv[]) {
  * @param argc Numero de argumentos
  * @param argv Posicion de los argumentos
  */
-void check_parameters(std::string &input_fa, std::string &output_gra, int argc,
-                      char *argv[]) {
+void check_parameters(std::string &input_fa, std::string &output_gra, int argc, char *argv[]) {
   std::regex fa_file("(.fa)$");
   std::regex gra_file("(.gra)$");
 
@@ -89,42 +88,33 @@ void check_parameters(std::string &input_fa, std::string &output_gra, int argc,
     }
   } else if (argc == 2) {
     if (argv[1] == HELP) {
-      std::cout
-          << " Para la correcta ejecución del programa, este debe invocarse";
-      std::cout << " con dos parametros. Un fichero de entrada .fa y otro "
-                   "fichero de salida de tipo .gra."
-                << std::endl;
-      std::cout << " En el fichero de tipo .fa estará contenido el DFA que va "
-                   "a contener la especificacion de una gramatica regular, ";
+      std::cout << " Para la correcta ejecución del programa, este debe invocarse";
+      std::cout << " con dos parametros. Un fichero de entrada .fa y otro fichero de salida de tipo .gra." << std::endl;
+      std::cout << " En el fichero de tipo .fa estará contenido el DFA, ";
       std::cout << " por ejemplo: input.fa" << std::endl;
-      std::cout << " En el fichero de tipo .gra contendrá la especificación de "
-                   "una gramática regular, ";
+      std::cout << " En el fichero de tipo .gra contendrá la especificación de una gramática regular sacado a partir del DFA introducido, ";
       std::cout << " por ejemplo: output.gra" << std::endl;
-      std::cout << " La ejecución del programa es: " << argv[0]
-                << " input.fa output.gra" << std::endl;
+      std::cout << " La ejecución del programa es: " << argv[0] << " input.fa output.gra" << std::endl;
       std::cout << std::endl;
       exit(0);
     }
     if (!(regex_search(argv[1], fa_file))) {
-      std::cout << "El primer fichero de entrada no es un fichero .fa"
-                << std::endl;
+      std::cout << "El primer fichero de entrada no es un fichero .fa" << std::endl;
       exit(1);
     }
   } else {
-    std::cout << "Modo de empleo: ./p07_dfa2grammar input.fa output.gra"
-              << std::endl;
-    std::cout << "Pruebe ’p07_dfa2grammar --help’ para más información."
-              << std::endl;
+    std::cout << "Modo de empleo: ./p07_dfa2grammar input.fa output.gra" << std::endl;
+    std::cout << "Pruebe ’p07_dfa2grammar --help’ para más información." << std::endl;
     exit(1);
   }
 }
 
 /**
- * @brief Comprueba si el autómata es un automata o un NFA
+ * @brief Comprueba si el autómata es un DFA
  *
  * @param automata Fichero de entrada, que es un automata
- * @return true Si el automata es un DFA
- * @return false  Si el automata es un NFA
+ * @return true 
+ * @return false  
  */
 bool check_automata(std::ifstream &automata) {
   std::string line, alpha, aux;

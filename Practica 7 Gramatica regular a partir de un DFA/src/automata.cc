@@ -34,7 +34,7 @@ Automata::Automata() {}
 Automata::Automata(std::ifstream& automata_file) {
   State actual;
   int count = 0;
-  std::string line, aux;
+  std::string line;
 
   while (getline(automata_file, line)) {
     if (count == 0) {  // Recoge los simbolos del alfabeto del automata
@@ -102,7 +102,7 @@ int Automata::getNumAlphabetSymbols() {
 /**
  * @brief Devuelve el tamaño del estado
  * 
- * @return unsigned o
+ * @return unsigned 
  */
 unsigned Automata::getStateSize() { 
   return state_.getStatesSize(); 
