@@ -1,0 +1,12 @@
+2
+a
+b
+3
+S
+A
+B
+S
+3
+S -> aS | aA
+A -> aB | bB
+B -> aB | bB | &

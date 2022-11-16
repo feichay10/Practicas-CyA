@@ -1,3 +1,4 @@
 *.o
 *.gdoc
 .vscode
+*.tgz
