@@ -29,6 +29,7 @@
 const std::string HELP = "--help";
 
 void check_parameters_automata(std::string &, std::string &, int, char **);
+void check_parameters_grammar(std::string &, std::string &, int, char **);
 bool check_automata(std::ifstream &);
 
 /**
@@ -38,11 +39,16 @@ bool check_automata(std::ifstream &);
  * @param argv Posicion de los argumentos
  */
 int main(int argc, char *argv[]) {
-  std::string strings, automata_in, grammar_out, line;
-  std::ifstream automata_file, automata_file_copy;
-  std::ofstream grammar_file;
+  std::string automata_in, grammar_in, grammar_out;
+  std::ifstream automata_file, automata_file_copy, grammar_file_in;
+  std::ofstream grammar_file_out;
   int option = 0;
   Grammar grammar;
+
+  std::cout << "1. Automata a Grammatica" << std::endl;
+  std::cout << "2. Gramatica a CNF" << std::endl;
+  std::cout << "Elige una opción: ";
+  std::cin >> option;
 
   switch(option) {
     case 1:
@@ -50,9 +56,9 @@ int main(int argc, char *argv[]) {
 
       automata_file.open(automata_in, std::ios::in);
       automata_file_copy.open(automata_in, std::ios::in);
-      grammar_file.open(grammar_out, std::ios::out | std::ios::ate);
+      grammar_file_out.open(grammar_out, std::ios::out | std::ios::ate);
 
-      if (automata_file.fail() || grammar_file.fail()) {
+      if (automata_file.fail() || grammar_file_out.fail()) {
         std::cout << "Error en la apertura de los ficheros " << std::endl;
         exit(1);
       }
@@ -62,14 +68,27 @@ int main(int argc, char *argv[]) {
         grammar = automata1.ConvertToGrammar();  // convert to grammar
         std::cout << std::endl;
         grammar.PrintOnScreen();
-        grammar.PrintToFile(grammar_file);
+        grammar.PrintToFile(grammar_file_out);
       }
 
       automata_file.close();
       automata_file_copy.close();
-      grammar_file.close();
+      grammar_file_out.close();
       break;
     case 2:
+      check_parameters_grammar(grammar_in, grammar_out, argc, argv);
+      
+      grammar_file_in.open(grammar_in, std::ios::in);
+      grammar_file_out.open(grammar_out, std::ios::out | std::ios::ate);
+
+      if (grammar_file_in.fail() || grammar_file_out.fail()) {
+        std::cout << "Error en la apertura de los ficheros " << std::endl;
+        exit(1);
+      }
+
+
+      grammar_file_in.close();
+      grammar_file_out.close();
       break;
     default:
       std::cout << "Opción no válida" << std::endl;
@@ -114,6 +133,53 @@ void check_parameters_automata(std::string &input_fa, std::string &output_gra, i
     }
   } else {
     std::cout << "Modo de empleo: ./p08_Grammar2CNF input.fa output.gra" << std::endl;
+    std::cout << "Pruebe ’p08_Grammar2CNF --help’ para más información." << std::endl;
+    exit(1);
+  }
+}
+
+/**
+ * @brief Comprueba que los parámetros introducidos son correctos 
+ * 
+ * @param input_gra 
+ * @param output_cnf 
+ * @param argc 
+ * @param argv 
+ */
+void check_parameters_grammar(std::string &input_gra, std::string &output_gra, int argc, char *argv[]) {
+  std::regex gra_file("(.gra)$");
+
+  std::cout << "Entro a check_parameters_grammar" << std::endl;
+  
+  if (argc == 3) {
+    input_gra = argv[1];
+    output_gra = argv[2];
+    if (!(regex_search(argv[1], gra_file))) {
+      std::cout << "El fichero de entra no es un fichero .gra" << std::endl;
+      exit(1);
+    }
+    if (!(regex_search(argv[2], gra_file))) {
+      std::cout << "El fichero de salida no es un fichero .gra" << std::endl;
+      exit(1);
+    }
+  } else if (argc == 2) {
+    if (argv[1] == HELP) {
+      std::cout << " Para la correcta ejecución del programa, este debe invocarse";
+      std::cout << " con dos parametros. Un fichero de entrada .gra y otro fichero de salida de tipo .gra." << std::endl;
+      std::cout << " En el fichero de tipo .gra estará contenido la gramática regular, ";
+      std::cout << " por ejemplo: input.gra" << std::endl;
+      std::cout << " En el fichero de tipo .gra contendrá la especificación de una gramática en forma normal de Chomsky, ";
+      std::cout << " por ejemplo: output.gra" << std::endl;
+      std::cout << " La ejecución del programa es: " << argv[0] << " input.gra output.gra" << std::endl;
+      std::cout << std::endl;
+      exit(0);
+    }
+    if (!(regex_search(argv[1], gra_file))) {
+      std::cout << "El primer fichero de entrada no es un fichero .gra" << std::endl;
+      exit(1);
+    }
+  } else {
+    std::cout << "Modo de empleo: ./p08_Grammar2CNF input.gra output.gra" << std::endl;
     std::cout << "Pruebe ’p08_Grammar2CNF --help’ para más información." << std::endl;
     exit(1);
   }

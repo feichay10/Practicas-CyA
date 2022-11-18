@@ -35,6 +35,7 @@ class Grammar {
   Grammar(Automata &);
 
   std::string GetNonTerminalSymbol(std::string);
+  std::string ChomskyAlgorithm();
   
   void PrintOnScreen();
   void PrintToFile(std::ofstream &);

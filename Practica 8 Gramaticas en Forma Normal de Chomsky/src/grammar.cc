@@ -118,3 +118,7 @@ void Grammar::PrintToFile(std::ofstream &output_file) {
     output_file << productions_[i] << std::endl;
   }
 }
+
+std::string Grammar::ChomskyAlgorithm(){
+  
+}
