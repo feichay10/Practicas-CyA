@@ -6,7 +6,10 @@ S
 A
 B
 S
-3
-S -> aS | bA
-A -> aB | bB
-B -> aB | bB | &
+6
+S -> aS 
+S -> bA
+A -> aB
+A -> bB
+B -> aB
+B -> bB

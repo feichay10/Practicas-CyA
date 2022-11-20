@@ -22,7 +22,7 @@
 #include <regex>
 #include <string>
 
-#include "../include/grammar.h"
+#include "grammar.h"
 
 const std::string HELP = "--help";
 

@@ -23,9 +23,6 @@
 #include <vector>
 #include <fstream>
 
-#include "alphabet.h"
-#include "symbol.h"
-
 class Automata;
 /**
  * @brief Clase que representa una gramática regular
@@ -36,15 +33,14 @@ class Grammar {
   Grammar();
   Grammar(std::ifstream &);
 
-  std::string ChomskyAlgorithm();
+  void ChomskyAlgorithm();
   
  private:
   int num_terminal_symbols_;
   int num_non_terminal_symbols_;
-  std::vector<Symbol> terminal_symbols_;  
-  std::vector<Symbol> non_terminal_symbols_;
+  std::vector<std::string> terminal_symbols_;  
+  std::vector<std::string> non_terminal_symbols_;
   std::string start_symbol_;
   int num_productions_;
   std::vector<std::string> productions_;
-  Alphabet alphabet_;
 };
