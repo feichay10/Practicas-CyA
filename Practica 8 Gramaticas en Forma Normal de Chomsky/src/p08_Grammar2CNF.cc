@@ -23,11 +23,10 @@
 #include <string>
 
 #include "../include/grammar.h"
-#include "../include/state.h"
 
 const std::string HELP = "--help";
 
-void check_parameters_grammar(std::string &, std::string &, int, char **);
+void check_parameters(std::string &, std::string &, int, char **);
 bool check_automata(std::ifstream &);
 
 /**
@@ -42,7 +41,7 @@ int main(int argc, char *argv[]) {
   std::ofstream grammar_file_out;
   Grammar grammar;
 
-  check_parameters_grammar(grammar_in, grammar_out, argc, argv);
+  check_parameters(grammar_in, grammar_out, argc, argv);
   
   grammar_file_in.open(grammar_in, std::ios::in);
   grammar_file_out.open(grammar_out, std::ios::out | std::ios::ate);
@@ -68,8 +67,6 @@ int main(int argc, char *argv[]) {
  */
 void check_parameters(std::string &input_gra, std::string &output_gra, int argc, char *argv[]) {
   std::regex gra_file("(.gra)$");
-
-  std::cout << "Entro a check_parameters_grammar" << std::endl;
   
   if (argc == 3) {
     input_gra = argv[1];

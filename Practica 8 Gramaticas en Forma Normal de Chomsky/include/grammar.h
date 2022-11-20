@@ -24,6 +24,7 @@
 #include <fstream>
 
 #include "alphabet.h"
+#include "symbol.h"
 
 class Automata;
 /**
@@ -40,8 +41,8 @@ class Grammar {
  private:
   int num_terminal_symbols_;
   int num_non_terminal_symbols_;
-  std::vector<std::string> terminal_symbols_;       // Cambiar a vector de simbolos
-  std::vector<std::string> non_terminal_symbols_;   // Cambiar a vector de simbolos
+  std::vector<Symbol> terminal_symbols_;  
+  std::vector<Symbol> non_terminal_symbols_;
   std::string start_symbol_;
   int num_productions_;
   std::vector<std::string> productions_;
