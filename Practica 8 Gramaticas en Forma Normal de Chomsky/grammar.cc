@@ -17,11 +17,6 @@
  *
  */
 
-// cd
-// /mnt/f/Google\ Drive\ ALU/Ingenieria\ Informatica/2ºIng\ Informatica/Primer\ Cuatrimestre/Computabilidad\
-// Y\ Algoritmia/Curso\ 2022-2023/Practicas-CyA/Practica\ 8\ Gramaticas\ en\ Forma\
-// Normal\ de\ Chomsky/
-
 #include "grammar.h"
 
 /**
@@ -96,29 +91,35 @@ Grammar::Grammar(std::ifstream& grammar_file) {
  *
  */
 void Grammar::ChomskyAlgorithm() {
-  // convertir a -> C, b -> D
-  // reemplazar a -> C, b -> D en las producciones y que siempre sea asi
   std::string no_terminal_symbols_aux = "SABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::vector<std::string> productions_aux;
   int count = num_non_terminal_symbols_;
-  std::set<std::string> new_production_aux;
+  std::pair<std::string, std::string> new_production_aux;
+  bool flag = false;
 
-  for (size_t i = 0; i < productions_.size(); i++) {              // for all productions
-    std::string aux = productions_[i].second;
-    for (size_t j = 0; j < productions_[i].second.size(); j++) {         // for all Xi
-      if (productions_[i].second.size() > 2) {                                          
-        for (size_t k = 0; k < terminal_symbols_.size(); k++) {
-          if (productions_[i].second[j] == terminal_symbols_[k][0]) {  // si Xi pertenece al alfabeto
-            if (productions_[i].second[j] > 2) {
-              char new_non_terminal_symbol = no_terminal_symbols_aux[count];
+  for (size_t i = 0; i < productions_.size(); i++) {                              // Recorre las producciones
+    std::string aux = productions_[i].second;                                     // Guarda la parte derecha de la produccion                  
+    for (size_t j = 0; j < productions_[i].second.size(); j++) {                  // Recorre la parte derecha de la produccion
+      if (productions_[i].second.size() > 2) {                                    // Si la parte derecha de la produccion es mayor que 2       
+        for (size_t k = 0; k < terminal_symbols_.size(); k++) {                   // Recorre los simbolos terminales
+          if (productions_[i].second[j] == terminal_symbols_[k][0]) {             // Si el simbolo terminal es igual al simbolo de la parte derecha de la produccion
+            for (size_t l = 0; l < productions_.size(); l++) {                    // Recorre las producciones
+              if (productions_[l].second == terminal_symbols_[k]) {               // Si la parte derecha de la produccion es igual al simbolo terminal
+                flag = true;
+              }
+            }
+            char new_non_terminal_symbol = no_terminal_symbols_aux[count];
+            if (flag == false) {
               std::string new_production = "";
-              new_production += no_terminal_symbols_aux[count];
-              new_production += " -> ";
-              new_production += terminal_symbols_[k];
-              productions_aux.push_back(new_production);
-              new_production_aux.insert(new_production);
+              std::string aux;
+              new_production_aux.first = no_terminal_symbols_aux[count];
+              new_production_aux.second = terminal_symbols_[k];
+              non_terminal_symbols_.push_back(new_production_aux.first);
+              productions_.push_back(new_production_aux);
+              aux = productions_[i].second;
               aux[j] = new_non_terminal_symbol;
-              std::cout << productions_[i].first << "->" << aux << std::endl;
+              productions_[i].second = aux;
+              count++;
             }
           }
         }
@@ -126,7 +127,28 @@ void Grammar::ChomskyAlgorithm() {
     }
   }
 
-  for (std::set<std::string>::iterator it = new_production_aux.begin(); it != new_production_aux.end(); ++it) {
-    std::cout << *it << std::endl;
+  for (size_t i = 0; i < productions_.size(); i++) {
+    for (size_t j = 0; j < productions_[i].second.size(); j++) {
+
+    }
+  }
+}
+
+
+void Grammar::PrintOnScreen() {
+  std::cout << "Numero de simbolos terminales: " << num_terminal_symbols_ << std::endl;
+  std::cout << "Simbolos terminales: " << std::endl;
+  for (int i = 0; i < num_terminal_symbols_; i++) {
+    std::cout << terminal_symbols_[i] << std::endl;
+  }
+  std::cout << "Numero de simbolos no terminales: " << non_terminal_symbols_.size() << std::endl;
+  std::cout << "Simbolos no terminales: " << std::endl;
+  for (size_t i = 0; i < non_terminal_symbols_.size(); i++) {
+    std::cout << non_terminal_symbols_[i] << std::endl;
+  }
+  std::cout << "Simbolo inicial: " << start_symbol_ << std::endl;
+  std::cout << "Producciones: " << std::endl;
+  for (size_t i = 0; i < productions_.size(); i++) {
+    std::cout << productions_[i].first << " -> " << productions_[i].second << std::endl;
   }
 }

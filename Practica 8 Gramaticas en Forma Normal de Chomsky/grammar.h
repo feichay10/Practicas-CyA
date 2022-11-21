@@ -36,6 +36,7 @@ class Grammar {
   Grammar(std::ifstream &);
 
   void ChomskyAlgorithm();
+  void PrintOnScreen();
   
  private:
   int num_terminal_symbols_;
