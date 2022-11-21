@@ -17,10 +17,7 @@
  *
  */
 
-// cd
-// /mnt/f/Google\ Drive\ ALU/Ingenieria\ Informatica/2ºIng\ Informatica/Primer\ Cuatrimestre/Computabilidad\
-// Y\ Algoritmia/Curso\ 2022-2023/Practicas-CyA/Practica\ 8\ Gramaticas\ en\ Forma\
-// Normal\ de\ Chomsky/
+// cd /mnt/f/Google\ Drive\ ALU/Ingenieria\ Informatica/2ºIng\ Informatica/Primer\ Cuatrimestre/Computabilidad\ Y\ Algoritmia/Curso\ 2022-2023/Practicas-CyA/Practica\ 8\ Gramaticas\ en\ Forma\ Normal\ de\ Chomsky/
 
 #include "grammar.h"
 
@@ -123,15 +120,39 @@ void Grammar::ChomskyAlgorithm() {
           char new_non_terminal_symbol = no_terminal_symbols_aux[count];
           std::string new_production = "";
           new_production += no_terminal_symbols_aux[count];
+          std::cout << "new_production: " << new_production << std::endl;
           new_production += " -> ";
           new_production += terminal_symbols_[k];
-          std::cout << "new_production: " << new_production << std::endl;
+          if (new_production == productions_[i]) {
+            break;
+          }
+          // std::cout << "new_production: " << new_production << std::endl;     // new_production: C -> a 
           productions_aux.push_back(new_production);
           aux[j] = new_non_terminal_symbol;
           std::cout << aux << std::endl;
           count++;
         }
       }
+      // std::cout << "productions_[i][j]: " << productions_[i][j] << std::endl;
+      // aux[5] = no_terminal_symbols_aux[count];
+      // std::cout << "aux: " << aux << std::endl << std::endl;
+      // productions_aux.push_back(aux);
+
+
+      // char new_non_terminal_symbol = no_terminal_symbols_aux[count];
+      // std::string new_production = "";
+      // new_production += no_terminal_symbols_aux[count];
+      // new_production += " -> ";
+      // new_production += terminal_symbols_[k];
+      // std::cout << "new_production: " << new_production << std::endl;     // new_production: C -> a si
+      // productions_aux.push_back(new_production);
+      // aux[j] = new_non_terminal_symbol;
+      // std::cout << aux << std::endl;
+      // count++;
     }
+  }
+
+  for (size_t i = 0; i < productions_aux.size(); i++) {
+    std::cout << "prueba: " << productions_aux[i] << std::endl;
   }
 }

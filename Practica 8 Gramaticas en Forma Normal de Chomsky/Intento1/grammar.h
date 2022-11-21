@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <set>
 
 class Automata;
 /**
