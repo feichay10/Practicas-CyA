@@ -5,13 +5,13 @@
  * Grado en Ingeniería Informática
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
- * Práctica 7: Gramática Regular a partir de una DFA
+ * Práctica 8: Gramática en Forma Normal de Chomsky
  * @file p08_Grammar2CNF.cc
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
- * @brief Programa principal que lee un fichero de entrada y genera un fichero
- * de salida con la gramática regular equivalente a la dada el DFA.
+ * @brief Programa principal que lee un fichero de entrada (una gramática regular) y lo "construye"
+ * en Forma Normal de Chomsky
  * @version 0.1
- * @date 2022-11-15
+ * @date 2022-11-22
  *
  * @copyright Copyright (c) 2022
  *
@@ -52,6 +52,8 @@ int main(int argc, char *argv[]) {
   }
 
   grammar = Grammar(grammar_file_in);
+  std::cout << std::endl << std::endl;
+  grammar.ChomskyAlgorithm();
 
   grammar_file_in.close();
   grammar_file_out.close();

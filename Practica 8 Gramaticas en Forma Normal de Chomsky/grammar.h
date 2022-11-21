@@ -5,12 +5,12 @@
  * Grado en Ingeniería Informática
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
- * Práctica 7: Gramática Regular a partir de una DFA
+ * Práctica 8: Gramática en Forma Normal de Chomsky
  * @file grammar.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief Contiene la implementacion de la clase 'Grammar'
  * @version 0.1
- * @date 2022-11-15
+ * @date 2022-11-22
  *
  * @copyright Copyright (c) 2022
  *
@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <set>
 
 class Automata;
 /**

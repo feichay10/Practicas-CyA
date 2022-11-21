@@ -3,13 +3,20 @@ a
 b
 3
 S
-A
-B
+X
+Y
 S
-6
-S -> aS 
-S -> bA
-A -> aB
-A -> bB
-B -> aB
-B -> bB
+13
+S -> aXbX
+S -> abX 
+S -> aXb
+S -> ab
+X -> aY
+X -> bY
+X -> a
+X -> b
+Y -> aY
+Y -> bY
+Y -> a
+Y -> b
+Y -> c
