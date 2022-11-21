@@ -22,6 +22,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <set>
+#include <sstream>
 
 class Automata;
 /**
@@ -42,5 +44,5 @@ class Grammar {
   std::vector<std::string> non_terminal_symbols_;
   std::string start_symbol_;
   int num_productions_;
-  std::vector<std::string> productions_;
+  std::vector<std::pair<std::string, std::string>> productions_;
 };
