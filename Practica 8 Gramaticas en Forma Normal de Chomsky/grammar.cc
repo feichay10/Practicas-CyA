@@ -101,7 +101,7 @@ void Grammar::ChomskyAlgorithm() {
   // Primera parte del algoritmo FNC
   for (size_t i = 0; i < productions_.size(); i++) {                      // Recorre las producciones
     std::string aux = productions_[i].second;                             // Guarda la parte derecha de la produccion
-    for (size_t j = 0; j < productions_[i].second.size(); j++) {          // Recorre la parte derecha de la produccion
+    for (size_t j = 1; j < productions_[i].second.size(); j++) {          // Recorre la parte derecha de la produccion
       if (productions_[i].second.size() > 2) {                            // Si la parte derecha de la produccion es mayor que 2
         for (size_t k = 0; k < terminal_symbols_.size(); k++) {           // Recorre los simbolos terminales
           if (productions_[i].second[j] == terminal_symbols_[k][0]) {     // Si el simbolo terminal es igual al simbolo de la parte derecha de la produccion
@@ -138,11 +138,14 @@ void Grammar::ChomskyAlgorithm() {
   // std::cout << "Contador: " << count << std::endl;
 
   // Segunda parte del algoritmo FNC
+  std::vector<std::pair<std::string, std::string>> new_productions;
+  std::pair<std::string, std::string> new_production_copy;
+
   for (size_t i = 0; i < productions_.size(); i++) {
     std::string aux = productions_[i].second;
-    if (productions_[i].second.size() == 2) {
+    if (productions_[i].second.size() > 2) {
       int count_aux = 2;
-      for (size_t j = 0; j < productions_[i].second.size(); j++) {
+      for (size_t j = 1; j < productions_[i].second.size(); j++) {
         std::string new_production_aux;
         for (int k = 0; k < count_aux; k++) {
           new_production_aux.push_back(aux[j]);
@@ -154,19 +157,21 @@ void Grammar::ChomskyAlgorithm() {
           if (no_terminal_symbols_aux[l] == non_terminal_symbols_[count][0]) {
             count++;
           } else {
-            new_production.first = no_terminal_symbols_aux[l];
-            non_terminal_symbols_.push_back(new_production.first);
+            new_production_copy.first = no_terminal_symbols_aux[l];
+            non_terminal_symbols_.push_back(new_production_copy.first);
             num_non_terminal_symbols_++;
             no_terminal_symbols_aux.erase(l, 1);
-            new_production.second = new_production_aux;
+            new_production_copy.second = new_production_aux;
+            new_productions.push_back(std::make_pair(new_production_copy.first, new_production_copy.second));
+            productions_.push_back(new_production_copy);
             bool flag = false;
             for (size_t m = 0; m < productions_.size(); m++) {
-              if (productions_[m].second == new_production.second) {
+              if (productions_[m].second == new_production_copy.second) {
                 flag = true;
               }
             }
             if (flag == false) {
-              productions_.push_back(new_production);
+              productions_.push_back(new_production_copy);
               num_productions_++;
             }
             break;
@@ -176,35 +181,16 @@ void Grammar::ChomskyAlgorithm() {
     }
   }
 
-  for (size_t i = 0; i < productions_.size(); i++) {
-    std::string aux = productions_[i].second;
-    if (productions_[i].second.size() > 2) {
-      int count_aux = 2;
-      bool flag = false;
-      for (size_t j = 0; j < productions_[i].second.size(); j++) {
-        std::string aux_production;
-        for (size_t k = 0; k < count_aux; k++) {
-          aux_production.push_back(aux[j]);
-          if (k == 0) {
-            j++;
-          }
-        }
-        for (size_t l = 0; l < productions_.size(); l++) {
-          if (productions_[l].second == aux_production) {
-            std::string new_production;
-            new_production.push_back(productions_[l].first[0]);
-            productions_[i].second.erase(j - 1, 1);
-            if (flag == false) {
-              productions_[i].second.replace(j - 1, 1, new_production);
-            } else {
-              productions_[i].second.replace(j - 2, 1, new_production);
-            }
-            flag = true;
-          }
-        }
-      }
-    }
-  }
+  // for (size_t i = 0; i < productions_.size(); i++) {
+  //   for (size_t j = 0; j < productions_[i].second.size(); j++) {
+  //     for (size_t k = 0; k < new_productions.size(); k++) {
+  //       if (productions_[i].second[j] == new_productions[k].second[0]) {
+  //         productions_[i].second.replace(j, 3, new_productions[k].first);
+  //         // productions_[i].second.erase(j, 2);
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 
