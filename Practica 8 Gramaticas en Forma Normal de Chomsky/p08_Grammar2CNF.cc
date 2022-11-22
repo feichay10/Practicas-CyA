@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
   grammar = Grammar(grammar_file_in);
   std::cout << std::endl << std::endl;
   grammar.ChomskyAlgorithm();
-  std::cout << std::endl << std::endl;
+  std::cout << std::endl;
   grammar.PrintOnScreen();
 
   grammar_file_in.close();

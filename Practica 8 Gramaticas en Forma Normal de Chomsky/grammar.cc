@@ -95,6 +95,7 @@ void Grammar::ChomskyAlgorithm() {
   std::vector<std::string> productions_aux;
   int count = num_non_terminal_symbols_;
   std::pair<std::string, std::string> new_production_aux;
+  std::vector<std::pair<std::string, std::string>> terminal_symbols_productions;
   bool flag = false;
 
   for (size_t i = 0; i < productions_.size(); i++) {                              // Recorre las producciones
@@ -119,6 +120,7 @@ void Grammar::ChomskyAlgorithm() {
               aux = productions_[i].second;
               aux[j] = new_non_terminal_symbol;
               productions_[i].second = aux;
+              terminal_symbols_productions.push_back(new_production_aux);
               count++;
             }
           }
@@ -127,9 +129,14 @@ void Grammar::ChomskyAlgorithm() {
     }
   }
 
+  // Buscar en todas las producciones los simbolos terminales y reemplazarlos por un nuevo simbolo no terminal generado anteriormente 
   for (size_t i = 0; i < productions_.size(); i++) {
     for (size_t j = 0; j < productions_[i].second.size(); j++) {
-
+      for (size_t k = 0; k < terminal_symbols_productions.size(); k++) {
+        if (productions_[i].second[j] == terminal_symbols_productions[k].second[0] && productions_[i].second.size() > 2) {
+          productions_[i].second.replace(j, 1, terminal_symbols_productions[k].first);
+        }
+      }
     }
   }
 }

@@ -40,24 +40,6 @@ Y -> c
 C -> a
 D -> b
 
-################################################
-
-S -> CaXCbX
-S -> CaCbX
-S -> CaXCb
-S -> CaCb
-X -> CaY
-X -> CbY
-X -> a
-X -> b
-Y -> CaY
-Y -> CbY
-Y -> a
-Y -> b
-Y -> c
-Ca -> a
-Cb -> b
-
 2. La gramática libre del contexto en FNC "equivalente" a la original es (tamaño de la produccion <= 2, en este caso 3):
 S -> CaXCbX => CaD1
 S -> CaCbX  => CaD1
@@ -76,7 +58,6 @@ Ca -> a
 Cb -> b
 D1 -> CbX
 D2 -> XCb
-
 
 
 2
