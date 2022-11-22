@@ -93,100 +93,98 @@ Grammar::Grammar(std::ifstream& grammar_file) {
 void Grammar::ChomskyAlgorithm() {
   std::string no_terminal_symbols_aux = "SABCDEFGHIJKLMNOPQRSTUVWXYZ";
   std::vector<std::string> productions_aux;
-  std::pair<std::string, std::string> new_production_aux;
+  std::pair<std::string, std::string> new_production;
   std::vector<std::pair<std::string, std::string>> terminal_symbols_productions;
   bool flag = false;
 
-  for (size_t i = 0; i < productions_.size(); i++) {                              // Recorre las producciones
-    std::string aux = productions_[i].second;                                  // Guarda la parte derecha de la produccion                  
+  for (size_t i = 0; i < productions_.size(); i++) {                      // Recorre las producciones
+    std::string aux = productions_[i].second;                             // Guarda la parte derecha de la produccion
     int count = 1;
-    for (size_t j = 0; j < productions_[i].second.size(); j++) {                  // Recorre la parte derecha de la produccion
-      if (productions_[i].second.size() > 2) {                                    // Si la parte derecha de la produccion es mayor que 2       
-        for (size_t k = 0; k < terminal_symbols_.size(); k++) {                   // Recorre los simbolos terminales
-          if (productions_[i].second[j] == terminal_symbols_[k][0]) {             // Si el simbolo terminal es igual al simbolo de la parte derecha de la produccion
-            for (size_t l = 0; l < productions_.size(); l++) {                    // Recorre las producciones
-              if (productions_[l].second == terminal_symbols_[k]) {               // Si la parte derecha de la produccion es igual al simbolo terminal
+    for (size_t j = 0; j < productions_[i].second.size(); j++) {          // Recorre la parte derecha de la produccion
+      if (productions_[i].second.size() > 2) {                            // Si la parte derecha de la produccion es mayor que 2
+        for (size_t k = 0; k < terminal_symbols_.size(); k++) {           // Recorre los simbolos terminales
+          if (productions_[i].second[j] == terminal_symbols_[k][0]) {     // Si el simbolo terminal es igual al simbolo de la parte derecha de la produccion
+            for (size_t l = 0; l < productions_.size(); l++) {            // Recorre las producciones
+              if (productions_[l].second == terminal_symbols_[k]) {       // Si la parte derecha de la produccion es igual al simbolo terminal
                 flag = true;
               }
             }
             char new_non_terminal_symbol = no_terminal_symbols_aux[count];
             if (flag == false) {
-              std::string new_production = "";
               std::string aux;
-              new_production_aux.first = no_terminal_symbols_aux[count];
-              new_production_aux.second = terminal_symbols_[k];
-              non_terminal_symbols_.push_back(new_production_aux.first);
-              productions_.push_back(new_production_aux);
+              new_production.first = no_terminal_symbols_aux[count];
+              new_production.second = terminal_symbols_[k];
+              non_terminal_symbols_.push_back(new_production.first);
+              productions_.push_back(new_production);
               aux = productions_[i].second;
               aux[j] = new_non_terminal_symbol;
               productions_[i].second = aux;
-              terminal_symbols_productions.push_back(new_production_aux);
+              terminal_symbols_productions.push_back(new_production);
               count++;
             }
           }
         }
+        // Busca en todas las producciones los simbolos terminales y los sustituye por un nuevo simbolo no terminal 
+        for (size_t l = 0; l < terminal_symbols_productions.size(); l++) {
+          if (productions_[i].second[j] == terminal_symbols_productions[l].second[0] && productions_[i].second.size() > 2) {
+            productions_[i].second.replace(j, 1, terminal_symbols_productions[l].first);
+          }
+        } 
       }
     }
   }
 
-  // Buscar en todas las producciones los simbolos terminales y reemplazarlos por un nuevo simbolo no terminal generado anteriormente 
-  for (size_t i = 0; i < productions_.size(); i++) {
-    for (size_t j = 0; j < productions_[i].second.size(); j++) {
-      for (size_t k = 0; k < terminal_symbols_productions.size(); k++) {
-        if (productions_[i].second[j] == terminal_symbols_productions[k].second[0] && productions_[i].second.size() > 2) {
-          productions_[i].second.replace(j, 1, terminal_symbols_productions[k].first);
-        }
-      }
-    }
-  }
-
-  for (size_t i = 0; i < productions_.size(); i++) {                              
-    std::string aux = productions_[i].second;
-    int counter = 2;
-    for (size_t j = 0; j < productions_[i].second.size(); j++) {
-      std::string new_production = "";
-      if (productions_[i].second.size() > 2) {
-        for (size_t k = 0; k < counter; k++) {
-          new_production.push_back(aux[j]);
-          if (k == 0) {
-            j++;
-          }
-        }
-        int count_aux = 0;
-        for (size_t l = 0; l < no_terminal_symbols_aux.size(); l++) {
-          if (no_terminal_symbols_aux[l] == no_terminal_symbols_aux[counter]) {
-            count_aux++;
-          } else {
-            new_production_aux.first = no_terminal_symbols_aux[l];
-            non_terminal_symbols_.push_back(new_production_aux.first);
-            num_non_terminal_symbols_++;
-            no_terminal_symbols_aux.erase(l, 1);
-            new_production_aux.second = new_production;
-            bool flag = false;
-            for (size_t m = 0; m < productions_.size(); m++) {
-              if (productions_[m].second == new_production_aux.second) {
-                flag = true;
-              }
-            }
-            if (flag == false) {
-              productions_.push_back(new_production_aux);
-              num_productions_++;
-            }
-            break;
-          }
-        }
-      }
-    }                                              
-  }
+  // for (size_t i = 0; i < productions_.size(); i++) {
+  //   std::string aux = productions_[i].second;
+  //   if (productions_[i].second.size() == 2) {
+  //     int count = 2;
+  //     for (size_t j = 0; j < terminal_symbols_.size(); j++) {
+  //       std::string new_production_aux;
+  //       for (int k = 0; k < count; k++) {
+  //         new_production_aux.push_back(aux[j]);
+  //         if (k == 0) {
+  //           j++;
+  //         }
+  //       }
+  //       int count_aux = 0;
+  //       for (size_t l = 0; l < no_terminal_symbols_aux.size(); l++) {
+  //         if (no_terminal_symbols_aux[l] == non_terminal_symbols_[count_aux][0]) {
+  //           count_aux++;
+  //         } else {
+  //           new_production.first = no_terminal_symbols_aux[l];
+  //           non_terminal_symbols_.push_back(new_production.first);
+  //           num_non_terminal_symbols_++;
+  //           no_terminal_symbols_aux.erase(l, 1);
+  //           new_production.second = new_production_aux;
+  //           bool flag = false;
+  //           for (size_t m = 0; m < productions_.size(); m++) {
+  //             if (productions_[m].second == new_production.second) {
+  //               flag = true;
+  //             }
+  //           }
+  //           if (flag == false) {
+  //             productions_.push_back(new_production);
+  //             num_productions_++;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
+
 void Grammar::PrintOnScreen() {
-  std::cout << "Numero de simbolos terminales: " << num_terminal_symbols_ << std::endl;
+  std::cout << "Gramatica en Forma Normal de Chomsky" << std::endl;
+  std::cout << "Numero de simbolos terminales: " << num_terminal_symbols_
+            << std::endl;
   std::cout << "Simbolos terminales: " << std::endl;
   for (int i = 0; i < num_terminal_symbols_; i++) {
     std::cout << terminal_symbols_[i] << std::endl;
   }
-  std::cout << "Numero de simbolos no terminales: " << non_terminal_symbols_.size() << std::endl;
+  std::cout << "Numero de simbolos no terminales: "
+            << non_terminal_symbols_.size() << std::endl;
   std::cout << "Simbolos no terminales: " << std::endl;
   for (size_t i = 0; i < non_terminal_symbols_.size(); i++) {
     std::cout << non_terminal_symbols_[i] << std::endl;
@@ -194,6 +192,7 @@ void Grammar::PrintOnScreen() {
   std::cout << "Simbolo inicial: " << start_symbol_ << std::endl;
   std::cout << "Producciones: " << std::endl;
   for (size_t i = 0; i < productions_.size(); i++) {
-    std::cout << productions_[i].first << " -> " << productions_[i].second << std::endl;
+    std::cout << productions_[i].first << " -> " << productions_[i].second
+              << std::endl;
   }
 }
