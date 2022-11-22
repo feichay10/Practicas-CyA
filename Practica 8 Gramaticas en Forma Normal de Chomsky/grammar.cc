@@ -185,8 +185,7 @@ void Grammar::ChomskyAlgorithm() {
   //   for (size_t j = 0; j < productions_[i].second.size(); j++) {
   //     for (size_t k = 0; k < new_productions.size(); k++) {
   //       if (productions_[i].second[j] == new_productions[k].second[0]) {
-  //         productions_[i].second.replace(j, 3, new_productions[k].first);
-  //         // productions_[i].second.erase(j, 2);
+  //         productions_[i].second.replace(j, 2, new_productions[k].first);
   //       }
   //     }
   //   }
