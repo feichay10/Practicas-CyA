@@ -205,7 +205,6 @@ void Grammar::ChomskyAlgorithm() {
       }
     }
   }
-
 }
 
 

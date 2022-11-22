@@ -7,10 +7,10 @@ A
 B
 S
 7
-S --> aS
-S --> bA
-A --> aBBa
-A --> bB
-B --> aB
-B --> bB
-B --> abBB
+S -> aS
+S -> bA
+A -> aBBa
+A -> bB
+B -> aB
+B -> bB
+B -> abBB
