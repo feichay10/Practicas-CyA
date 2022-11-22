@@ -1,0 +1,61 @@
+2
+a
+b
+3
+S
+X
+Y
+S
+13
+S -> aXbX
+S -> abX 
+S -> aXb
+S -> ab
+X -> aY
+X -> bY
+X -> a
+X -> b
+Y -> aY
+Y -> bY
+Y -> a
+Y -> b
+Y -> c
+
+FNC:
+1. Añadimos nuevas variables a la gramatica:
+S -> AXBX
+S -> ABX
+S -> AXB
+S -> AB
+X -> AY
+X -> BY
+X -> a
+X -> b
+Y -> AY
+Y -> BY
+Y -> a
+Y -> b
+Y -> c
+A -> a
+B -> b
+
+2. La gramática libre del contexto en FNC "equivalente" a la original es (tamaño de la produccion <= 2, en este caso 3):
+S -> CD
+S -> SF
+S -> CH
+S -> AB
+X -> AY
+X -> BY
+X -> A
+X -> B
+Y -> AY
+Y -> BY
+Y -> A
+Y -> B
+Y -> c
+A -> a
+B -> b
+C -> AX
+D -> BX
+F -> X
+H -> B
