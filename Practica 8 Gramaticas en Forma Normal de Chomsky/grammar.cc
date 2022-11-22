@@ -96,10 +96,11 @@ void Grammar::ChomskyAlgorithm() {
   std::pair<std::string, std::string> new_production;
   std::vector<std::pair<std::string, std::string>> terminal_symbols_productions;
   bool flag = false;
+  int count = 1;
 
+  // Primera parte del algoritmo FNC
   for (size_t i = 0; i < productions_.size(); i++) {                      // Recorre las producciones
     std::string aux = productions_[i].second;                             // Guarda la parte derecha de la produccion
-    int count = 1;
     for (size_t j = 0; j < productions_[i].second.size(); j++) {          // Recorre la parte derecha de la produccion
       if (productions_[i].second.size() > 2) {                            // Si la parte derecha de la produccion es mayor que 2
         for (size_t k = 0; k < terminal_symbols_.size(); k++) {           // Recorre los simbolos terminales
@@ -134,44 +135,77 @@ void Grammar::ChomskyAlgorithm() {
     }
   }
 
-  // for (size_t i = 0; i < productions_.size(); i++) {
-  //   std::string aux = productions_[i].second;
-  //   if (productions_[i].second.size() == 2) {
-  //     int count = 2;
-  //     for (size_t j = 0; j < terminal_symbols_.size(); j++) {
-  //       std::string new_production_aux;
-  //       for (int k = 0; k < count; k++) {
-  //         new_production_aux.push_back(aux[j]);
-  //         if (k == 0) {
-  //           j++;
-  //         }
-  //       }
-  //       int count_aux = 0;
-  //       for (size_t l = 0; l < no_terminal_symbols_aux.size(); l++) {
-  //         if (no_terminal_symbols_aux[l] == non_terminal_symbols_[count_aux][0]) {
-  //           count_aux++;
-  //         } else {
-  //           new_production.first = no_terminal_symbols_aux[l];
-  //           non_terminal_symbols_.push_back(new_production.first);
-  //           num_non_terminal_symbols_++;
-  //           no_terminal_symbols_aux.erase(l, 1);
-  //           new_production.second = new_production_aux;
-  //           bool flag = false;
-  //           for (size_t m = 0; m < productions_.size(); m++) {
-  //             if (productions_[m].second == new_production.second) {
-  //               flag = true;
-  //             }
-  //           }
-  //           if (flag == false) {
-  //             productions_.push_back(new_production);
-  //             num_productions_++;
-  //           }
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  // std::cout << "Contador: " << count << std::endl;
+
+  // Segunda parte del algoritmo FNC
+  for (size_t i = 0; i < productions_.size(); i++) {
+    std::string aux = productions_[i].second;
+    if (productions_[i].second.size() == 2) {
+      int count_aux = 2;
+      for (size_t j = 0; j < productions_[i].second.size(); j++) {
+        std::string new_production_aux;
+        for (int k = 0; k < count_aux; k++) {
+          new_production_aux.push_back(aux[j]);
+          if (k == 0) {
+            j++;
+          }
+        }
+        for (size_t l = count; l < no_terminal_symbols_aux.size(); l++) {
+          if (no_terminal_symbols_aux[l] == non_terminal_symbols_[count][0]) {
+            count++;
+          } else {
+            new_production.first = no_terminal_symbols_aux[l];
+            non_terminal_symbols_.push_back(new_production.first);
+            num_non_terminal_symbols_++;
+            no_terminal_symbols_aux.erase(l, 1);
+            new_production.second = new_production_aux;
+            bool flag = false;
+            for (size_t m = 0; m < productions_.size(); m++) {
+              if (productions_[m].second == new_production.second) {
+                flag = true;
+              }
+            }
+            if (flag == false) {
+              productions_.push_back(new_production);
+              num_productions_++;
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  for (size_t i = 0; i < productions_.size(); i++) {
+    std::string aux = productions_[i].second;
+    if (productions_[i].second.size() > 2) {
+      int count_aux = 2;
+      bool flag = false;
+      for (size_t j = 0; j < productions_[i].second.size(); j++) {
+        std::string aux_production;
+        for (size_t k = 0; k < count_aux; k++) {
+          aux_production.push_back(aux[j]);
+          if (k == 0) {
+            j++;
+          }
+        }
+        for (size_t l = 0; l < productions_.size(); l++) {
+          if (productions_[l].second == aux_production) {
+            std::string new_production;
+            new_production.push_back(productions_[l].first[0]);
+            productions_[i].second.erase(j - 1, 1);
+            if (flag == false) {
+              productions_[i].second.replace(j - 1, 1, new_production);
+            } else {
+              productions_[i].second.replace(j - 2, 1, new_production);
+            }
+            flag = true;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 
@@ -194,5 +228,20 @@ void Grammar::PrintOnScreen() {
   for (size_t i = 0; i < productions_.size(); i++) {
     std::cout << productions_[i].first << " -> " << productions_[i].second
               << std::endl;
+  }
+}
+
+void Grammar::PrintToFile(std::ofstream & grammar_file_out) {
+  grammar_file_out << num_terminal_symbols_ << std::endl;
+  for (int i = 0; i < num_terminal_symbols_; i++) {
+    grammar_file_out << terminal_symbols_[i] << std::endl;
+  }
+  grammar_file_out << non_terminal_symbols_.size() << std::endl;
+  for (size_t i = 0; i < non_terminal_symbols_.size(); i++) {
+    grammar_file_out << non_terminal_symbols_[i] << std::endl;
+  }
+  grammar_file_out << start_symbol_ << std::endl;
+  for (size_t i = 0; i < productions_.size(); i++) {
+    grammar_file_out << productions_[i].first << " -> " << productions_[i].second << std::endl;
   }
 }

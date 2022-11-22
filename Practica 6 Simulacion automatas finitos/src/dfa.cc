@@ -77,9 +77,9 @@ bool Dfa::Read(std::string line) {
       std::cout << "ERROR. Esta cadena tiene simbolos que no pertecen al alfabeto del DFA" << std::endl;
       return false;
     }
-    //std::cout << actual.GetName() << "transita a ";
+    std::cout << actual.GetName() << "transita a ";
     next = actual.GetTransition(symbol); 
-    //std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
+    std::cout << states_.at(next.GetPos()).GetName() << " con el simbolo " << symbol << std::endl;
     actual = states_.at(next.GetPos());
   }
   //std::cout << std::endl;

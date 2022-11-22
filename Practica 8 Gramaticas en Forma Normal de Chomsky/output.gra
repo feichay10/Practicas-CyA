@@ -1,0 +1,30 @@
+2
+a
+b
+10
+S
+X
+Y
+A
+B
+C
+D
+E
+F
+G
+S
+S  ->  AXBX
+S  ->  ABX 
+S  ->  AXB
+S  ->  AB
+X  ->  AY
+X  ->  BY
+X  ->  a
+X  ->  b
+Y  ->  AY
+Y  ->  BY
+Y  ->  a
+Y  ->  b
+Y  ->  c
+A -> a
+B -> b

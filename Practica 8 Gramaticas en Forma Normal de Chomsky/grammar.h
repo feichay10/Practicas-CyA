@@ -37,6 +37,7 @@ class Grammar {
 
   void ChomskyAlgorithm();
   void PrintOnScreen();
+  void PrintToFile(std::ofstream &);
   
  private:
   int num_terminal_symbols_;
