@@ -99,14 +99,14 @@ void Grammar::ChomskyAlgorithm() {
   int count = 1;
 
   // Primera parte del algoritmo FNC
-  for (size_t i = 0; i < productions_.size(); i++) {                      // Recorre las producciones
-    std::string aux = productions_[i].second;                             // Guarda la parte derecha de la produccion
-    for (size_t j = 1; j < productions_[i].second.size(); j++) {          // Recorre la parte derecha de la produccion
-      if (productions_[i].second.size() > 2) {                            // Si la parte derecha de la produccion es mayor que 2
-        for (size_t k = 0; k < terminal_symbols_.size(); k++) {           // Recorre los simbolos terminales
-          if (productions_[i].second[j] == terminal_symbols_[k][0]) {     // Si el simbolo terminal es igual al simbolo de la parte derecha de la produccion
-            for (size_t l = 0; l < productions_.size(); l++) {            // Recorre las producciones
-              if (productions_[l].second == terminal_symbols_[k]) {       // Si la parte derecha de la produccion es igual al simbolo terminal
+  for (size_t i = 0; i < productions_.size(); i++) {            
+    std::string aux = productions_[i].second;                   
+    for (size_t j = 1; j < productions_[i].second.size(); j++) {
+      if (productions_[i].second.size() > 2) {
+        for (size_t k = 0; k < terminal_symbols_.size(); k++) {
+          if (productions_[i].second[j] == terminal_symbols_[k][0]) {
+            for (size_t l = 0; l < productions_.size(); l++) {
+              if (productions_[l].second == terminal_symbols_[k]) {
                 flag = true;
               }
             }
@@ -180,16 +180,6 @@ void Grammar::ChomskyAlgorithm() {
       }
     }
   }
-
-  // for (size_t i = 0; i < productions_.size(); i++) {
-  //   for (size_t j = 0; j < productions_[i].second.size(); j++) {
-  //     for (size_t k = 0; k < new_productions.size(); k++) {
-  //       if (productions_[i].second[j] == new_productions[k].second[0]) {
-  //         productions_[i].second.replace(j, 2, new_productions[k].first);
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 
