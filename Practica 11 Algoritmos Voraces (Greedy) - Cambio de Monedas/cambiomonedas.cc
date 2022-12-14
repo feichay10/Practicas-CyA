@@ -16,13 +16,46 @@
  *
  */
 
-#include "monedero.h"
-
 #include <iostream>
 
-int main () {
-  float n;
+#include "monedero.h"
+
+const std::string HELP = "--help";
+const std::string BILLETES = "-b";
+
+void check_parameters(int argc, char* argv[]);
+
+int main(int argc, char* argv[]) {
+  double n, aux;
+  int count = 1;
+  Monedero monedero;
+
+  check_parameters(argc, argv);
 
   std::cout << "Introduzca la cantidad a cambiar: ";
   std::cin >> n;
+
+  monedero.CambioMonedas(n);
+
+  std::cout << "El cambio de monedas es: ";
+  for (double i = 0; i < monedero.getSolucionSize(); i++) {
+    std::cout << monedero.getSolucion()[i] << "€, ";
+  }
+  std::cout << std::endl;
+  std::cout << "El cambio de moneda es: ";
+  int j = 0;
+  while (j < monedero.getSolucionSize()) {
+    if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
+      count++;
+
+    } else {
+      std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
+      count = 1;
+    }
+    j++;
+  }
+}
+
+void check_parameters(int argc, char* argv[]) {
+  std::cout << "Entro a check" << std::endl;
 }

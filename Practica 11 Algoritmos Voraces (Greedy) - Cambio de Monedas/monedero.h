@@ -16,10 +16,29 @@
  *
  */
 
-#include <vector>
+#include <iostream>
 #include <list>
+#include <vector>
 
 class Monedero {
- private:
  public:
+  Monedero();
+  ~Monedero();
+
+  void setMonedas(std::vector<double> monedas);
+  void setSolucion(std::vector<double> solucion);
+  void setSuma(double suma);
+
+  std::vector<double> getMonedas();
+  std::vector<double> getSolucion();
+  double getSuma();
+  int getSolucionSize();
+
+  double CambioMonedas(double n);
+  
+ private:
+  std::vector<double> monedas_;
+  std::vector<double> billetes_;
+  std::vector<double> solucion_;
+  double suma_;
 };
