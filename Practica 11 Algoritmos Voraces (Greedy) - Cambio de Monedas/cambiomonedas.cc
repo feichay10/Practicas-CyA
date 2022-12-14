@@ -24,7 +24,15 @@ const std::string HELP = "--help";
 const std::string BILLETES = "-b";
 
 void check_parameters(int argc, char* argv[]);
+void print_money(Monedero &);
 
+/**
+ * @brief Funcion main que ejecuta el programa principal del cambio de monedas 
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char* argv[]) {
   double n;
   int count = 1;
@@ -37,46 +45,51 @@ int main(int argc, char* argv[]) {
 
   if (argc == 1) {
     monedero.CambioMonedas(n);
-
-    std::cout << "Solucion: ";
-    for (double i = 0; i < monedero.getSolucionSize(); i++) {
-      std::cout << monedero.getSolucion()[i] << "€, ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Solucion: ";
-    int j = 0;
-    while (j < monedero.getSolucionSize()) {
-      if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
-        count++;
-      } else {
-        std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
-        count = 1;
-      }
-      j++;
-    }
-    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize()
-              << std::endl;
+    print_money(monedero);
+    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize() << std::endl;
   } else if (argv[1] == BILLETES) {
-    std::cout << "Billetes" << std::endl;
     monedero.CambioBilletes(n);
-    std::cout << "Solucion: ";
-    int j = 0;
-    while (j < monedero.getSolucionSize()) {
-      if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
-        count++;
-      } else {
-        std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
-        count = 1;
-      }
-      j++;
-    }
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
-              << std::endl;
+    print_money(monedero);
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
     exit(0);
   }
 }
 
 void check_parameters(int argc, char* argv[]) {
   std::cout << "Entro a check" << std::endl;
+}
+
+void print_money(Monedero &monedero) {
+  int count = 1;
+  std::cout << "Solucion: ";
+  int j = 0;
+  while (j < monedero.getSolucionSize()) {
+    if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
+      count++;
+    } else {
+      if (monedero.getSolucion()[j] == 0.5) {
+        std::cout << count << "x"
+                  << "50¢, ";
+      } else if (monedero.getSolucion()[j] == 0.2) {
+        std::cout << count << "x"
+                  << "20¢, ";
+      } else if (monedero.getSolucion()[j] == 0.1) {
+        std::cout << count << "x"
+                  << "10¢, ";
+      } else if (monedero.getSolucion()[j] == 0.05) {
+        std::cout << count << "x"
+                  << "5¢, ";
+      } else if (monedero.getSolucion()[j] == 0.02) {
+        std::cout << count << "x"
+                  << "2¢, ";
+      } else if (monedero.getSolucion()[j] == 0.01) {
+        std::cout << count << "x"
+                  << "1¢, ";
+      } else {
+        std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
+      }
+      count = 1;
+    }
+    j++;
+  }
 }

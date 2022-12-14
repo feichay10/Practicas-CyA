@@ -27,56 +27,30 @@ Monedero::Monedero() {
 
 Monedero::~Monedero() {}
 
-void Monedero::setMonedas(std::vector<double> monedas) {
-  monedas_ = monedas;
-}
-
-void Monedero::setSolucion(std::vector<double> solucion) {
-  solucion_ = solucion;
-}
-
-void Monedero::setSuma(double suma) {
-  suma_ = suma;
-}
-
-std::vector<double> Monedero::getMonedas() {
-  return monedas_;
-}
-
 std::vector<double> Monedero::getSolucion() {
   return solucion_;
-}
-
-double Monedero::getSuma() {
-  return suma_;
 }
 
 int Monedero::getSolucionSize() {
   return solucion_.size();
 }
 
-double Monedero::CambioMonedas(double n) {
-  double suma = 0;
-  for (int i = 0; i < monedas_.size(); i++) {
-    while (suma + monedas_[i] <= n) {
-      suma += monedas_[i];
+void Monedero::CambioMonedas(double n) {
+  for (double i = 0; i < monedas_.size(); i++) {
+    while (suma_ + monedas_[i] <= n) {
+      suma_ += monedas_[i];
       solucion_.push_back(monedas_[i]);
     }
   }
-
-  std::cout << "Suma: " << suma << std::endl;
-  return suma;
+  std::cout << "Suma: " << suma_ << std::endl;
 }
 
-double Monedero::CambioBilletes(double n) {
-  double suma = 0;
-  for (int i = 0; i < billetes_.size(); i++) {
-    while (suma + billetes_[i] <= n) {
-      suma += billetes_[i];
+void Monedero::CambioBilletes(double n) {
+  for (double i = 0; i < billetes_.size(); i++) {
+    while (suma_ + billetes_[i] <= n) {
+      suma_ += billetes_[i];
       solucion_.push_back(billetes_[i]);
     }
   }
-
-  std::cout << "Suma: " << suma << std::endl;
-  return suma;
+  std::cout << "Suma: " << suma_ << std::endl;
 }
