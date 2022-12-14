@@ -35,6 +35,7 @@ class Monedero {
   int getSolucionSize();
 
   double CambioMonedas(double n);
+  double CambioBilletes(double n);
   
  private:
   std::vector<double> monedas_;

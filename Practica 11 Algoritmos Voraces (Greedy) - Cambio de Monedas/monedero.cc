@@ -67,3 +67,16 @@ double Monedero::CambioMonedas(double n) {
   std::cout << "Suma: " << suma << std::endl;
   return suma;
 }
+
+double Monedero::CambioBilletes(double n) {
+  double suma = 0;
+  for (int i = 0; i < billetes_.size(); i++) {
+    while (suma + billetes_[i] <= n) {
+      suma += billetes_[i];
+      solucion_.push_back(billetes_[i]);
+    }
+  }
+
+  std::cout << "Suma: " << suma << std::endl;
+  return suma;
+}

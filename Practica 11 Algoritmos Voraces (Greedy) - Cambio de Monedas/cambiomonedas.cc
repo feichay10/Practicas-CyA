@@ -26,7 +26,7 @@ const std::string BILLETES = "-b";
 void check_parameters(int argc, char* argv[]);
 
 int main(int argc, char* argv[]) {
-  double n, aux;
+  double n;
   int count = 1;
   Monedero monedero;
 
@@ -35,24 +35,45 @@ int main(int argc, char* argv[]) {
   std::cout << "Introduzca la cantidad a cambiar: ";
   std::cin >> n;
 
-  monedero.CambioMonedas(n);
+  if (argc == 1) {
+    monedero.CambioMonedas(n);
 
-  std::cout << "El cambio de monedas es: ";
-  for (double i = 0; i < monedero.getSolucionSize(); i++) {
-    std::cout << monedero.getSolucion()[i] << "€, ";
-  }
-  std::cout << std::endl;
-  std::cout << "El cambio de moneda es: ";
-  int j = 0;
-  while (j < monedero.getSolucionSize()) {
-    if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
-      count++;
-
-    } else {
-      std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
-      count = 1;
+    std::cout << "Solucion: ";
+    for (double i = 0; i < monedero.getSolucionSize(); i++) {
+      std::cout << monedero.getSolucion()[i] << "€, ";
     }
-    j++;
+    std::cout << std::endl;
+
+    std::cout << "Solucion: ";
+    int j = 0;
+    while (j < monedero.getSolucionSize()) {
+      if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
+        count++;
+      } else {
+        std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
+        count = 1;
+      }
+      j++;
+    }
+    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize()
+              << std::endl;
+  } else if (argv[1] == BILLETES) {
+    std::cout << "Billetes" << std::endl;
+    monedero.CambioBilletes(n);
+    std::cout << "Solucion: ";
+    int j = 0;
+    while (j < monedero.getSolucionSize()) {
+      if (monedero.getSolucion()[j] == monedero.getSolucion()[j + 1]) {
+        count++;
+      } else {
+        std::cout << count << "x" << monedero.getSolucion()[j] << "€, ";
+        count = 1;
+      }
+      j++;
+    }
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
+              << std::endl;
+    exit(0);
   }
 }
 
