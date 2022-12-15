@@ -22,6 +22,7 @@
 
 const std::string HELP = "--help";
 const std::string BILLETES = "-b";
+const std::string COMPLEJIDAD = "-o";
 
 void check_parameters(int argc, char* argv[]);
 void print_money(Monedero&);
@@ -55,7 +56,20 @@ int main(int argc, char* argv[]) {
 }
 
 void check_parameters(int argc, char* argv[]) {
-  std::cout << "Entro a check" << std::endl;
+  if (argc > 2) {
+    std::cout << "Error: Numero de parametros incorrecto" << std::endl;
+    exit(1);
+  } else if (argc == 2 && argv[1] == HELP) {
+    std::cout << "Uso: ./cambiomonedas [OPCION]" << std::endl;
+    std::cout << "OPCIONES:" << std::endl;
+    std::cout << "-b\t\tCambio de billetes" << std::endl;
+    std::cout << "-o\t\tComplejidad" << std::endl;
+    std::cout << "--help\t\tAyuda" << std::endl;
+    exit(0);
+  } else if (argc == 2 && argv[1] != BILLETES && argv[1] != COMPLEJIDAD) {
+    std::cout << "Error: Parametro incorrecto" << std::endl;
+    exit(1);
+  }
 }
 
 void print_money(Monedero& monedero) {
