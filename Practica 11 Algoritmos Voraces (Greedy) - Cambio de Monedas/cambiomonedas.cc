@@ -17,6 +17,8 @@
  */
 
 #include <iostream>
+#include <vector>
+#include <set>
 
 #include "monedero.h"
 
@@ -37,6 +39,7 @@ void print_money(Monedero&);
 int main(int argc, char* argv[]) {
   double n;
   Monedero monedero;
+  std::vector<double> resultado;
 
   check_parameters(argc, argv);
 
@@ -49,6 +52,11 @@ int main(int argc, char* argv[]) {
     std::cout << "\nTotal de monedas: " << monedero.getSolucionSize() << std::endl;
   } else if (argv[1] == BILLETES) {
     monedero.CambioBilletes(n);
+    print_money(monedero);
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
+    exit(0);
+  } else if (argv[1] == COMPLEJIDAD) {
+    monedero.AlgoritmoAlternativo(n);
     print_money(monedero);
     std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
     exit(0);
@@ -88,7 +96,7 @@ void print_money(Monedero& monedero) {
   int i = 0;
   bool print_comma = true;
 
-  std::cout << "Solucion: ";
+  std::cout << "\nSolucion: ";
   while (i < monedero.getSolucionSize()) {
     if (monedero.getSolucion()[i] == monedero.getSolucion()[i + 1]) {
       count++;

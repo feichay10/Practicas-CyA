@@ -17,8 +17,8 @@
  */
 
 #include <iostream>
-#include <list>
 #include <vector>
+#include <cmath>
 
 /**
  * @brief Clase Monedero que contiene los métodos para calcular el cambio de monedas y billetes
@@ -33,6 +33,7 @@ class Monedero {
   int getSolucionSize();
 
   void CambioMonedas(double n);
+  std::vector<double> AlgoritmoAlternativo(double n);
   void CambioBilletes(double n);
   
  private:

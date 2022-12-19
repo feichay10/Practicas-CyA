@@ -19,44 +19,41 @@
 #include "monedero.h"
 
 /**
- * @brief Constructor de la clase Monedero que inicializa los atributos de la clase
- * 
+ * @brief Constructor de la clase Monedero que inicializa los atributos de la
+ * clase
+ *
  */
 Monedero::Monedero() {
   monedas_ = {2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
-  billetes_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
+  billetes_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.50,  0.20,  0.10, 0.05, 0.02, 0.01};
   solucion_ = {};
   suma_ = 0;
 }
 
 /**
  * @brief Destructor de la clase Monedero
- * 
+ *
  */
 Monedero::~Monedero() {}
 
 /**
  * @brief Método que asigna un valor al vector solucion_
- * 
- * @param monedas 
+ *
+ * @param monedas
  */
-std::vector<double> Monedero::getSolucion() {
-  return solucion_;
-}
+std::vector<double> Monedero::getSolucion() { return solucion_; }
 
 /**
- * @brief Método que asigna el tamaño del vector solucion_ 
- * 
- * @return int 
+ * @brief Método que asigna el tamaño del vector solucion_
+ *
+ * @return int
  */
-int Monedero::getSolucionSize() {
-  return solucion_.size();
-}
+int Monedero::getSolucionSize() { return solucion_.size(); }
 
 /**
  * @brief Algoritmo voraz para calcular el cambio de monedas
- * 
- * @param n 
+ *
+ * @param n
  */
 void Monedero::CambioMonedas(double n) {
   for (double i = 0; i < monedas_.size(); i++) {
@@ -65,12 +62,33 @@ void Monedero::CambioMonedas(double n) {
       solucion_.push_back(monedas_[i]);
     }
   }
+  std::cout << "Suma: " << suma_ << std::endl;
 }
+
+std::vector<double> Monedero::AlgoritmoAlternativo(double n) {
+  for (double v : monedas_) {
+    int c = floor((n - suma_) / v); // división entera hacia abajo
+    if (c > 0) {
+      for (int i = 0; i < c; i++) {
+        // std::cout << v << " ";
+        solucion_.push_back(v);
+      }
+      suma_ += c * v;
+    }
+    std::cout << "Suma: " << suma_ << std::endl;
+    if (suma_ == n) {
+      break;
+    }
+  }
+  std::cout << "Suma algoritmo alternativo: " << suma_ << std::endl;
+  return solucion_;
+}
+
 
 /**
  * @brief Algoritmo voraz para calcular el cambio de billetes y monedas
- * 
- * @param n 
+ *
+ * @param n
  */
 void Monedero::CambioBilletes(double n) {
   for (double i = 0; i < billetes_.size(); i++) {
