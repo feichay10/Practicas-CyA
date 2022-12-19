@@ -55,6 +55,12 @@ int main(int argc, char* argv[]) {
   }
 }
 
+/**
+ * @brief Funcion que comprueba los parametro de entrada
+ * 
+ * @param argc 
+ * @param argv 
+ */
 void check_parameters(int argc, char* argv[]) {
   if (argc > 2) {
     std::cout << "Error: Numero de parametros incorrecto" << std::endl;
@@ -72,6 +78,11 @@ void check_parameters(int argc, char* argv[]) {
   }
 }
 
+/**
+ * @brief Funcion que imprime el cambio de monedas
+ * 
+ * @param monedero 
+ */
 void print_money(Monedero& monedero) {
   int count = 1;
   int i = 0;
