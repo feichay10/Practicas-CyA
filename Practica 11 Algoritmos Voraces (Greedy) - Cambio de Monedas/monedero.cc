@@ -8,9 +8,9 @@
  * Práctica 11: Algoritmos Voraces (Greedy) - Cambio de Monedas
  * @file monedero.cc
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
- * @brief 
+ * @brief Contiene la implementación de los métodos de la clase Monedero
  * @version 0.1
- * @date 2022-11-22
+ * @date 2022-12-20
  *
  * @copyright Copyright (c) 2022
  *
