@@ -1,27 +1,29 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
-std::vector<double> devolver_cambio(double n) {
-  std::vector<double> M = {2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
-  std::vector<double> S; // conjunto de la solución
-  double suma = 0; // suma de los elementos de S
-  for (double v : M) {
-    int c = (n - suma) / v; // división entera
+using namespace std;
+
+vector<double> devolver_cambio(double n) {
+  vector<double> monedas {2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
+  vector<double> solucion;
+  double suma = 0;
+  for (auto v : monedas) {
+    int c = floor(n / v);
     if (c > 0) {
-      for (int i = 0; i < c; i++) {
-        S.push_back(v);
-      }
+      solucion.insert(solucion.end(), c, v);
       suma += c * v;
+      n -= c * v;
     }
   }
-  return S;
+  return solucion;
 }
 
 int main() {
-  std::vector<double> resultado = devolver_cambio(3.67);
-  for (double m : resultado) {
-    std::cout << m << " ";
+  vector<double> solucion = devolver_cambio(234.56);
+  for (auto m : solucion) {
+    cout << m << " ";
   }
-  std::cout << std::endl;
+  cout << endl;
   return 0;
 }

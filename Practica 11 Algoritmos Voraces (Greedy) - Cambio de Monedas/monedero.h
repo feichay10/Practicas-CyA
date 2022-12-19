@@ -35,6 +35,7 @@ class Monedero {
   void CambioMonedas(double n);
   std::vector<double> AlgoritmoAlternativo(double n);
   void CambioBilletes(double n);
+  std::vector<double> AlgoritmoAlternativoBilletes(double n);
   
  private:
   std::vector<double> monedas_;

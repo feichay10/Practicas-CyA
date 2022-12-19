@@ -65,26 +65,6 @@ void Monedero::CambioMonedas(double n) {
   std::cout << "Suma: " << suma_ << std::endl;
 }
 
-std::vector<double> Monedero::AlgoritmoAlternativo(double n) {
-  for (double v : monedas_) {
-    int c = floor((n - suma_) / v); // división entera hacia abajo
-    if (c > 0) {
-      for (int i = 0; i < c; i++) {
-        // std::cout << v << " ";
-        solucion_.push_back(v);
-      }
-      suma_ += c * v;
-    }
-    std::cout << "Suma: " << suma_ << std::endl;
-    if (suma_ == n) {
-      break;
-    }
-  }
-  std::cout << "Suma algoritmo alternativo: " << suma_ << std::endl;
-  return solucion_;
-}
-
-
 /**
  * @brief Algoritmo voraz para calcular el cambio de billetes y monedas
  *
@@ -97,4 +77,36 @@ void Monedero::CambioBilletes(double n) {
       solucion_.push_back(billetes_[i]);
     }
   }
+}
+
+/**
+ * @brief Método del nuevo algoritmo más eficiente para calcular el cambio de monedas
+ * 
+ * @param n 
+ * @return std::vector<double> 
+ */
+std::vector<double> Monedero::AlgoritmoAlternativo(double n) {
+  for (double i = 0; i < monedas_.size(); i++) {
+    int c = floor(n / monedas_[i]);
+    if (c > 0) {
+      solucion_.insert(solucion_.end(), c, monedas_[i]);
+      suma_ += c * monedas_[i];
+      n -= c * monedas_[i];
+    }
+  }
+  std::cout << "Suma algoritmo alternativo: " << suma_ << std::endl;
+  return solucion_;
+}
+
+std::vector<double> Monedero::AlgoritmoAlternativoBilletes(double n) {
+  std::cout << "Bosko" << std::endl;
+  for (double i = 0; i < billetes_.size(); i++) {
+    int c = floor(n / billetes_[i]);
+    if (c > 0) {
+      solucion_.insert(solucion_.end(), c, billetes_[i]);
+      suma_ += c * billetes_[i];
+      n -= c * billetes_[i];
+    }
+  }
+  return solucion_;
 }

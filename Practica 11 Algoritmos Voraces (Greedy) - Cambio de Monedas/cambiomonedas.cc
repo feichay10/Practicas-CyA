@@ -17,8 +17,8 @@
  */
 
 #include <iostream>
-#include <vector>
 #include <set>
+#include <vector>
 
 #include "monedero.h"
 
@@ -49,28 +49,37 @@ int main(int argc, char* argv[]) {
   if (argc == 1) {
     monedero.CambioMonedas(n);
     print_money(monedero);
-    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize() << std::endl;
+    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize()
+              << std::endl;
+  } else if (argc == 3 && (argv[1] == BILLETES || argv[1] == COMPLEJIDAD)) {
+    monedero.AlgoritmoAlternativoBilletes(n);
+    print_money(monedero);
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
+              << std::endl;
+    exit(0);
   } else if (argv[1] == BILLETES) {
     monedero.CambioBilletes(n);
     print_money(monedero);
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
+              << std::endl;
     exit(0);
   } else if (argv[1] == COMPLEJIDAD) {
     monedero.AlgoritmoAlternativo(n);
     print_money(monedero);
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
+              << std::endl;
     exit(0);
-  }
+  } 
 }
 
 /**
  * @brief Funcion que comprueba los parametro de entrada
- * 
- * @param argc 
- * @param argv 
+ *
+ * @param argc
+ * @param argv
  */
 void check_parameters(int argc, char* argv[]) {
-  if (argc > 2) {
+  if (argc > 3) {
     std::cout << "Error: Numero de parametros incorrecto" << std::endl;
     exit(1);
   } else if (argc == 2 && argv[1] == HELP) {
@@ -88,8 +97,8 @@ void check_parameters(int argc, char* argv[]) {
 
 /**
  * @brief Funcion que imprime el cambio de monedas
- * 
- * @param monedero 
+ *
+ * @param monedero
  */
 void print_money(Monedero& monedero) {
   int count = 1;
@@ -102,17 +111,23 @@ void print_money(Monedero& monedero) {
       count++;
     } else {
       if (monedero.getSolucion()[i] == 0.5) {
-        std::cout << count << "x" << "50¢";
+        std::cout << count << "x"
+                  << "50¢";
       } else if (monedero.getSolucion()[i] == 0.2) {
-        std::cout << count << "x" << "20¢";
+        std::cout << count << "x"
+                  << "20¢";
       } else if (monedero.getSolucion()[i] == 0.1) {
-        std::cout << count << "x" << "10¢";
+        std::cout << count << "x"
+                  << "10¢";
       } else if (monedero.getSolucion()[i] == 0.05) {
-        std::cout << count << "x" << "5¢";
+        std::cout << count << "x"
+                  << "5¢";
       } else if (monedero.getSolucion()[i] == 0.02) {
-        std::cout << count << "x" << "2¢";
+        std::cout << count << "x"
+                  << "2¢";
       } else if (monedero.getSolucion()[i] == 0.01) {
-        std::cout << count << "x" << "1¢";
+        std::cout << count << "x"
+                  << "1¢";
       } else {
         std::cout << count << "x" << monedero.getSolucion()[i] << "€";
       }
