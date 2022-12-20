@@ -35,7 +35,7 @@ class Monedero {
   int getSolucionSize();
 
   void CambioDinero(double n);
-  std::vector<double> AlgoritmoAlternativo(double n);
+  void AlgoritmoAlternativo(double n);
 
  protected:
   std::vector<double> dinero_;

@@ -49,7 +49,7 @@ int Monedero::getSolucionSize() { return solucion_.size(); }
  * @param n
  */
 void Monedero::CambioDinero(double n) {
-  std::cout << "Algoritmo voraz original" << std::endl;
+  std::cout << "\n########## Algoritmo voraz original ##########" << std::endl;
   for (double i = 0; i < dinero_.size(); i++) {
     while (suma_ + dinero_[i] <= n) {
       suma_ += dinero_[i];
@@ -59,20 +59,21 @@ void Monedero::CambioDinero(double n) {
 }
 
 /**
- * @brief Método del nuevo algoritmo más eficiente para calcular el cambio de monedas
- * 
- * @param n 
- * @return std::vector<double> 
+ * @brief Método del nuevo algoritmo más eficiente para calcular el cambio de
+ * monedas
+ *
+ * @param n
+ * @return std::vector<double>
  */
-std::vector<double> Monedero::AlgoritmoAlternativo(double n) {
-  std::cout << "Algoritmo voraz alternativo" << std::endl;
-  for (double i = 0; i < dinero_.size(); i++) {
-    int c = floor(n / dinero_[i]);
+void Monedero::AlgoritmoAlternativo(double n) {
+  std::cout << "\n########## Algoritmo voraz alternativo ##########" << std::endl;
+  for (double v : dinero_) {
+    int c = (n - suma_) / v;
     if (c > 0) {
-      solucion_.insert(solucion_.end(), c, dinero_[i]);
-      suma_ += c * dinero_[i];
-      n -= c * dinero_[i];
+      for (int i = 0; i < c; i++) {
+        solucion_.push_back(v);
+      }
+      suma_ += c * v;
     }
   }
-  return solucion_;
 }
