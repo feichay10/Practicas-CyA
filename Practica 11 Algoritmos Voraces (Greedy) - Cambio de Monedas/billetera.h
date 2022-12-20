@@ -6,7 +6,7 @@
  * Asignatura: Computabilidad y Algoritmia
  * Curso: 2º
  * Práctica 11: Algoritmos Voraces (Greedy) - Cambio de Monedas
- * @file monedero.h
+ * @file billetera.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
  * @brief Clase Monedero que contiene los métodos para calcular el cambio de
  * monedas y billetes
@@ -16,29 +16,12 @@
  * @copyright Copyright (c) 2022
  *
  */
+
 #pragma once
 
-#include <cmath>
-#include <iostream>
-#include <vector>
+#include "monedero.h"
 
-/**
- * @brief Clase Monedero que contiene los métodos para calcular el cambio de
- * monedas y billetes
- *
- */
-class Monedero {
+class Billetera : public Monedero {
  public:
-  Monedero();
-
-  std::vector<double> getSolucion();
-  int getSolucionSize();
-
-  void CambioDinero(double n);
-  std::vector<double> AlgoritmoAlternativo(double n);
-
- protected:
-  std::vector<double> dinero_;
-  std::vector<double> solucion_;
-  double suma_;
+  Billetera();
 };

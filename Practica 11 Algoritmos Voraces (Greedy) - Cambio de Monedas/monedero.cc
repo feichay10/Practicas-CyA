@@ -24,17 +24,10 @@
  *
  */
 Monedero::Monedero() {
-  monedas_ = {2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
-  billetes_ = {500.0, 200.0, 100.0, 50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.50,  0.20,  0.10, 0.05, 0.02, 0.01};
+  dinero_ = {2.0, 1.0, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01};
   solucion_ = {};
   suma_ = 0;
 }
-
-/**
- * @brief Destructor de la clase Monedero
- *
- */
-Monedero::~Monedero() {}
 
 /**
  * @brief Método que asigna un valor al vector solucion_
@@ -55,26 +48,12 @@ int Monedero::getSolucionSize() { return solucion_.size(); }
  *
  * @param n
  */
-void Monedero::CambioMonedas(double n) {
-  for (double i = 0; i < monedas_.size(); i++) {
-    while (suma_ + monedas_[i] <= n) {
-      suma_ += monedas_[i];
-      solucion_.push_back(monedas_[i]);
-    }
-  }
-  std::cout << "Suma: " << suma_ << std::endl;
-}
-
-/**
- * @brief Algoritmo voraz para calcular el cambio de billetes y monedas
- *
- * @param n
- */
-void Monedero::CambioBilletes(double n) {
-  for (double i = 0; i < billetes_.size(); i++) {
-    while (suma_ + billetes_[i] <= n) {
-      suma_ += billetes_[i];
-      solucion_.push_back(billetes_[i]);
+void Monedero::CambioDinero(double n) {
+  std::cout << "Algoritmo voraz original" << std::endl;
+  for (double i = 0; i < dinero_.size(); i++) {
+    while (suma_ + dinero_[i] <= n) {
+      suma_ += dinero_[i];
+      solucion_.push_back(dinero_[i]);
     }
   }
 }
@@ -86,26 +65,13 @@ void Monedero::CambioBilletes(double n) {
  * @return std::vector<double> 
  */
 std::vector<double> Monedero::AlgoritmoAlternativo(double n) {
-  for (double i = 0; i < monedas_.size(); i++) {
-    int c = floor(n / monedas_[i]);
+  std::cout << "Algoritmo voraz alternativo" << std::endl;
+  for (double i = 0; i < dinero_.size(); i++) {
+    int c = floor(n / dinero_[i]);
     if (c > 0) {
-      solucion_.insert(solucion_.end(), c, monedas_[i]);
-      suma_ += c * monedas_[i];
-      n -= c * monedas_[i];
-    }
-  }
-  std::cout << "Suma algoritmo alternativo: " << suma_ << std::endl;
-  return solucion_;
-}
-
-std::vector<double> Monedero::AlgoritmoAlternativoBilletes(double n) {
-  std::cout << "Bosko" << std::endl;
-  for (double i = 0; i < billetes_.size(); i++) {
-    int c = floor(n / billetes_[i]);
-    if (c > 0) {
-      solucion_.insert(solucion_.end(), c, billetes_[i]);
-      suma_ += c * billetes_[i];
-      n -= c * billetes_[i];
+      solucion_.insert(solucion_.end(), c, dinero_[i]);
+      suma_ += c * dinero_[i];
+      n -= c * dinero_[i];
     }
   }
   return solucion_;

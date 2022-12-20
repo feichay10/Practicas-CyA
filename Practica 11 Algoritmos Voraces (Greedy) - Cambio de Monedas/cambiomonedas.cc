@@ -17,9 +17,9 @@
  */
 
 #include <iostream>
-#include <set>
 #include <vector>
 
+#include "billetera.h"
 #include "monedero.h"
 
 const std::string HELP = "--help";
@@ -39,6 +39,7 @@ void print_money(Monedero&);
 int main(int argc, char* argv[]) {
   double n;
   Monedero monedero;
+  Billetera billetera;
   std::vector<double> resultado;
 
   check_parameters(argc, argv);
@@ -47,29 +48,20 @@ int main(int argc, char* argv[]) {
   std::cin >> n;
 
   if (argc == 1) {
-    monedero.CambioMonedas(n);
+    monedero.CambioDinero(n);
     print_money(monedero);
-    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize()
-              << std::endl;
-  } else if (argc == 3 && (argv[1] == BILLETES || argv[1] == COMPLEJIDAD)) {
-    monedero.AlgoritmoAlternativoBilletes(n);
-    print_money(monedero);
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
-              << std::endl;
-    exit(0);
+    std::cout << "\nTotal de monedas: " << monedero.getSolucionSize() << std::endl;
   } else if (argv[1] == BILLETES) {
-    monedero.CambioBilletes(n);
-    print_money(monedero);
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
-              << std::endl;
+    billetera.CambioDinero(n);
+    print_money(billetera);
+    std::cout << "\nTotal de billetes o monedas: " << billetera.getSolucionSize() << std::endl;
     exit(0);
   } else if (argv[1] == COMPLEJIDAD) {
     monedero.AlgoritmoAlternativo(n);
     print_money(monedero);
-    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize()
-              << std::endl;
+    std::cout << "\nTotal de billetes o monedas: " << monedero.getSolucionSize() << std::endl;
     exit(0);
-  } 
+  }
 }
 
 /**
@@ -79,7 +71,7 @@ int main(int argc, char* argv[]) {
  * @param argv
  */
 void check_parameters(int argc, char* argv[]) {
-  if (argc > 3) {
+  if (argc > 2) {
     std::cout << "Error: Numero de parametros incorrecto" << std::endl;
     exit(1);
   } else if (argc == 2 && argv[1] == HELP) {

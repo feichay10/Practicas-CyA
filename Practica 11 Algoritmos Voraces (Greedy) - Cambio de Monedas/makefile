@@ -7,7 +7,7 @@ text4 = Se ha eliminado el fichero ejecutable y los ficheros objetos.
 CC=g++
 CXXFLAGS=-g -std=c++14 -Wall
 
-OBJS = cambiomonedas.o monedero.o
+OBJS = cambiomonedas.o monedero.o billetera.o
 
 all: ${OBJS}
 	@echo $(text0)
@@ -18,5 +18,5 @@ all: ${OBJS}
 	@echo $(text3)
 
 clean: 
-	rm -rf src/*.o cambiomonedas
+	rm -rf *.o cambiomonedas
 	@echo $(text4)
