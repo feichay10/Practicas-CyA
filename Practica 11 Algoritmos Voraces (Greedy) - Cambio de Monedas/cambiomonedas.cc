@@ -103,23 +103,17 @@ void print_money(Monedero& monedero) {
       count++;
     } else {
       if (monedero.getSolucion()[i] == 0.5) {
-        std::cout << count << "x"
-                  << "50¢";
+        std::cout << count << "x" << "50¢";
       } else if (monedero.getSolucion()[i] == 0.2) {
-        std::cout << count << "x"
-                  << "20¢";
+        std::cout << count << "x" << "20¢";
       } else if (monedero.getSolucion()[i] == 0.1) {
-        std::cout << count << "x"
-                  << "10¢";
+        std::cout << count << "x" << "10¢";
       } else if (monedero.getSolucion()[i] == 0.05) {
-        std::cout << count << "x"
-                  << "5¢";
+        std::cout << count << "x" << "5¢";
       } else if (monedero.getSolucion()[i] == 0.02) {
-        std::cout << count << "x"
-                  << "2¢";
+        std::cout << count << "x" << "2¢";
       } else if (monedero.getSolucion()[i] == 0.01) {
-        std::cout << count << "x"
-                  << "1¢";
+        std::cout << count << "x" << "1¢";
       } else {
         std::cout << count << "x" << monedero.getSolucion()[i] << "€";
       }

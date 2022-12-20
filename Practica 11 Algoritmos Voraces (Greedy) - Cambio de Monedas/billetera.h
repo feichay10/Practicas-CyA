@@ -8,8 +8,7 @@
  * Práctica 11: Algoritmos Voraces (Greedy) - Cambio de Monedas
  * @file billetera.h
  * @author Cheuk Kelly Ng Pante (alu0101364544@ull.edu.es)
- * @brief Clase Monedero que contiene los métodos para calcular el cambio de
- * monedas y billetes
+ * @brief Clase Billetera que hereda de la clase Monedero 
  * @version 0.1
  * @date 2022-12-20
  *
@@ -21,6 +20,10 @@
 
 #include "monedero.h"
 
+/**
+ * @brief Clase Billetera que hereda de la clase Monedero
+ * 
+ */
 class Billetera : public Monedero {
  public:
   Billetera();
