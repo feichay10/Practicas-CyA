@@ -22,6 +22,9 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
 
 #include "bigint.h"
 
@@ -29,6 +32,8 @@ const std::string HELP1 = "-h";
 const std::string HELP2 = "--help";
 const std::string KARATSUBA = "-k";
 const std::string OPERATOR = "-m";
+const std::string COTA = "-n";
+const std::string RANDOM = "-r";
 
 void check_parameters(int argc, char* argv[]);
 
@@ -40,17 +45,39 @@ int main(int argc, char* argv[]) {
   
   check_parameters(argc, argv);
 
+  if (argv[1] == RANDOM) {
+    // Generar dos numeros aleatorios de tamaño N (introducido por parametro)
+    srand(time(NULL));
+    int size = std::stoi(argv[2]);
+    for (int i = 0; i < size; i++) {
+      number1 += std::to_string(rand() % 10);
+      number2 += std::to_string(rand() % 10);
+    }
+    aux.push_back(number1);
+    aux.push_back(number2);
+
+    std::cout << "Primer numero aleatorio generado = " << aux[0] << std::endl;
+    std::cout << "Segundo numero aleatorio generado = " << aux[1] << std::endl;
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+    result = karatsubaOperation.Karatsuba(std::stoi(aux[0]), std::stoi(aux[1]), 0);
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    std::cout << "La solución de la operación con el algoritmo Karatsuba con numeros aleatorios es: " << result << std::endl;
+    std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+    exit(0);
+  }
+
   while(getline(std::cin, line)){
     aux.push_back(line);
   }
-
 
   std::cout << "Primer numero = " << aux[0] << std::endl;
   std::cout << "Segundo numero = " << aux[1] << std::endl;
 
   if(argc == 1 || argv[1] == KARATSUBA){
     auto t1 = std::chrono::high_resolution_clock::now();
-    result = karatsubaOperation.Karatsuba(std::stoi(aux[0]), std::stoi(aux[1]));
+    result = karatsubaOperation.Karatsuba(std::stoi(aux[0]), std::stoi(aux[1]), 0);
     auto t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
@@ -64,7 +91,14 @@ int main(int argc, char* argv[]) {
     auto t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "El tiempo de ejecución del operador *: " << time << " nanosegundos" << std::endl;
-  }
+  } else if (argv[1] == COTA) {
+    auto t1 = std::chrono::high_resolution_clock::now();
+    result = karatsubaOperation.Karatsuba(std::stoi(aux[0]), std::stoi(aux[1]), std::stoi(argv[2]));
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
+    std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+  } 
   return 0;
 }
 
@@ -79,11 +113,11 @@ void check_parameters(int argc, char* argv[]) {
       std::cout << "  -m\t\t\tUsa el operador * de la clase BigInt." << std::endl;
       exit(0);
     } 
-    if (parameter != KARATSUBA && parameter != OPERATOR) {
+    if (parameter != KARATSUBA && parameter != OPERATOR && parameter != COTA) {
       std::cout << "Error: argumento no válido. Use la opcion -h o --help para saber el funcionamiento del programa." << std::endl;
       exit(1);
     }
-  } else if (argc == 3) {
+  } else if (argc == 4) {
     std::cout << "Error: demasiados argumentos. Use la opcion -h o --help para saber el funcionamiento del programa." << std::endl;
     exit(1);
   } else if (argc == 1) {

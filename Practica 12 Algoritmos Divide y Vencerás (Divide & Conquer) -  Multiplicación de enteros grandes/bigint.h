@@ -94,6 +94,7 @@ class BigInt {
   friend BigInt Factorial(int n);
 
   long long Karatsuba(long long num1, long long num2);
+  long long Karatsuba(long long num1, long long num2, int cota);
 
  private:
   std::string digits;
