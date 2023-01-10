@@ -53,7 +53,8 @@ bool Null(const BigInt &a) {
 int Length(const BigInt &a) { return a.digits.size(); }
 
 int BigInt::operator[](const int index) const {
-  if (digits.size() <= index || index < 0) throw("ERROR");
+  if (digits.size() <= index || index < 0) 
+    throw("ERROR");
   return digits[index];
 }
 
@@ -382,3 +383,23 @@ std::ostream &operator<<(std::ostream &out, const BigInt &a) {
   return std::cout;
 }
 
+// Algoritmo Divide y Vencerás de Karatsuba mediante recursividad para multiplicar dos enteros positivos grandes, no necesariamente de igual número de dígito usando metodos de string
+BigInt BigInt::Karatsuba(std::string num1, std::string num2) {
+  int n = num1.size();
+  int m = num2.size();
+  if (n == 0 || m == 0) return BigInt();
+  if (n == 1 && m == 1) return BigInt((num1[0] - '0') * (num2[0] - '0'));
+  int fh = n / 2;
+  int sh = (n - fh);
+  int fl = m / 2;
+  int sl = (m - fl);
+  std::string a = num1.substr(0, fh);
+  std::string b = num1.substr(fh, sh);
+  std::string c = num2.substr(0, fl);
+  std::string d = num2.substr(fl, sl);
+  BigInt z0 = Karatsuba(a, c);
+  BigInt z1 = Karatsuba(b, d);
+  BigInt z2 = Karatsuba(a, d) + Karatsuba(b, c);
+  BigInt z3 = z2 * BigInt(10);
+  z3 *= BigIn
+}

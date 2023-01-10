@@ -17,52 +17,82 @@
  *
  */
 
+// clang-format -style=google -i *.h *.cc
+
 #include <iostream>
+#include <chrono>
+#include <vector>
 
 #include "bigint.h"
 
-const std::string HELP = "--help";
+const std::string HELP1 = "-h";
+const std::string HELP2 = "--help";
+const std::string KARATSUBA = "-k";
+const std::string OPERATOR = "-m";
 
 void check_parameters(int argc, char* argv[]);
 
 int main(int argc, char* argv[]) {
-  std::ifstream file_1, file_2;
+  BigInt karatsubaOperation, result;
+  std::string number1, number2, line;
+  std::vector<std::string> aux;
 
   check_parameters(argc, argv);
-  
-  file_1.open(argv[1]);
-  file_2.open(argv[2]);
 
-  if (!file_1.is_open() || !file_2.is_open()) {
-    std::cout << "Error: No se ha podido abrir el fichero" << std::endl;
-    exit(1);
+  while(getline(std::cin, line)){
+    aux.push_back(line);
   }
 
-  std::string line_1, line_2;
-  while (getline(file_1, line_1) && getline(file_2, line_2)) {
-    BigInt x(line_1);
-    BigInt y(line_2);
-    BigInt z = x * y;
-    std::cout << x << " * " << y << " = " << z << std::endl;
+  // std::cout << "Introduzca el primer numero: ";
+  // std::cin >> number1;
+  // std::cout << "Introduzca el segundo numero: ";
+  // std::cin >> number2;
+
+  std::cout << "Primer numero = " << aux[0] << std::endl;
+  std::cout << "Segundo numero = " << aux[1] << std::endl;
+
+  if(argc == 1 || argv[1] == KARATSUBA){
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "Castolo" << std::endl;
+    result = karatsubaOperation.Karatsuba(aux[0], aux[1]);
+    std::cout << "manzana" << std::endl;
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
+    std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+  } else if (argv[1] == OPERATOR) {
+    BigInt x(number1);
+    BigInt y(number2);
+    BigInt result;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    result = x * y;
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    std::cout << "La solución de la operación con el operador * es: " << result << std::endl;
+    std::cout << "El tiempo de ejecución del operador *: " << time << " nanosegundos" << std::endl;
   }
+  return 0;
 }
 
 void check_parameters(int argc, char* argv[]) {
-  if (argc > 3 || argc == 1) {
-    std::cout << "Error: Numero de parametros incorrecto" << std::endl;
+  if (argc == 2) {
+    std::string parameter = argv[1];
+    if (parameter == HELP1 || parameter == HELP2) {
+      std::cout << "Uso: " << argv[0] << " [OPCION]" << std::endl;
+      std::cout << "OPCION:" << std::endl;
+      std::cout << "  -h, --help\t\tAyuda del programa." << std::endl;
+      std::cout << "  -k\t\t\tUsa el algoritmo Karatsuba." << std::endl;
+      std::cout << "  -m\t\t\tUsa el operador * de la clase BigInt." << std::endl;
+      exit(0);
+    } 
+    if (parameter != KARATSUBA && parameter != OPERATOR) {
+      std::cout << "Error: argumento no válido. Use la opcion -h o --help para saber el funcionamiento del programa." << std::endl;
+      exit(1);
+    }
+  } else if (argc == 3) {
+    std::cout << "Error: demasiados argumentos. Use la opcion -h o --help para saber el funcionamiento del programa." << std::endl;
     exit(1);
-  } else if (argc == 2 && argv[1] == HELP) {
-    std::cout << "Uso: ./multbigint [OPCION]" << std::endl;
-    std::cout << "OPCIONES:" << std::endl;
-    std::cout << "--help\t\tAyuda" << std::endl;
-    std::cout << "-k\t\tAlgoritmo Karatsuba" << std::endl;
-    std::cout << "-m\t\tOperador * de la clase BigInt" << std::endl;
-    std::cout << "-n <cota>\t\t Cota es el valor de la cota del cambio"
-              << std::endl;
-    std::cout << "-r <digitos>\t\tGeneracion aleatoria de los numeros 'x' e "
-                 "'y' enteros a multiplicar. Además, <digitos> es el numero de "
-                 "digitos que tiene que tener cada numero"
-              << std::endl;
-    exit(0);
+  } else if (argc == 1) {
+    std::cout << "Se usará el algoritmo Karatsuba por defecto." << std::endl;
   }
 }
