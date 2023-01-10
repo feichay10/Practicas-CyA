@@ -364,13 +364,13 @@ BigInt BigInt::Karatsuba(BigInt num1, BigInt num2, int cota) {
   
   // Calcular el valor "m"
   BigInt base(10);
-  BigInt m = base ^ N; // Tarda mas porque la implementacion del operador ^ de la clase bigint que hace una multiplicacion 
+  BigInt m = base ^ N;
   
   // Dividir num1 y num2 en bloques "a", "b", "c", y "d"
   BigInt b = num1 / m;
-  BigInt a = num1 - (b * m); // Aqui hay otra multiplicacion
+  BigInt a = num1 - (b * m);
   BigInt d = num2 / m;
-  BigInt c = num2 - (d * m); // Aqui hay otra multiplicacion
+  BigInt c = num2 - (d * m);
   
   // Realizar 3 llamadas recursivas a la función Karatsuba para calcular z0, z1 y z2
   BigInt z0 = Karatsuba(a, c, cota);
@@ -378,6 +378,6 @@ BigInt BigInt::Karatsuba(BigInt num1, BigInt num2, int cota) {
   BigInt z2 = Karatsuba(b, d, cota);
   
   // Retorna el resultado final utilizando la fórmula
-  return z0 + ((z1 - z0 - z2) * m) + (z2 * m * m); 
+  return z0 + ((z1 - z0 - z2) * m) + (z2 * m * m);
 }
 

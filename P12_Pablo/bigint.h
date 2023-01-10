@@ -31,7 +31,7 @@ class BigInt {
  public:
   // Constructors:
   BigInt(unsigned long long n = 0);
-  BigInt(std::string&);
+  BigInt(std::string &);
   BigInt(const char *);
   BigInt(const BigInt &);
 

@@ -44,17 +44,15 @@ int main(int argc, char* argv[]) {
   check_parameters(argc, argv);
 
   if(argc == 1 || argv[1] == KARATSUBA) {
-    for (int i = 0; i < 2; ++i) {
-      getline(std::cin, line);
+    while(getline(std::cin, line)){
       aux.push_back(line);
     }
 
     std::cout << "Primer numero = " << aux[0] << std::endl;
     std::cout << "Segundo numero = " << aux[1] << std::endl;
-    BigInt num1(aux[0]);
-    BigInt num2(aux[1]);
+
     auto t1 = std::chrono::high_resolution_clock::now();
-    result = karatsubaOperation.Karatsuba(num1, num2, 0);
+    result = karatsubaOperation.Karatsuba(BigInt(aux[0]), BigInt(aux[1]), 0);
     auto t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
