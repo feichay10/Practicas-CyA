@@ -17,15 +17,15 @@
  *
  */
 
+#pragma once
+
+#include <bits/stdc++.h>
+
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
-
-// C++ program to implement
-// the above approach
-#include <bits/stdc++.h>
 
 class BigInt {
  public:
@@ -92,7 +92,8 @@ class BigInt {
   friend BigInt NthCatalan(int n);
   friend BigInt NthFibonacci(int n);
   friend BigInt Factorial(int n);
-  BigInt Karatsuba(std::string num1, std::string num2);
+
+  long long Karatsuba(long long num1, long long num2);
 
  private:
   std::string digits;

@@ -33,42 +33,36 @@ const std::string OPERATOR = "-m";
 void check_parameters(int argc, char* argv[]);
 
 int main(int argc, char* argv[]) {
-  BigInt karatsubaOperation, result;
+  BigInt karatsubaOperation;
+  long long result;
   std::string number1, number2, line;
   std::vector<std::string> aux;
-
+  
   check_parameters(argc, argv);
 
   while(getline(std::cin, line)){
     aux.push_back(line);
   }
 
-  // std::cout << "Introduzca el primer numero: ";
-  // std::cin >> number1;
-  // std::cout << "Introduzca el segundo numero: ";
-  // std::cin >> number2;
 
   std::cout << "Primer numero = " << aux[0] << std::endl;
   std::cout << "Segundo numero = " << aux[1] << std::endl;
 
   if(argc == 1 || argv[1] == KARATSUBA){
     auto t1 = std::chrono::high_resolution_clock::now();
-    std::cout << "Castolo" << std::endl;
-    result = karatsubaOperation.Karatsuba(aux[0], aux[1]);
-    std::cout << "manzana" << std::endl;
+    result = karatsubaOperation.Karatsuba(std::stoi(aux[0]), std::stoi(aux[1]));
     auto t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
     std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
   } else if (argv[1] == OPERATOR) {
-    BigInt x(number1);
-    BigInt y(number2);
-    BigInt result;
+    std::cout << "Entro" << std::endl;
+    BigInt num1(std::stoi(aux[0])); 
+    BigInt num2(std::stoi(aux[1]));
     auto t1 = std::chrono::high_resolution_clock::now();
-    result = x * y;
+    std::cout << "La solución de la operación con el operador * es: " << num1 * num2 << std::endl;
     auto t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
-    std::cout << "La solución de la operación con el operador * es: " << result << std::endl;
     std::cout << "El tiempo de ejecución del operador *: " << time << " nanosegundos" << std::endl;
   }
   return 0;
