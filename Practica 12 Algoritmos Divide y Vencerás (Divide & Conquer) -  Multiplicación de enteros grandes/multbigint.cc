@@ -17,8 +17,6 @@
  *
  */
 
-// clang-format -style=google -i *.h *.cc
-
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -126,9 +124,11 @@ void check_parameters(int argc, char* argv[]) {
       std::cout << "  -h, --help\t\tAyuda del programa." << std::endl;
       std::cout << "  -k\t\t\tUsa el algoritmo Karatsuba." << std::endl;
       std::cout << "  -m\t\t\tUsa el operador * de la clase BigInt." << std::endl;
+      std::cout << "  -n [COTA]\t\tUsa el algoritmo Karatsuba con una cota." << std::endl;
+      std::cout << "  -r [TAMANO]\t\tUsa el algoritmo Karatsuba con numeros aleatorios." << std::endl;
       exit(0);
     } 
-    if (parameter != KARATSUBA && parameter != OPERATOR && parameter != COTA) {
+    if (parameter != KARATSUBA && parameter != OPERATOR && parameter != COTA && parameter != RANDOM) {
       std::cout << "Error: argumento no válido. Use la opcion -h o --help para saber el funcionamiento del programa." << std::endl;
       exit(1);
     }

@@ -344,40 +344,39 @@ std::ostream &operator<<(std::ostream &out, const BigInt &a) {
   return std::cout;
 }
 
-// long long BigInt::Karatsuba(long long num1, long long num2) {
-//   int size1 = std::to_string(num1).size();
-//   int size2 = std::to_string(num2).size();
-//   int N = std::max(size1, size2);
-//   if (N < 10) return num1 * num2;
-//   N = (N / 2) + (N % 2);
-//   long long m = std::pow(10, N);
-//   long long b = num1 / m;
-//   long long a = num1 - (b * m);
-//   long long d = num2 / m;
-//   long long c = num2 - (d * m);
-//   long long z0 = Karatsuba(a, c);
-//   long long z1 = Karatsuba(a + b, c + d);
-//   long long z2 = Karatsuba(b, d);
-//   return z0 + ((z1 - z0 - z2) * m) + (z2 * m * m);
-// }
-
 long long BigInt::Karatsuba(long long num1, long long num2, int cota) {
+  // Calcular el tamaño de cada número
   int size1 = std::to_string(num1).size();
   int size2 = std::to_string(num2).size();
+
+  // Elige el número mayor
   int N = std::max(size1, size2);
+  
+  // Si N es menor que la cota o 10, se retorna el resultado de multiplicar num1 * num2.
   if (cota == 0) {
     if (N < 10) return num1 * num2;
   } else {
     if (N < cota) return num1 * num2;
   }
+  
+  // Dividir N entre 2 y redondea hacia arriba
   N = (N / 2) + (N % 2);
+  
+  // Calcular el valor "m"
   long long m = std::pow(10, N);
+  
+  // Dividir num1 y num2 en bloques "a", "b", "c", y "d"
   long long b = num1 / m;
   long long a = num1 - (b * m);
   long long d = num2 / m;
   long long c = num2 - (d * m);
+  
+  // Realizar 3 llamadas recursivas a la función Karatsuba para calcular z0, z1 y z2
   long long z0 = Karatsuba(a, c, cota);
   long long z1 = Karatsuba(a + b, c + d, cota);
   long long z2 = Karatsuba(b, d, cota);
+  
+  // Retorna el resultado final utilizando la fórmula
   return z0 + ((z1 - z0 - z2) * m) + (z2 * m * m);
 }
+
