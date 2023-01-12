@@ -26,21 +26,31 @@ BigInt::BigInt(std::string &s) {
     if (!isdigit(s[i])) throw("ERROR");
     digits.push_back(s[i] - '0');
   }
+  count = 0;
 }
+
 BigInt::BigInt(unsigned long long nr) {
   do {
     digits.push_back(nr % 10);
     nr /= 10;
   } while (nr);
+  count = 0;
 }
+
 BigInt::BigInt(const char *s) {
   digits = "";
   for (int i = strlen(s) - 1; i >= 0; i--) {
     if (!isdigit(s[i])) throw("ERROR");
     digits.push_back(s[i] - '0');
   }
+  count = 0;
 }
-BigInt::BigInt(const BigInt &a) { digits = a.digits; }
+
+BigInt::BigInt(const BigInt &a) { 
+  digits = a.digits; 
+  count = 0;
+  count = a.count;
+}
 
 bool Null(const BigInt &a) {
   if (a.digits.size() == 1 && a.digits[0] == 0) return true;
@@ -68,6 +78,7 @@ bool operator<=(const BigInt &a, const BigInt &b) { return !(a > b); }
 
 BigInt &BigInt::operator=(const BigInt &a) {
   digits = a.digits;
+  count += a.count;
   return *this;
 }
 
@@ -95,6 +106,7 @@ BigInt &BigInt::operator--() {
   if (n > 1 && digits[n - 1] == 0) digits.pop_back();
   return *this;
 }
+
 BigInt BigInt::operator--(int temp) {
   BigInt aux;
   aux = *this;
@@ -116,12 +128,17 @@ BigInt &operator+=(BigInt &a, const BigInt &b) {
     a.digits[i] = (s % 10);
   }
   if (t) a.digits.push_back(t);
+  a.count = a.count + b.count;
   return a;
 }
+
 BigInt operator+(const BigInt &a, const BigInt &b) {
   BigInt temp;
   temp = a;
   temp += b;
+
+  temp.count = a.count + b.count;
+
   return temp;
 }
 
@@ -141,12 +158,16 @@ BigInt &operator-=(BigInt &a, const BigInt &b) {
     a.digits[i] = s;
   }
   while (n > 1 && a.digits[n - 1] == 0) a.digits.pop_back(), n--;
+  a.count = a.count + b.count;
   return a;
 }
 BigInt operator-(const BigInt &a, const BigInt &b) {
   BigInt temp;
   temp = a;
   temp -= b;
+
+  temp.count = a.count + b.count;
+
   return temp;
 }
 
@@ -172,10 +193,15 @@ BigInt &operator*=(BigInt &a, const BigInt &b) {
   for (int i = n - 1; i >= 1 && !v[i]; i--) a.digits.pop_back();
   return a;
 }
+
 BigInt operator*(const BigInt &a, const BigInt &b) {
   BigInt temp;
   temp = a;
   temp *= b;
+
+  temp.count = a.count + b.count + 1;
+  // std::cout << temp.count << std::endl;
+
   return temp;
 }
 
@@ -186,7 +212,9 @@ BigInt &operator/=(BigInt &a, const BigInt &b) {
     return a;
   }
   if (a == b) {
+    int times = a.count;
     a = BigInt(1);
+    a.count = times + b.count;
     return a;
   }
   int i, lgcat = 0, cc;
@@ -207,12 +235,15 @@ BigInt &operator/=(BigInt &a, const BigInt &b) {
   a.digits.resize(cat.size());
   for (i = 0; i < lgcat; i++) a.digits[i] = cat[lgcat - i - 1];
   a.digits.resize(lgcat);
+  a.count = a.count + b.count;
   return a;
 }
+
 BigInt operator/(const BigInt &a, const BigInt &b) {
   BigInt temp;
   temp = a;
   temp /= b;
+  temp.count = a.count + b.count;	
   return temp;
 }
 
@@ -222,7 +253,9 @@ BigInt &operator%=(BigInt &a, const BigInt &b) {
     return a;
   }
   if (a == b) {
+    int times = a.count;
     a = BigInt();
+    a.count = times;
     return a;
   }
   int i, lgcat = 0, cc;
@@ -243,10 +276,12 @@ BigInt &operator%=(BigInt &a, const BigInt &b) {
   a = t;
   return a;
 }
+
 BigInt operator%(const BigInt &a, const BigInt &b) {
   BigInt temp;
   temp = a;
   temp %= b;
+  temp.count = a.count + b.count;
   return temp;
 }
 
@@ -259,11 +294,14 @@ BigInt &operator^=(BigInt &a, const BigInt &b) {
     Base *= Base;
     divide_by_2(Exponent);
   }
+  a.count = a.count + b.count;
   return a;
 }
+
 BigInt operator^(BigInt &a, BigInt &b) {
   BigInt temp(a);
   temp ^= b;
+  temp.count = a.count + b.count;
   return temp;
 }
 
@@ -295,6 +333,7 @@ BigInt sqrt(BigInt &a) {
     }
     mid = BigInt();
   }
+  v.count = a.count;
   return v;
 }
 
@@ -358,6 +397,8 @@ BigInt BigInt::Karatsuba(BigInt num1, BigInt num2, int cota) {
   } else {
     if (N < cota) return num1 * num2;
   }
+
+  // Contador de llamadas al operador * de la clase BigInt:
   
   // Dividir N entre 2 y redondea hacia arriba
   N = (N / 2) + (N % 2);
@@ -376,8 +417,12 @@ BigInt BigInt::Karatsuba(BigInt num1, BigInt num2, int cota) {
   BigInt z0 = Karatsuba(a, c, cota);
   BigInt z1 = Karatsuba(a + b, c + d, cota);
   BigInt z2 = Karatsuba(b, d, cota);
-  
+
+  BigInt result = z0 + ((z1 - z0 - z2) * m) + (z2 * m * m);
   // Retorna el resultado final utilizando la fórmula
-  return z0 + ((z1 - z0 - z2) * m) + (z2 * m * m); 
+  return result; 
 }
 
+int BigInt::getCount() const {
+  return count;
+}

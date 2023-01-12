@@ -95,6 +95,10 @@ class BigInt {
 
   BigInt Karatsuba(BigInt num1, BigInt num2, int cota);
 
+  int getCount() const;
+
+  int count = 0;
+
  private:
   std::string digits;
 };

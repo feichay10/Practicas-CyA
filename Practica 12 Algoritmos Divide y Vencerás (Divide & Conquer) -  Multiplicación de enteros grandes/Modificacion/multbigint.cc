@@ -59,6 +59,7 @@ int main(int argc, char* argv[]) {
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
     std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+    std::cout << "Numero de llamadas '*': " << result.getCount() << std::endl;
     exit(0);
   } else if (argv[1] == OPERATOR) {
     while(getline(std::cin, line)){
@@ -90,6 +91,7 @@ int main(int argc, char* argv[]) {
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba es: " << result << std::endl;
     std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+    std::cout << "Numero de llamadas '*': " << result.getCount() << std::endl;
     exit(0);
   } 
   
@@ -112,6 +114,7 @@ int main(int argc, char* argv[]) {
     auto time = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
     std::cout << "La solución de la operación con el algoritmo Karatsuba con numeros aleatorios es: " << result << std::endl;
     std::cout << "El tiempo de ejecución del algoritmo de Karatsuba: " << time << " nanosegundos" << std::endl;
+
     exit(0);
   }
   return 0;
