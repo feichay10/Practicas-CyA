@@ -57,14 +57,10 @@ language::~language() {}
  * @param language2 
  * @return language 
  */
-
 language operator+(const language& language1, const language& language2) {
   language concatenation;
   std::set<strings> aux1 = language1.get_Language(), aux2 = language2.get_Language(), language_;
-  /**
-   * @brief Verificar si es de tamaño 1 y la unica cadena es el &, significa que concatenamos & con el lenguaje 2 y sacamos el resultado que es el lenguaje 2
-   * 
-   */
+
   if (aux1.size() == 1) {
     for (std::set<strings>::iterator it = aux1.begin(); it != aux1.end(); it++) {
       if (*it == strings("&")) {
@@ -73,10 +69,6 @@ language operator+(const language& language1, const language& language2) {
     }
   }
 
-  /**
-   * @brief Verificar si es de tamaño 1 y la unica cadena es el &, significa que concatenamos & con el lenguaje 1 y sacamos el resultado que es el lenguaje 1
-   * 
-   */
   if (aux2.size() == 1) {
     for (std::set<strings>::iterator it = aux2.begin(); it != aux2.end(); it++) {
       if (*it == strings("&")) {
@@ -84,12 +76,6 @@ language operator+(const language& language1, const language& language2) {
       }
     }
   }
-
-  /**
-   * @brief Si no son de tamaño 1 hace la concatenacion de los dos lenguajes
-   * 
-   * @param it1 
-   */
 
   for (std::set<strings>::iterator it1 = aux1.begin(); it1 != aux1.end(); it1++) { // Recorremos el lenguaje 1
     for (std::set<strings>::iterator it2 = aux2.begin(); it2 != aux2.end(); it2++) { // Recorremos el lenguage 2
@@ -114,7 +100,6 @@ language operator+(const language& language1, const language& language2) {
  * @param language2 
  * @return language 
  */
-
 language operator|(const language& language1, const language& language2) {
   language language_union;
   std::set<strings> strings_, aux1 = language1.get_Language(), aux2 = language2.get_Language();
@@ -205,7 +190,6 @@ language operator-(const language& language1, const language& language2) {
  * @param language_ 
  * @return language 
  */
-
 language operator!(const language& language_) {
   language reverse;
   strings aux_string;
@@ -230,12 +214,6 @@ language operator*(const language& language_, int exponent) {
     pow.set_Language(empty_string);
     return pow;
   }
-
-  /**
-   * @brief Lo mismo que la concatenacion pero lo repite "concatenaion" veces
-   * 
-   */
-
   std::set<strings> aux_string = language_.get_Language(), pow_acum;
   for (int i = 1; i < exponent; i++) {
     for (std::set<strings>::iterator it1 = aux_string.begin(); it1 != aux_string.end(); it1++) {
