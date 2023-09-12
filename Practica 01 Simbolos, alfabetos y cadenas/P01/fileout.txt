@@ -1,0 +1,6 @@
+La longitud de la cadena abbab es: 6
+La longitud de la cadena 6793836 es: 8
+La longitud de la cadena  es: 0
+La longitud de la cadena  es: 0
+La longitud de la cadena abcda es: 6
+La longitud de la cadena  es: 0

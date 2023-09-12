@@ -1,0 +1,5 @@
+a b c abbab
+abbab
+a b abbabc
+abbaddbcc
+a b aabbab

@@ -60,7 +60,10 @@ language::~language() {}
 language operator+(const language& language1, const language& language2) {
   language concatenation;
   std::set<strings> aux1 = language1.get_Language(), aux2 = language2.get_Language(), language_;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 578e42f (Minor fixes and adding improvement on p01 and p02)
   if (aux1.size() == 1) {
     for (std::set<strings>::iterator it = aux1.begin(); it != aux1.end(); it++) {
       if (*it == strings("&")) {
@@ -214,6 +217,10 @@ language operator*(const language& language_, int exponent) {
     pow.set_Language(empty_string);
     return pow;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 578e42f (Minor fixes and adding improvement on p01 and p02)
   std::set<strings> aux_string = language_.get_Language(), pow_acum;
   for (int i = 1; i < exponent; i++) {
     for (std::set<strings>::iterator it1 = aux_string.begin(); it1 != aux_string.end(); it1++) {

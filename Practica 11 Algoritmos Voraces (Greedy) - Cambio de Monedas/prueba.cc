@@ -59,7 +59,6 @@ int main() {
   clock_t t1 = clock();
   AlgoritmoVoraz(n);
   clock_t t2 = clock();
-
   double tiempo1 = double(t2 - t1) / CLOCKS_PER_SEC;
 
   t1 = clock();

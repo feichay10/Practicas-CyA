@@ -1,0 +1,4 @@
+{ } { a abc cab bbcc }
+{ } { a aa aaa }
+{ } { }
+{ } { a abc cab bbcc }
