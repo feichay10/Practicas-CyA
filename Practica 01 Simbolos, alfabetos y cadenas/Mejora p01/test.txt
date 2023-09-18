@@ -1,6 +1,1 @@
-a b abbab
-a b c aababbb
-a b c abbaba
-a b c aaccbbaabb
-a b aababccbb
-ab bc abcdacd
+s o l sol

@@ -27,6 +27,8 @@
 #include "alphabet.h"
 #include "symbol.h"
 
+class Alphabet;
+
 class Chain {
  public:
   // Constructors
